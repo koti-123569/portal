@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry — Study Portal</title>
+    <meta name="description" content="Structure, bonding and reactions, chapter by chapter. 8 chapters with videos, slides, mind maps, notes and MCQs.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23161A24'/><rect x='7' y='7' width='7' height='7' rx='2' fill='%23E7A94C'/><rect x='18' y='7' width='7' height='7' rx='2' fill='%23E7A94C' opacity='.55'/><rect x='7' y='18' width='7' height='7' rx='2' fill='%23E7A94C' opacity='.55'/><rect x='18' y='18' width='7' height='7' rx='2' fill='%23E7A94C' opacity='.25'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+/* ============================================================
+   Study Portal — shared dark theme
+   Palette and type carried over from the Mathematics 1A sheet.
+   ============================================================ */
+
+:root {
+    --ink: #161A24;
+    --surface: #1F2433;
+    --surface-raised: #262C3E;
+    --surface-hi: #2E3549;
+    --line: #333B52;
+    --line-soft: #272E42;
+    --cream: #EDEAE1;
+    --slate: #9099B3;
+    --slate-dim: #5D6685;
+
+    --jade: #5FBFAE;
+    --amber: #E7A94C;
+    --violet: #C48BE0;
+    --azure: #7FA7F0;
+
+    --accent: var(--jade);
+    --accent-dim: #3B7A70;
+    --accent-dim: color-mix(in srgb, var(--accent) 42%, var(--ink));
+    --accent-wash: rgba(95, 191, 174, .14);
+    --accent-wash: color-mix(in srgb, var(--accent) 12%, transparent);
+
+    --radius: 14px;
+    --radius-sm: 10px;
+    --ease: cubic-bezier(.32, .72, 0, 1);
+}
+
+[data-subject="physics"] { --accent: var(--jade); }
+[data-subject="chemistry"] { --accent: var(--amber); }
+[data-subject="maths1a"] { --accent: var(--violet); }
+[data-subject="maths1b"] { --accent: var(--azure); }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(1200px 600px at 12% -12%, #232A3D 0%, transparent 58%),
+        radial-gradient(1000px 700px at 108% 8%, #202638 0%, transparent 55%),
+        var(--ink);
+    color: var(--cream);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+::selection { background: var(--accent-dim); color: var(--cream); }
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.shell {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ---------- shared type ---------- */
+
+.eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+}
+
+h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    margin: 0 0 16px;
+}
+
+h1 em {
+    font-style: italic;
+    color: var(--accent);
+}
+
+.lede {
+    color: var(--slate);
+    font-size: 16.5px;
+    line-height: 1.65;
+    max-width: 54ch;
+    margin: 0;
+}
+
+.mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ============================================================
+   HOME
+   ============================================================ */
+
+.home-hero {
+    padding: 92px 0 8px;
+}
+
+.home-hero .lede { margin-bottom: 40px; }
+
+.tally {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 64px;
+}
+
+.tally-cell {
+    flex: 1 1 140px;
+    padding: 20px 24px 20px 0;
+}
+
+.tally-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--cream);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.tally-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--slate-dim);
+    margin-top: 9px;
+}
+
+.subject-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 20px;
+    padding-bottom: 40px;
+}
+
+.subject-card {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    background: linear-gradient(180deg, var(--surface-raised) 0%, var(--surface) 100%);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px 26px 22px;
+    overflow: hidden;
+    transition: transform .35s var(--ease), border-color .25s ease, box-shadow .35s var(--ease);
+}
+
+.subject-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--accent);
+    opacity: .55;
+    transition: opacity .25s ease, width .3s var(--ease);
+}
+
+.subject-card:hover,
+.subject-card:focus-visible {
+    transform: translateY(-3px);
+    border-color: var(--accent-dim);
+    box-shadow: 0 18px 40px -24px rgba(0, 0, 0, .9);
+}
+
+.subject-card:hover::before { opacity: 1; width: 4px; }
+
+.subject-card-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
+.subject-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.subject-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+}
+
+.subject-tagline {
+    color: var(--slate);
+    font-size: 14.5px;
+    margin: 0 0 22px;
+    min-height: 44px;
+}
+
+/* signature: one square per chapter, filled by how complete its resources are */
+.spark {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+.spark-cell {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    background: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.spark-legend {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--slate-dim);
+    margin-bottom: 18px;
+}
+
+.subject-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-soft);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--slate-dim);
+    letter-spacing: 0.04em;
+}
+
+.subject-go {
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.subject-card:hover .subject-go svg { transform: translateX(3px); }
+.subject-go svg { width: 13px; height: 13px; transition: transform .3s var(--ease); }
+
+.home-foot {
+    border-top: 1px solid var(--line-soft);
+    margin-top: 24px;
+    padding: 26px 0 60px;
+    color: var(--slate-dim);
+    font-size: 13px;
+}
+
+/* ============================================================
+   SUBJECT PAGES
+   ============================================================ */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(22, 26, 36, .9);
+    background: color-mix(in srgb, var(--ink) 88%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-soft);
+}
+
+.topbar-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--slate);
+    text-decoration: none;
+    font-size: 13.5px;
+    white-space: nowrap;
+    transition: color .2s ease;
+}
+
+.back:hover { color: var(--accent); }
+.back svg { width: 14px; height: 14px; }
+
+.topbar-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-left: 1px solid var(--line);
+    padding-left: 16px;
+}
+
+.search-wrap {
+    margin-left: auto;
+    position: relative;
+    flex: 0 1 340px;
+}
+
+.search-wrap svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    color: var(--slate-dim);
+    pointer-events: none;
+}
+
+#search {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 9px 44px 9px 38px;
+    border-radius: 999px;
+    outline: none;
+    transition: border-color .2s ease, background .2s ease;
+}
+
+#search:focus { border-color: var(--accent-dim); background: var(--surface-raised); }
+#search::-webkit-search-decoration,
+#search::-webkit-search-cancel-button { -webkit-appearance: none; }
+#search::placeholder { color: var(--slate-dim); }
+
+.kbd {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--slate-dim);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 2px 6px;
+    pointer-events: none;
+}
+
+.subject-hero {
+    padding: 60px 0 34px;
+}
+
+.subject-hero .lede { margin-bottom: 26px; }
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--slate);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 7px 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.chip svg { width: 13px; height: 13px; }
+.chip:hover { color: var(--cream); border-color: var(--slate-dim); }
+
+.chip[aria-pressed="true"] {
+    color: var(--ink);
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
+.chip-count {
+    font-size: 10px;
+    opacity: .7;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 18px 0;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 30px;
+}
+
+.toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn {
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--slate);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color .2s ease, border-color .2s ease;
+}
+
+.btn:hover { color: var(--cream); border-color: var(--slate-dim); }
+
+.progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--slate-dim);
+    letter-spacing: 0.08em;
+}
+
+.progress-track {
+    width: 130px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--line);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width .45s var(--ease);
+}
+
+/* ---------- layout: rail + list ---------- */
+
+.layout {
+    display: grid;
+    grid-template-columns: 218px minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+    padding-bottom: 80px;
+}
+
+.rail {
+    position: sticky;
+    top: 78px;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+}
+
+.rail-head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate-dim);
+    padding: 0 0 12px 12px;
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 8px;
+}
+
+.rail-link {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--slate);
+    font-size: 13.5px;
+    line-height: 1.35;
+    border-left: 2px solid transparent;
+    transition: color .2s ease, background .2s ease, border-color .2s ease;
+}
+
+.rail-link span:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--slate-dim);
+}
+
+.rail-link:hover { color: var(--cream); background: var(--surface); }
+
+.rail-link.active {
+    color: var(--cream);
+    background: var(--surface);
+    border-left-color: var(--accent);
+}
+
+.rail-link.active span:first-child { color: var(--accent); }
+
+/* ---------- chapters ---------- */
+
+.chapter {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color .25s ease;
+    scroll-margin-top: 80px;
+}
+
+.chapter[open] { border-color: var(--accent-dim); }
+
+.chapter summary {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 22px;
+    cursor: pointer;
+    list-style: none;
+    transition: background .2s ease;
+}
+
+.chapter summary::-webkit-details-marker { display: none; }
+.chapter summary:hover { background: var(--surface-raised); }
+
+.ch-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    flex: none;
+    width: 26px;
+}
+
+.ch-head { flex: 1 1 auto; min-width: 0; }
+
+.ch-title {
+    display: block;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin: 0 0 3px;
+}
+
+.ch-meta {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--slate-dim);
+    letter-spacing: 0.08em;
+}
+
+.ch-bar {
+    flex: none;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+}
+
+.ch-bar i {
+    width: 5px;
+    height: 16px;
+    border-radius: 1.5px;
+    background: var(--line);
+    display: block;
+}
+
+.ch-bar i.on { background: var(--accent); }
+
+.chevron {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    color: var(--slate-dim);
+    transition: transform .3s var(--ease);
+}
+
+.chapter[open] .chevron { transform: rotate(180deg); color: var(--accent); }
+
+.topics {
+    border-top: 1px solid var(--line-soft);
+}
+
+/* ---------- topic rows ---------- */
+
+.topic {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 0 16px;
+    padding: 17px 22px 17px 18px;
+    border-bottom: 1px solid var(--line-soft);
+}
+
+.topic:last-child { border-bottom: none; }
+.topic:hover { background: rgba(38, 44, 62, .55); }
+.topic.done .topic-name { color: var(--slate-dim); text-decoration: line-through; text-decoration-thickness: 1px; }
+
+.tick {
+    grid-row: 1 / span 3;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--ink);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    color: transparent;
+    transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+
+.tick svg { width: 11px; height: 11px; }
+.tick:hover { border-color: var(--accent-dim); }
+
+.topic.done .tick {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--ink);
+}
+
+.topic-name {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--cream);
+    margin: 0;
+}
+
+.topic-tag {
+    display: inline-block;
+    min-width: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-right: 6px;
+}
+
+.topic-desc {
+    color: var(--slate);
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 5px 0 0;
+    max-width: 76ch;
+}
+
+.res {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 11px;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    background: var(--surface-raised);
+    border: 1px solid var(--line);
+    color: var(--slate);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 999px;
+    transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s var(--ease);
+}
+
+.pill svg { width: 13px; height: 13px; flex: none; }
+
+.pill:hover {
+    color: var(--cream);
+    background: var(--surface-hi);
+    border-color: var(--accent-dim);
+    transform: translateY(-1px);
+}
+
+.pill.video:hover { color: var(--jade); }
+.pill.slides:hover { color: var(--azure); }
+.pill.mindmap:hover { color: var(--violet); }
+.pill.notes:hover { color: var(--amber); }
+.pill.images:hover { color: var(--amber); }
+.pill.mcq:hover { color: var(--cream); }
+
+.pill.off {
+    opacity: .4;
+    border-style: dashed;
+    cursor: default;
+    background: transparent;
+}
+
+.pill.off:hover { transform: none; color: var(--slate); border-color: var(--line); background: transparent; }
+
+mark {
+    background: var(--accent-wash);
+    color: var(--accent);
+    border-radius: 3px;
+    padding: 0 2px;
+}
+
+.empty {
+    text-align: center;
+    color: var(--slate-dim);
+    padding: 60px 20px;
+    font-size: 14px;
+}
+
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 980px) {
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .rail { display: none; }
+}
+
+@media (max-width: 720px) {
+    .shell { padding: 0 18px; }
+    .topbar-inner { padding: 10px 18px; flex-wrap: wrap; }
+    .search-wrap { flex: 1 1 100%; margin-left: 0; order: 3; }
+    .kbd { display: none; }
+    .home-hero { padding: 56px 0 4px; }
+    .subject-hero { padding: 36px 0 26px; }
+    .tally-cell { flex-basis: 50%; padding-right: 16px; }
+    .chapter summary { gap: 12px; padding: 15px 16px; }
+    .ch-bar { display: none; }
+    .topic { padding: 15px 16px 15px 14px; grid-template-columns: 26px minmax(0, 1fr); }
+    .subject-tagline { min-height: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    html { scroll-behavior: auto; }
+}
+
+    </style>
+</head>
+
+<body data-page="chemistry" data-subject="chemistry">
+
+    <div class="topbar">
+        <div class="topbar-inner">
+            <a class="back" href="index.html">All subjects</a>
+            <span class="topbar-title">Chemistry</span>
+            <div class="search-wrap">
+                <input id="search" type="search" autocomplete="off" placeholder="Search topics">
+                <span class="kbd">/</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="shell">
+
+        <section class="subject-hero" id="subject-head"></section>
+
+        <div class="toolbar">
+            <div class="progress">
+                <span class="progress-track"><span class="progress-fill" id="progress-fill"></span></span>
+                <span id="progress-text">0/0 done</span>
+                <span aria-hidden="true">·</span>
+                <span id="result-count"></span>
+            </div>
+            <div class="toolbar-actions">
+                <button class="btn" id="expand-all">Expand all</button>
+                <button class="btn" id="collapse-all">Collapse all</button>
+            </div>
+        </div>
+
+        <div class="layout">
+            <nav class="rail" aria-label="Chapters">
+                <div class="rail-head">Chapters</div>
+                <div id="rail-links"></div>
+            </nav>
+            <div id="chapters"></div>
+        </div>
+
+    </main>
+
+    <script>
+window.PORTAL_DATA = {"subjects":[{"id":"chemistry","name":"Chemistry","short":"CHE","page":"chemistry.html","tagline":"Structure, bonding and reactions, chapter by chapter.","accent":"#E7A94C","chapters":[{"num":1,"title":"Some Basic Concepts of Chemistry","topics":[{"num":"1.1","title":"Introduction & Basics of Matter","desc":"Importance of chemistry, Nature of matter, SI units, Measurement uncertainty","res":{"video":"https://drive.google.com/file/d/1rVBRQ_-J_OQkYdWP5KI8W7QLR1QYd1lt/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1jY9Zy7HstQcJ5P-7S7upISIYZm91T5F0/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1R_lXWAKQSNsw3Lly2DU6S4tuSYZeyrJI/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1SR1IEPClz4jXyY8WVRsQnR1Of5lYVU_4ICf2aiYU8VQ/edit?usp=sharing","test":null,"extra":[]}},{"num":"1.2","title":"Laws of Chemical Combination & Dalton's Theory","desc":"Law of Conservation of Mass, Law of Definite Proportions, Law of Multiple Proportions","res":{"video":"https://drive.google.com/file/d/1R2SAJwBLW9rIFciUdyS_a116XuqQ54JI/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1VZiic5QrUWOjua-Q7-HTaK-9OGZqgZUA/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/111P6fWCqbSAq9F63ymH_vZPY0OBG0sGa/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1MvMUOQshcx6ch-6kLohy81Yk-8_QWFerrQWpQfh7AMs/edit?usp=sharing","test":null,"extra":[]}},{"num":"1.3","title":"Atomic & Molecular Masses","desc":"Atomic Mass Unit (amu), Average Atomic Mass, Molecular Mass, Formula Mass","res":{"video":"https://drive.google.com/file/d/1AJEhLML6y2oCyE90YvQxJasubnP4BU26/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1YrdpjbZzSN-FZdqcZbP5q9cSE5PihjWh/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/10hQVNXQ5LzxkUig5tFPwaTTib1EaSQLx/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1tWu8YrXCHro2qLWZ383N9NOcgKN6ghIk8bbaWyCHxgw/edit?usp=sharing","test":null,"extra":[]}},{"num":"1.4","title":"The Mole Concept & Chemical Formulas","desc":"Avogadro's Number, Molar Mass, Percentage Composition","res":{"video":"https://drive.google.com/file/d/1OWXwhGw4XNGRQuE_D9kutKlwLE5h-vqq/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1yg2Ic_viBoEyMnZ4ZI94ul1VdOlU29jW/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1fe-qzoZ4yVF999Fm55M_h65rmvGvi6Wv/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1fKhQ-cnTBoE8f8_XUyOVuGNRRUqy95Dr8LHPgVkZgFQ/edit?usp=sharing","test":null,"extra":[]}},{"num":"1.5","title":"Stoichiometry & Limiting Reagents","desc":"Stoichiometric Coefficients, Mass-Mole Calculations, Limiting Reagent, Reaction Yields","res":{"video":"https://drive.google.com/file/d/1tjeBBREM9NFWglX-1drqCMOUS1oMRZAC/view?usp=drivesdk","slides":"https://drive.google.com/file/d/11gKpyuugplP9FeE2t3LQnSfYvPHet-lI/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1gxjQ_ArUBx2Kjx6UAN-G7T3dUw0cKv8B/view?usp=drivesdk","mcq":null,"test":null,"extra":[]}}]},{"num":2,"title":"Structure of Atom","topics":[{"num":"2.1","title":"Discovery of Sub-atomic Particles","desc":"Electron, Proton, Neutron; Atomic Models (Thomson, Rutherford, Bohr)","res":{"video":"https://drive.google.com/file/d/1IFtdL8Vkuv_zFI2RUvro_EafmCOtXd4V/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1NEJZq932ug89hD7uJm_IV7Z-fSmkk8m3/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1BifiN-HNgnPG8CP7Y_QW3AjNSgKks3Vy/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1iDScU8Mp_PvmNy6tj6O82XuhCgsvNUEpcvYPNd750S0/edit?usp=sharing","test":null,"extra":[]}},{"num":"2.2","title":"Bohr's Model & Quantum Mechanics","desc":"Bohr's Model for Hydrogen, Line Spectrum, Dual Nature of Matter","res":{"video":"https://drive.google.com/file/d/1kB90J62Vap6LOGCAhfPLcpiQkwSbOENd/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1YaTRaatqN0IMQMwbxENuoVtQ6hafSHDB/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1UE8StB46QpfzMMYA2XDxynjfnHLtt683/view?usp=sharing","mcq":"https://docs.google.com/document/d/1Cba-wcsD5lpOb2_x3eU0fF0cPqx8hsF1Qcl-yKDGDEE/edit?usp=sharing","test":null,"extra":[]}},{"num":"2.3","title":"Quantum Mechanical Model & Orbitals","desc":"Quantum Numbers, Orbitals Shape, Aufbau Principle, Pauli's Exclusion Principle","res":{"video":"https://drive.google.com/file/d/1MCuVh5JRghTVy1WayTxUJEkHuN_VZtfJ/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1HcnlgTH2sBukuOigwVXonbblrI5Vv9sX/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1Sr47w6mDj8gD027sAc04xa--Q8y6VAKk/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/16NA3v2ZBlnPoNgrwng2Jg1E7RqG8TyqapljMj23Bis0/edit?usp=sharing","test":null,"extra":[]}}]},{"num":3,"title":"Classification of Elements and Periodicity","topics":[{"num":"3.1","title":"Significance of Classification & History","desc":"History of Periodic Table, Modern Periodic Law, Mendeleev's Table","res":{"video":"https://drive.google.com/file/d/1dg2o6H_3pLWk8YpjL3ak82JleM8VmkSm/view?usp=sharing","slides":"https://drive.google.com/file/d/18j7p8LtyAUuN_4jWpBWuI_6cp5MfaZLy/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1x9kYUzKa9-YDOrl7uNaP9FanSfZaDdII/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/18OrD5h7FmN5Vfk86tMkqBEgjFiDur9zq7xXHzpCBZTg/edit?usp=sharing","test":null,"extra":[]}},{"num":"3.2","title":"Present Form of Periodic Table","desc":"Modern Periodic Table Structure, Blocks, Periods, Groups","res":{"video":"https://drive.google.com/file/d/1DOFl_dTMwScTfAzUsnu-eIwYFbXvLzQF/view?usp=sharing","slides":"https://drive.google.com/file/d/1aRcfdwDVgdsKctdH62rtzlyBjRtdj-BX/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1hmb63-TMSVUtZPbYmjFFDQHwX2EvhpT4/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/15Ct7Vai_TUGn0Jn0aIl1owSlICfD_UREFW4WM1yp4I8/edit?usp=sharing","test":null,"extra":[]}},{"num":"3.3","title":"Nomenclature of Elements","desc":"IUPAC Nomenclature System, Element Naming Conventions","res":{"video":"https://drive.google.com/file/d/1B7pDNEXvGW884mEVA6iKAMGGXsqJaNna/view?usp=sharing","slides":"https://drive.google.com/file/d/11y-44_UVMZZIcoGL6I9CAOP6wRs3VBsy/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1mzMul5egtWF6bP4n4GvrtXrSrHWrDVlT/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1SqZDdQ5LTbqZh_Nm1Pnez4dn9cvIkErkV38gP_HbdD4/edit?usp=sharing","test":null,"extra":[]}},{"num":"3.4","title":"Periodic Trends in Properties","desc":"Atomic Radii, Ionic Radii, Ionization Enthalpy, Electronegativity","res":{"video":"https://drive.google.com/file/d/1VkGsj8HPIgMNoMCYImoV2ppCg3er2HFo/view?usp=drivesdk","slides":"https://drive.google.com/file/d/15aS5LY4ZetE-dlYjBbYS9kJUQR3WrJHO/view?usp=sharing","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1_it-odQA9XHRrmt62gOc07P7g2dW2PUb/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1Z5bI4sTT2rxE1tc6Fr7KZsIJdUBcbyg3Wm0zUNBYmhA/edit?usp=sharing","test":null,"extra":[]}}]},{"num":4,"title":"Chemical Bonding and Molecular Structure","topics":[{"num":"4.1","title":"Kossel-Lewis Approach to Bonding","desc":"Ionic Bond, Electrovalent Bond, Octet Rule","res":{"video":"https://drive.google.com/file/d/1K9VYL1JYxQVwxxYGVXBTxZYpA7unVUU6/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1lFEeqY8auHuLqcd0U2CIofjbxkBM0CUU/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1nzzM0ai7s7oTLgzLG-j8YVHe1CbmeEok/view?usp=sharing","mcq":"https://docs.google.com/document/d/16b5x5z_vPIR3vvw0O3cWFLmMqX13SA-by1l-Pdp2334/edit?usp=sharing","test":null,"extra":[]}},{"num":"4.2","title":"Covalent Bond & Bond Parameters","desc":"Covalent Bond, Bond Length, Bond Angle, Bond Dissociation Energy","res":{"video":"https://drive.google.com/file/d/1v-GZ-pq8nldYyvos7R6TgvrLMa7iwSB0/view?usp=sharing","slides":"https://drive.google.com/file/d/13bIFyK3RQa6Nfitfjv5NlYTfuLz619m0/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1pFlJs3XKfjhsok3LGAQtkNgNoCwgkV4E/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1ymwhaHWORsv7UzW9SgrSw16OwoVd3kg2KFEikA2DCU8/edit?usp=sharing","test":null,"extra":[]}},{"num":"4.3","title":"Resonance Structures & Polarity","desc":"Resonance, Bond Polarity, Electronegativity","res":{"video":"https://drive.google.com/file/d/18viEDJuXEeNQmGyLV3Gkk1Eo7FIhTfOO/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1gW1EwJSrb-YQnbJ-QSjsTfvjc6GDj70j/view?usp=sharing","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1UUjls1fCG6dlT-4ZY72UDcCJuH-tJtrd/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1IzmUhHA8LR0e9FGDjXzRsnzQ7HaW-XCAvKKQLJMaf9M/edit?usp=sharing","test":null,"extra":[]}},{"num":"4.4","title":"VSEPR Theory & Molecular Structure","desc":"Valence Shell Electron Pair Repulsion Theory, Molecular Geometry","res":{"video":"https://drive.google.com/file/d/1_l7AGspp3EzuTG88JTB2te-bZLXOTqtK/view?usp=sharing","slides":"https://drive.google.com/file/d/1dod-AvNtKWvZTw_lAR0vUHkzKjtAtcCb/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1zwr16hA892dzmbgI_QQZKF518tNJYaBT/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1uLSgfRYWvU1m7yTNW4ie4KrgmD6FEJs0aZ50dftCZag/edit?usp=sharing","test":null,"extra":[]}},{"num":"4.5","title":"Valence Bond Theory & Hybridization","desc":"Valence Bond Theory, Hybridization (sp, sp², sp³)","res":{"video":"https://drive.google.com/file/d/17vbD0E-DTd9DQiIoqXvAq6k9Uogzwl_y/view?usp=sharing","slides":"https://drive.google.com/file/d/1-4C52YANeGY2UhJ3KVPTwCmr1esCl15N/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1c_yWJflEAW4446mwz1qlOmU34G-s_uK-/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1QIlD5EAbJ8q4E3duQt8QYf6iaX1fELinQyRIRnT00X4/edit?usp=sharing","test":null,"extra":[]}}]},{"num":5,"title":"Thermodynamics","topics":[{"num":"5.1","title":"Fundamental Concepts","desc":"System, Surroundings, Universe, Types of Systems","res":{"video":"https://drive.google.com/file/d/1sJd6ffzShwHxsMYdl3F2pt9Li45LCuN-/view?usp=drivesdk","slides":"https://drive.google.com/file/d/11guhplaJi8nWud728arSoT2LOzeCqJz_/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1DOlTIRnrhSYZWdpJ8Yk_l7wJnmr3xJL3/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1ZpwbdEFCS0TXdhs7kbyZ3eap1rHgh9GYgNa68tDd2Wc/edit?usp=sharing","test":null,"extra":[]}},{"num":"5.2","title":"State Functions vs Path Functions","desc":"State Functions, Path Functions, Heat and Work","res":{"video":"https://drive.google.com/file/d/1JTppAHUFm1aYYLrSRiqozaJwjyqo9ehx/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1TKsE9_WB4iqESEXE5_BOU1PCFUCCTD0C/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1XBx6G4-Z-J8FvN6UHu7mvnr5BxgUIEUn/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1sgC9hWMXxNM0IQbyGluulk86H7oHUXB5FDFJYLqj63s/edit?usp=sharing","test":null,"extra":[]}},{"num":"5.3","title":"Extensive and Intensive Properties","desc":"Extensive Properties, Intensive Properties","res":{"video":null,"slides":null,"mindmap":null,"notes":null,"images":null,"mcq":null,"test":null,"extra":[]}},{"num":"5.4","title":"First Law of Thermodynamics","desc":"Conservation of Energy, ΔU = q + w, Sign Conventions","res":{"video":"https://drive.google.com/file/d/1ONUQVHaIFCjAtprL32v-yHvFUvxURtL/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1IPLYTYUFc0Yck2Hp3llMd3_k_f2Bq2VZ/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/13xAsJLpw5ONI_39qaJJGIhI-XgX_WHx4/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1oCDe5nOBFKN9ZSlTi_hx2btYviJL0p3_jC9hg5iMCKA/edit?usp=sharing","test":null,"extra":[]}},{"num":"5.5","title":"Internal Energy & Enthalpy Change","desc":"Internal Energy, Enthalpy, Relationship ΔH = ΔU + ΔnRT","res":{"video":"https://drive.google.com/file/d/1KmOPu4Sr8F8vXjo_CI9Wa4K7N7PUr9zc/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1HtqdqNU2wTu45S4R-1_NF56cKm4Utf2n/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1xlAsN1N3oBpyBxY0uOiDMvyReeJkdmEA/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1b-9WsDoTXGkshjxHcNAzf0CcYBJIKqzviAeH_cTq9o8/edit?usp=sharing","test":null,"extra":[]}},{"num":"5.6","title":"Spontaneity, Entropy & Second Law","desc":"Spontaneity, Entropy, Second Law, Gibbs Energy","res":{"video":"https://drive.google.com/file/d/1Rf5YrowiaRa3HD2txCya0vu1ycQtsP2n/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1XaLCZm-qmSM-NB9mjFnNfpep5peZZa2P/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1AQRs1O3RD-u5NLph__gba9VQv4gSH_43/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1Oxwbb2wYNrPKOQkYkcoDDzVkpbSSBC_vSunEvATzBG8/edit?usp=sharing","test":null,"extra":[]}}]},{"num":6,"title":"Advanced Topics","topics":[{"num":"6.1","title":"Advanced Topic 1","desc":"Complete study material and resources for Topic 6.1","res":{"video":"https://drive.google.com/file/d/1qmF-GnQBN8-A3eSDECas3K5h27NdAV5_/view?usp=sharing","slides":"https://drive.google.com/file/d/1qFnWCW0HDo80FHj4ni9VTFgoKdjcYaFh/view?usp=sharing","mindmap":"https://drive.google.com/file/d/1eH_pEPqzFIM_uzv0K78KlZy-j-AD8dRQ/view?usp=drive_link","notes":null,"images":null,"mcq":"https://docs.google.com/document/d/1TUBJIsUJWGGxFm_fEs_Gerx0Va6h7ySAydbHie7de6s/edit?usp=sharing","test":null,"extra":[]}},{"num":"6.2","title":"Advanced Topic 2","desc":"Complete study material and resources for Topic 6.2","res":{"video":"https://drive.google.com/file/d/1CF0a12qpT4IV5Yfwa1W3V48sSSaKSL1a/view?usp=sharing","slides":"https://drive.google.com/file/d/1j6_D_-sQzKo-lh1lwGz7UXiFRD9_J21x/view?usp=sharing","mindmap":"https://drive.google.com/file/d/10E6kSdwn7DI1FXwWzJHOdCOzpMsHjanA/view?usp=sharing","notes":null,"images":null,"mcq":"https://docs.google.com/document/d/11TNcKbbFgZ2C5kN20r8sOoWEYXNbptLAPCyVcPVry3s/edit?usp=sharing","test":null,"extra":[]}},{"num":"6.3","title":"Advanced Topic 3","desc":"Complete study material and resources for Topic 6.3","res":{"video":"https://drive.google.com/file/d/1mIxt1rx7v-nqjgUKiG-LTqExTFqxC9fz/view?usp=sharing","slides":"https://drive.google.com/file/d/1lOszsFYa4r30JYeMpGobt9FcSEyd61Cc/view?usp=sharing","mindmap":"https://drive.google.com/file/d/1RyGW9cVHP3rKhZ3oxofxh974tSa9-Edy/view?usp=sharing","notes":null,"images":null,"mcq":"https://docs.google.com/document/d/1BwGIItypanbtJTffiNr3qnJOChtxpPkK5-Q80NMZ8ro/edit?usp=sharing","test":null,"extra":[]}},{"num":"6.4","title":"Advanced Topic 4","desc":"Complete study material and resources for Topic 6.4","res":{"video":"https://drive.google.com/file/d/1bzAxPo2nJwtBpucb7F5ngVH2adO1CZHk/view?usp=sharing","slides":"https://drive.google.com/file/d/1SWbMeLJfAMbi-olWMWpjY0YCLnV98QQ4/view?usp=sharing","mindmap":"https://drive.google.com/file/d/1i5tERcCZvkpKoyy66e7Z1Ps8OuJ4wF9J/view?usp=sharing","notes":null,"images":null,"mcq":"https://docs.google.com/document/d/1l0OGAZHu78Shs1vRlC6-lilabt6jDuxFo0Jh_zTyDjs/edit?usp=sharing","test":null,"extra":[]}}]},{"num":8,"title":"Organic Chemistry","topics":[{"num":"8.1","title":"Tetravalence of Carbon and Shapes","desc":"Carbon tetravalence, Catenation, Hybridization (sp³, sp², sp), Molecular shapes","res":{"video":"https://drive.google.com/file/d/1bPTieqgsCQOJJVUzxpWh3laIdMhXYtaE/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1gduzj9liq0Ld4kJJGqLHQ-grFqQRTmxQ/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1UFHi-uktzFEkBmmC2uAN4AcwzSMsWZXv/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1BZguE0eqVJjG5KXjur7TQgPVjO_y5jFA0K07acDNsUs/edit?usp=sharing","test":null,"extra":[]}},{"num":"8.2","title":"Structural Isomerism","desc":"Types of isomerism in organic compounds","res":{"video":null,"slides":null,"mindmap":null,"notes":null,"images":null,"mcq":"https://docs.google.com/document/d/13exzb3MYVl0m-CvrPYrF8pqI-aHbk3JMPEuWBg2bmrY/edit?usp=sharing","test":null,"extra":[]}},{"num":"8.3","title":"Organic Reactions","desc":"Types of organic reactions and mechanisms","res":{"video":null,"slides":null,"mindmap":null,"notes":null,"images":null,"mcq":"https://docs.google.com/document/d/1QTtDP7MhCvAX6eic_z5ywFxy0VNHJLON526ExfXUIj4/edit?usp=sharing","test":null,"extra":[]}},{"num":"8.4","title":"Reaction Mechanisms","desc":"Understanding organic reaction pathways","res":{"video":null,"slides":null,"mindmap":null,"notes":null,"images":null,"mcq":"https://docs.google.com/document/d/1FR4HjMMGlq-WM4OTjftniD9CDUwScbZ-aS4z5PyqWWI/edit?usp=sharing","test":null,"extra":[]}},{"num":"8.5","title":"Functional Groups","desc":"Introduction to functional groups in organic chemistry","res":{"video":null,"slides":null,"mindmap":null,"notes":null,"images":null,"mcq":"https://docs.google.com/document/d/1mucEBj-LbIWbc1jl8-SY7ykGelYp09JsX5N6bYAQ-p0/edit?usp=sharing","test":null,"extra":[]}},{"num":"8.6","title":"Nomenclature of Organic Compounds","desc":"IUPAC naming conventions","res":{"video":null,"slides":null,"mindmap":null,"notes":null,"images":null,"mcq":"https://docs.google.com/document/d/1MTPWkgE-veS6cUxtrZPGc7g2sYJle-ZD5LvocK5Rfsg/edit?usp=sharing","test":null,"extra":[]}}]},{"num":9,"title":"Hydrocarbons","topics":[{"num":"9.1","title":"Classification and Alkanes","desc":"Hydrocarbon classification, Alkane nomenclature, Isomerism, Preparation and properties","res":{"video":"https://drive.google.com/file/d/1dGoTApQ-24tsl5ZCARXHoQ_DsrBpZMLN/view?usp=drivesdk","slides":"https://drive.google.com/file/d/19euypzeMQzrBQzeXgjixCySERDUhLY9L/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1Zka-1XlRflC43B9kVJvcFahB3bCz1JRG/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1VDRHNRZcfuwaZQHp-hhGwTr5sKKhT8XGAXfi9MjI35s/edit?usp=sharing","test":null,"extra":[]}},{"num":"9.2","title":"Alkenes","desc":"Nomenclature, Double bond structure, Geometrical isomerism, Addition reactions","res":{"video":"https://drive.google.com/file/d/1Uf2Bj-OblKWAWSn47BPnDhE4ZBrmFpU4/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1h2H6rLZ_uIpWcdHNs0EyMf0jxkIKunCB/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1uj1hmrtV58Wpv_wDaxTtKjpxO1mEXlO2/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1zlLNHFGaBTwbZV7fLZZyFH2mTf1LgGi31zMOMbVfcuc/edit?usp=sharing","test":null,"extra":[]}},{"num":"9.3","title":"Alkynes","desc":"Nomenclature, Triple bond structure, Preparation, Chemical reactions","res":{"video":"https://drive.google.com/file/d/1JmA74whJE7U4bHqFULP8PDlbR_GH3sOH/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1gYCYYnZJcXw5z2ZY5itzkfFdxXCu4Oz6/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/153V8-qMKPnarOwe8OEMfWpZKxt51gfcn/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1yYBN0Mzy5f0gvuxlimF3BMsr3kZpRfbbaivnQzD5hn8/edit?usp=sharing","test":null,"extra":[]}},{"num":"9.4","title":"Aromatic Hydrocarbons – Benzene","desc":"Aromatic compounds, IUPAC nomenclature, Benzene structure, Resonance and aromaticity","res":{"video":"https://drive.google.com/file/d/1nOadxaB5g2181xg9uUITVGajljeBJ2_V/view?usp=drivesdk","slides":"https://drive.google.com/file/d/12FN2Cs4xQk6P85VKhPPgscvhuqZGA5oc/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1Tm-5aPg3LwHUwPok4Kmfyy544LBaIvO4/view?usp=drivesdk","mcq":"https://docs.google.com/document/d/1MM6f48FerbwtMoYYnkV3aaxwoqVuwqD8OVHL9ADJGsY/edit?usp=sharing","test":null,"extra":[]}},{"num":"9.5","title":"Electrophilic Substitution Reactions of Benzene","desc":"Electrophilic substitution mechanism, Nitration, Halogenation, Friedel-Crafts reactions","res":{"video":"https://drive.google.com/file/d/1gGvhfpDhlAXGfu3oonS50nggKPDxsY95/view?usp=drivesdk","slides":"https://drive.google.com/file/d/1o1vH9jihd_eCdi0EySzMQfu62M4ricNQ/view?usp=drivesdk","mindmap":null,"notes":null,"images":"https://drive.google.com/file/d/1M9qSywL3_XW78filncZBa1bz_4V3PRTr/view?usp=drivesdk","mcq":null,"test":null,"extra":[]}}]}]}]};
+    </script>
+    <script>
+/* ============================================================
+   Study Portal — shared logic
+   Reads window.PORTAL_DATA (assets/data.js)
+   ============================================================ */
+
+(function () {
+    'use strict';
+
+    var DATA = window.PORTAL_DATA;
+    var KINDS = ['video', 'slides', 'mindmap', 'notes', 'images', 'mcq', 'test'];
+
+    var LABEL = {
+        video: 'Video',
+        slides: 'Slides',
+        mindmap: 'Mind map',
+        notes: 'Notes',
+        images: 'Images',
+        mcq: 'MCQs',
+        test: 'Test'
+    };
+
+    /* Chemistry shows Images before Video before Slides, per request —
+       every other subject keeps the default KINDS order. */
+    var PILL_ORDER = {
+        chemistry: ['images', 'video', 'slides', 'mindmap', 'mcq', 'test']
+    };
+    function orderFor(subject) { return PILL_ORDER[subject.id] || KINDS; }
+
+    var ICON = {
+        images: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>',
+        video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M17 9.5l4-2.3v9.6l-4-2.3"/></svg>',
+        slides: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>',
+        mindmap: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2.3"/><circle cx="17" cy="5" r="2.3"/><circle cx="17" cy="19" r="2.3"/><path d="M7 11l7.5-4.5M7 13l7.5 4.5"/></svg>',
+        notes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+        mcq: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2a2.5 2.5 0 114 2c-.9.7-1.5 1.2-1.5 2.3M12 17h.01"/></svg>',
+        test: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+        check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg>',
+        arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+        back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>',
+        search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>',
+        chevron: '<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+        book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2.5 2.5 0 016.5 2H20v18H6.5A2.5 2.5 0 004 22z"/><path d="M4 17.5A2.5 2.5 0 016.5 15H20"/></svg>'
+    };
+
+    /* ---------- tiny persistent store (falls back to memory) ---------- */
+
+    var mem = {};
+    var store = {
+        get: function (k) {
+            try { return JSON.parse(localStorage.getItem(k)) || null; }
+            catch (e) { return mem[k] || null; }
+        },
+        set: function (k, v) {
+            try { localStorage.setItem(k, JSON.stringify(v)); }
+            catch (e) { mem[k] = v; }
+        }
+    };
+
+    /* ---------- helpers ---------- */
+
+    function esc(s) {
+        return String(s == null ? '' : s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    function highlight(text, q) {
+        var out = esc(text);
+        if (!q) return out;
+        var re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+        return out.replace(re, '<mark>$1</mark>');
+    }
+
+    function subjectById(id) {
+        for (var i = 0; i < DATA.subjects.length; i++) {
+            if (DATA.subjects[i].id === id) return DATA.subjects[i];
+        }
+        return null;
+    }
+
+    function eachTopic(subject, fn) {
+        subject.chapters.forEach(function (ch) {
+            ch.topics.forEach(function (t) { fn(t, ch); });
+        });
+    }
+
+    function topicCount(subject) {
+        var n = 0;
+        subject.chapters.forEach(function (c) { n += c.topics.length; });
+        return n;
+    }
+
+    function kindCounts(subject) {
+        var c = {};
+        KINDS.forEach(function (k) { c[k] = 0; });
+        eachTopic(subject, function (t) {
+            KINDS.forEach(function (k) { if (t.res[k]) c[k]++; });
+        });
+        return c;
+    }
+
+    /* Kinds a subject is *expected* to have — used for coverage and for
+       showing "not added yet" placeholders. A kind counts as expected when
+       it exists for at least a quarter of the subject's topics. */
+    function expectedKinds(subject) {
+        var counts = kindCounts(subject), total = topicCount(subject);
+        return KINDS.filter(function (k) { return counts[k] >= total * 0.25; });
+    }
+
+    function resourceTotal(subject) {
+        var n = 0;
+        eachTopic(subject, function (t) {
+            KINDS.forEach(function (k) { if (t.res[k]) n++; });
+            n += (t.res.extra || []).length;
+        });
+        return n;
+    }
+
+    function chapterCoverage(ch, kinds) {
+        if (!kinds.length || !ch.topics.length) return 0;
+        var have = 0;
+        ch.topics.forEach(function (t) {
+            kinds.forEach(function (k) { if (t.res[k]) have++; });
+        });
+        return have / (ch.topics.length * kinds.length);
+    }
+
+    /* ============================================================
+       HOME PAGE
+       ============================================================ */
+
+    function renderHome() {
+        var grid = document.getElementById('subjects');
+        if (!grid) return;
+
+        var totals = { chapters: 0, topics: 0, resources: 0 };
+
+        var html = DATA.subjects.map(function (s) {
+            var st = s.stats || (function () {
+                var kinds = expectedKinds(s);
+                return {
+                    chapters: s.chapters.length,
+                    topics: topicCount(s),
+                    resources: resourceTotal(s),
+                    cov: s.chapters.map(function (ch) {
+                        return { num: ch.num, cov: chapterCoverage(ch, kinds) };
+                    })
+                };
+            })();
+
+            totals.chapters += st.chapters;
+            totals.topics += st.topics;
+            totals.resources += st.resources;
+
+            var spark = st.cov.map(function (c) {
+                return '<i class="spark-cell" style="opacity:' + (0.14 + 0.86 * c.cov).toFixed(2) +
+                    '" title="Chapter ' + c.num + ' · ' + Math.round(c.cov * 100) + '% of resources added"></i>';
+            }).join('');
+
+            return '' +
+                '<a class="subject-card" data-subject="' + s.id + '" href="' + s.page + '">' +
+                '<div class="subject-card-top">' +
+                '<h2 class="subject-name">' + esc(s.name) + '</h2>' +
+                '<span class="subject-code">' + esc(s.short) + '</span>' +
+                '</div>' +
+                '<p class="subject-tagline">' + esc(s.tagline) + '</p>' +
+                '<div class="spark">' + spark + '</div>' +
+                '<div class="spark-legend">' + st.chapters + ' chapters · brighter = more resources ready</div>' +
+                '<div class="subject-meta">' +
+                '<span>' + st.topics + ' topics · ' + st.resources + ' links</span>' +
+                '<span class="subject-go">Open ' + ICON.arrow + '</span>' +
+                '</div>' +
+                '</a>';
+        }).join('');
+
+        grid.innerHTML = html;
+
+        var tally = document.getElementById('tally');
+        if (tally) {
+            tally.innerHTML = [
+                [DATA.subjects.length, 'Subjects'],
+                [totals.chapters, 'Chapters'],
+                [totals.topics, 'Topics'],
+                [totals.resources, 'Resource links']
+            ].map(function (c) {
+                return '<div class="tally-cell"><div class="tally-num">' + c[0] +
+                    '</div><div class="tally-label">' + c[1] + '</div></div>';
+            }).join('');
+        }
+    }
+
+    /* ============================================================
+       SUBJECT PAGE
+       ============================================================ */
+
+    function renderSubject(id) {
+        var s = subjectById(id);
+        if (!s) return;
+
+        document.documentElement.setAttribute('data-subject', s.id);
+        document.title = s.name + ' — Study Portal';
+
+        var kinds = expectedKinds(s);
+        var counts = kindCounts(s);
+        var doneKey = 'studyportal:' + s.id + ':done';
+        var done = store.get(doneKey) || {};
+        var activeFilters = {};
+        var query = '';
+
+        /* ---- header ---- */
+        var head = document.getElementById('subject-head');
+        head.innerHTML =
+            '<p class="eyebrow">' + esc(s.short) + ' · ' + s.chapters.length + ' chapters</p>' +
+            '<h1>' + esc(s.name.split(' ')[0]) + (s.name.split(' ').length > 1 ? ' <em>' + esc(s.name.split(' ').slice(1).join(' ')) + '</em>' : '') + '</h1>' +
+            '<p class="lede">' + esc(s.tagline) + '</p>' +
+            '<div class="legend" id="filters"></div>';
+
+        /* ---- filter chips ---- */
+        var filterBox = document.getElementById('filters');
+        filterBox.innerHTML = orderFor(s).filter(function (k) { return counts[k] > 0; }).map(function (k) {
+            return '<button class="chip" data-kind="' + k + '" aria-pressed="false">' +
+                ICON[k] + LABEL[k] + ' <span class="chip-count">' + counts[k] + '</span></button>';
+        }).join('');
+
+        filterBox.addEventListener('click', function (e) {
+            var chip = e.target.closest('.chip');
+            if (!chip) return;
+            var k = chip.dataset.kind;
+            activeFilters[k] = !activeFilters[k];
+            chip.setAttribute('aria-pressed', activeFilters[k] ? 'true' : 'false');
+            render();
+        });
+
+        /* ---- toolbar ---- */
+        document.getElementById('expand-all').addEventListener('click', function () {
+            document.querySelectorAll('.chapter').forEach(function (d) { d.open = true; });
+        });
+        document.getElementById('collapse-all').addEventListener('click', function () {
+            document.querySelectorAll('.chapter').forEach(function (d) { d.open = false; });
+        });
+
+        /* ---- search ---- */
+        var search = document.getElementById('search');
+        search.placeholder = 'Search ' + s.name + ' chapters and topics';
+        search.addEventListener('input', function () {
+            query = this.value.trim();
+            render();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === '/' && document.activeElement !== search) {
+                e.preventDefault(); search.focus();
+            } else if (e.key === 'Escape' && document.activeElement === search) {
+                search.value = ''; query = ''; render(); search.blur();
+            }
+        });
+
+        var startQ = new URLSearchParams(location.search).get('q');
+        if (startQ) { search.value = startQ; query = startQ.trim(); }
+
+        /* ---- rail ---- */
+        document.getElementById('rail-links').innerHTML = s.chapters.map(function (ch) {
+            return '<a class="rail-link" href="#ch-' + ch.num + '" data-ch="' + ch.num + '">' +
+                '<span>' + String(ch.num).padStart(2, '0') + '</span><span>' + esc(ch.title) + '</span></a>';
+        }).join('');
+
+        /* ---- progress ---- */
+        function updateProgress() {
+            var total = topicCount(s), n = 0;
+            Object.keys(done).forEach(function (k) { if (done[k]) n++; });
+            var pct = total ? Math.round(n / total * 100) : 0;
+            document.getElementById('progress-fill').style.width = pct + '%';
+            document.getElementById('progress-text').textContent = n + '/' + total + ' done';
+        }
+
+        /* ---- resource pills ---- */
+        function pills(t) {
+            var shown = orderFor(s).filter(function (k) { return t.res[k] || kinds.indexOf(k) > -1; });
+            var html = shown.map(function (k) {
+                var url = t.res[k];
+                if (!url) {
+                    return '<span class="pill off ' + k + '">' + ICON[k] + LABEL[k] + ' · soon</span>';
+                }
+                return '<a class="pill ' + k + '" href="' + esc(url) + '" target="_blank" rel="noopener">' +
+                    ICON[k] + LABEL[k] + '</a>';
+            }).join('');
+
+            (t.res.extra || []).forEach(function (x) {
+                html += '<a class="pill notes" href="' + esc(x.url) + '" target="_blank" rel="noopener">' +
+                    ICON.notes + esc(x.name) + '</a>';
+            });
+
+            return html || '<span class="pill off">Nothing added yet</span>';
+        }
+
+        /* ---- main render ---- */
+        function render() {
+            var list = document.getElementById('chapters');
+            var q = query.toLowerCase();
+            var filterKeys = Object.keys(activeFilters).filter(function (k) { return activeFilters[k]; });
+            var out = [];
+            var shownTopics = 0;
+
+            s.chapters.forEach(function (ch) {
+                var chMatch = !q || ch.title.toLowerCase().indexOf(q) > -1 ||
+                    ('chapter ' + ch.num).indexOf(q) > -1;
+
+                var topics = ch.topics.filter(function (t) {
+                    var okQ = !q || chMatch ||
+                        t.title.toLowerCase().indexOf(q) > -1 ||
+                        (t.desc || '').toLowerCase().indexOf(q) > -1 ||
+                        String(t.num).indexOf(q) > -1;
+                    var okF = !filterKeys.length || filterKeys.every(function (k) { return !!t.res[k]; });
+                    return okQ && okF;
+                });
+
+                if (!topics.length) return;
+                shownTopics += topics.length;
+
+                var cov = chapterCoverage(ch, kinds);
+                var bars = 5, on = Math.round(cov * bars);
+                var bar = '';
+                for (var i = 0; i < bars; i++) bar += '<i class="' + (i < on ? 'on' : '') + '"></i>';
+
+                var doneInCh = ch.topics.filter(function (t) { return done[ch.num + '.' + t.num]; }).length;
+
+                var rows = topics.map(function (t) {
+                    var key = ch.num + '.' + t.num;
+                    return '<div class="topic' + (done[key] ? ' done' : '') + '" data-key="' + key + '">' +
+                        '<button class="tick" aria-label="Mark topic as done" aria-pressed="' + (done[key] ? 'true' : 'false') + '">' + ICON.check + '</button>' +
+                        '<div>' +
+                        '<p class="topic-name"><span class="topic-tag">' + esc(t.num) + '</span>' + highlight(t.title, query) + '</p>' +
+                        (t.desc ? '<p class="topic-desc">' + highlight(t.desc, query) + '</p>' : '') +
+                        '<div class="res">' + pills(t) + '</div>' +
+                        '</div></div>';
+                }).join('');
+
+                out.push(
+                    '<details class="chapter" id="ch-' + ch.num + '"' + (q ? ' open' : '') + '>' +
+                    '<summary>' +
+                    '<span class="ch-num">' + String(ch.num).padStart(2, '0') + '</span>' +
+                    '<span class="ch-head">' +
+                    '<span class="ch-title">' + highlight(ch.title, query) + '</span>' +
+                    '<span class="ch-meta">' + ch.topics.length + ' topics · ' + doneInCh + ' done · ' + Math.round(cov * 100) + '% resourced</span>' +
+                    '</span>' +
+                    '<span class="ch-bar">' + bar + '</span>' +
+                    ICON.chevron +
+                    '</summary>' +
+                    '<div class="topics">' + rows + '</div>' +
+                    '</details>'
+                );
+            });
+
+            list.innerHTML = out.length ? out.join('') :
+                '<p class="empty">No topic matches that. Try a chapter name, a topic number like 4.2, or clear the filters.</p>';
+
+            document.getElementById('result-count').textContent =
+                (query || filterKeys.length) ? shownTopics + ' matching topics' : topicCount(s) + ' topics';
+
+            updateProgress();
+            observeChapters();
+        }
+
+        /* ---- tick handling (delegated) ---- */
+        document.getElementById('chapters').addEventListener('click', function (e) {
+            var btn = e.target.closest('.tick');
+            if (!btn) return;
+            var row = btn.closest('.topic');
+            var key = row.dataset.key;
+            done[key] = !done[key];
+            store.set(doneKey, done);
+            row.classList.toggle('done', !!done[key]);
+            btn.setAttribute('aria-pressed', done[key] ? 'true' : 'false');
+            var summary = row.closest('.chapter').querySelector('.ch-meta');
+            var chNum = row.closest('.chapter').id.replace('ch-', '');
+            var ch = s.chapters.filter(function (c) { return String(c.num) === chNum; })[0];
+            if (ch && summary) {
+                var d = ch.topics.filter(function (t) { return done[ch.num + '.' + t.num]; }).length;
+                summary.textContent = summary.textContent.replace(/· \d+ done/, '· ' + d + ' done');
+            }
+            updateProgress();
+        });
+
+        /* ---- rail highlighting ---- */
+        var io = null;
+        function observeChapters() {
+            if (io) io.disconnect();
+            if (!('IntersectionObserver' in window)) return;
+            io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (en) {
+                    if (!en.isIntersecting) return;
+                    var num = en.target.id.replace('ch-', '');
+                    document.querySelectorAll('.rail-link').forEach(function (a) {
+                        a.classList.toggle('active', a.dataset.ch === num);
+                    });
+                });
+            }, { rootMargin: '-70px 0px -72% 0px' });
+            document.querySelectorAll('.chapter').forEach(function (c) { io.observe(c); });
+        }
+
+        /* open a chapter when linked from the rail */
+        document.getElementById('rail-links').addEventListener('click', function (e) {
+            var a = e.target.closest('.rail-link');
+            if (!a) return;
+            var target = document.querySelector(a.getAttribute('href'));
+            if (target) target.open = true;
+        });
+
+        render();
+
+        if (location.hash) {
+            var t = document.querySelector(location.hash);
+            if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); }
+        }
+    }
+
+    /* ---------- boot ---------- */
+
+    window.Portal = { renderHome: renderHome, renderSubject: renderSubject, ICON: ICON };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var back = document.querySelector('.back');
+        if (back) back.insertAdjacentHTML('afterbegin', ICON.back);
+        var si = document.querySelector('.search-wrap');
+        if (si) si.insertAdjacentHTML('afterbegin', ICON.search);
+
+        var page = document.body.dataset.page;
+        if (page === 'home') renderHome();
+        else if (page) renderSubject(page);
+    });
+})();
+
+    </script>
+</body>
+
+</html>

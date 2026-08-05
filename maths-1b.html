@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics 1B — Study Portal</title>
+    <meta name="description" content="Coordinate geometry, 3D and calculus foundations. 10 chapters with videos, slides, mind maps, notes and MCQs.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23161A24'/><rect x='7' y='7' width='7' height='7' rx='2' fill='%237FA7F0'/><rect x='18' y='7' width='7' height='7' rx='2' fill='%237FA7F0' opacity='.55'/><rect x='7' y='18' width='7' height='7' rx='2' fill='%237FA7F0' opacity='.55'/><rect x='18' y='18' width='7' height='7' rx='2' fill='%237FA7F0' opacity='.25'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+/* ============================================================
+   Study Portal — shared dark theme
+   Palette and type carried over from the Mathematics 1A sheet.
+   ============================================================ */
+
+:root {
+    --ink: #161A24;
+    --surface: #1F2433;
+    --surface-raised: #262C3E;
+    --surface-hi: #2E3549;
+    --line: #333B52;
+    --line-soft: #272E42;
+    --cream: #EDEAE1;
+    --slate: #9099B3;
+    --slate-dim: #5D6685;
+
+    --jade: #5FBFAE;
+    --amber: #E7A94C;
+    --violet: #C48BE0;
+    --azure: #7FA7F0;
+
+    --accent: var(--jade);
+    --accent-dim: #3B7A70;
+    --accent-dim: color-mix(in srgb, var(--accent) 42%, var(--ink));
+    --accent-wash: rgba(95, 191, 174, .14);
+    --accent-wash: color-mix(in srgb, var(--accent) 12%, transparent);
+
+    --radius: 14px;
+    --radius-sm: 10px;
+    --ease: cubic-bezier(.32, .72, 0, 1);
+}
+
+[data-subject="physics"] { --accent: var(--jade); }
+[data-subject="chemistry"] { --accent: var(--amber); }
+[data-subject="maths1a"] { --accent: var(--violet); }
+[data-subject="maths1b"] { --accent: var(--azure); }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(1200px 600px at 12% -12%, #232A3D 0%, transparent 58%),
+        radial-gradient(1000px 700px at 108% 8%, #202638 0%, transparent 55%),
+        var(--ink);
+    color: var(--cream);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+::selection { background: var(--accent-dim); color: var(--cream); }
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.shell {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ---------- shared type ---------- */
+
+.eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+}
+
+h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    margin: 0 0 16px;
+}
+
+h1 em {
+    font-style: italic;
+    color: var(--accent);
+}
+
+.lede {
+    color: var(--slate);
+    font-size: 16.5px;
+    line-height: 1.65;
+    max-width: 54ch;
+    margin: 0;
+}
+
+.mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ============================================================
+   HOME
+   ============================================================ */
+
+.home-hero {
+    padding: 92px 0 8px;
+}
+
+.home-hero .lede { margin-bottom: 40px; }
+
+.tally {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 64px;
+}
+
+.tally-cell {
+    flex: 1 1 140px;
+    padding: 20px 24px 20px 0;
+}
+
+.tally-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--cream);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.tally-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--slate-dim);
+    margin-top: 9px;
+}
+
+.subject-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 20px;
+    padding-bottom: 40px;
+}
+
+.subject-card {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    background: linear-gradient(180deg, var(--surface-raised) 0%, var(--surface) 100%);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px 26px 22px;
+    overflow: hidden;
+    transition: transform .35s var(--ease), border-color .25s ease, box-shadow .35s var(--ease);
+}
+
+.subject-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--accent);
+    opacity: .55;
+    transition: opacity .25s ease, width .3s var(--ease);
+}
+
+.subject-card:hover,
+.subject-card:focus-visible {
+    transform: translateY(-3px);
+    border-color: var(--accent-dim);
+    box-shadow: 0 18px 40px -24px rgba(0, 0, 0, .9);
+}
+
+.subject-card:hover::before { opacity: 1; width: 4px; }
+
+.subject-card-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
+.subject-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.subject-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+}
+
+.subject-tagline {
+    color: var(--slate);
+    font-size: 14.5px;
+    margin: 0 0 22px;
+    min-height: 44px;
+}
+
+/* signature: one square per chapter, filled by how complete its resources are */
+.spark {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+.spark-cell {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    background: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.spark-legend {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--slate-dim);
+    margin-bottom: 18px;
+}
+
+.subject-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-soft);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--slate-dim);
+    letter-spacing: 0.04em;
+}
+
+.subject-go {
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.subject-card:hover .subject-go svg { transform: translateX(3px); }
+.subject-go svg { width: 13px; height: 13px; transition: transform .3s var(--ease); }
+
+.home-foot {
+    border-top: 1px solid var(--line-soft);
+    margin-top: 24px;
+    padding: 26px 0 60px;
+    color: var(--slate-dim);
+    font-size: 13px;
+}
+
+/* ============================================================
+   SUBJECT PAGES
+   ============================================================ */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(22, 26, 36, .9);
+    background: color-mix(in srgb, var(--ink) 88%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-soft);
+}
+
+.topbar-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--slate);
+    text-decoration: none;
+    font-size: 13.5px;
+    white-space: nowrap;
+    transition: color .2s ease;
+}
+
+.back:hover { color: var(--accent); }
+.back svg { width: 14px; height: 14px; }
+
+.topbar-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-left: 1px solid var(--line);
+    padding-left: 16px;
+}
+
+.search-wrap {
+    margin-left: auto;
+    position: relative;
+    flex: 0 1 340px;
+}
+
+.search-wrap svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    color: var(--slate-dim);
+    pointer-events: none;
+}
+
+#search {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 9px 44px 9px 38px;
+    border-radius: 999px;
+    outline: none;
+    transition: border-color .2s ease, background .2s ease;
+}
+
+#search:focus { border-color: var(--accent-dim); background: var(--surface-raised); }
+#search::-webkit-search-decoration,
+#search::-webkit-search-cancel-button { -webkit-appearance: none; }
+#search::placeholder { color: var(--slate-dim); }
+
+.kbd {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--slate-dim);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 2px 6px;
+    pointer-events: none;
+}
+
+.subject-hero {
+    padding: 60px 0 34px;
+}
+
+.subject-hero .lede { margin-bottom: 26px; }
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--slate);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 7px 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.chip svg { width: 13px; height: 13px; }
+.chip:hover { color: var(--cream); border-color: var(--slate-dim); }
+
+.chip[aria-pressed="true"] {
+    color: var(--ink);
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
+.chip-count {
+    font-size: 10px;
+    opacity: .7;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 18px 0;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 30px;
+}
+
+.toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn {
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--slate);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color .2s ease, border-color .2s ease;
+}
+
+.btn:hover { color: var(--cream); border-color: var(--slate-dim); }
+
+.progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--slate-dim);
+    letter-spacing: 0.08em;
+}
+
+.progress-track {
+    width: 130px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--line);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width .45s var(--ease);
+}
+
+/* ---------- layout: rail + list ---------- */
+
+.layout {
+    display: grid;
+    grid-template-columns: 218px minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+    padding-bottom: 80px;
+}
+
+.rail {
+    position: sticky;
+    top: 78px;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+}
+
+.rail-head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate-dim);
+    padding: 0 0 12px 12px;
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 8px;
+}
+
+.rail-link {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--slate);
+    font-size: 13.5px;
+    line-height: 1.35;
+    border-left: 2px solid transparent;
+    transition: color .2s ease, background .2s ease, border-color .2s ease;
+}
+
+.rail-link span:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--slate-dim);
+}
+
+.rail-link:hover { color: var(--cream); background: var(--surface); }
+
+.rail-link.active {
+    color: var(--cream);
+    background: var(--surface);
+    border-left-color: var(--accent);
+}
+
+.rail-link.active span:first-child { color: var(--accent); }
+
+/* ---------- chapters ---------- */
+
+.chapter {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color .25s ease;
+    scroll-margin-top: 80px;
+}
+
+.chapter[open] { border-color: var(--accent-dim); }
+
+.chapter summary {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 22px;
+    cursor: pointer;
+    list-style: none;
+    transition: background .2s ease;
+}
+
+.chapter summary::-webkit-details-marker { display: none; }
+.chapter summary:hover { background: var(--surface-raised); }
+
+.ch-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    flex: none;
+    width: 26px;
+}
+
+.ch-head { flex: 1 1 auto; min-width: 0; }
+
+.ch-title {
+    display: block;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin: 0 0 3px;
+}
+
+.ch-meta {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--slate-dim);
+    letter-spacing: 0.08em;
+}
+
+.ch-bar {
+    flex: none;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+}
+
+.ch-bar i {
+    width: 5px;
+    height: 16px;
+    border-radius: 1.5px;
+    background: var(--line);
+    display: block;
+}
+
+.ch-bar i.on { background: var(--accent); }
+
+.chevron {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    color: var(--slate-dim);
+    transition: transform .3s var(--ease);
+}
+
+.chapter[open] .chevron { transform: rotate(180deg); color: var(--accent); }
+
+.topics {
+    border-top: 1px solid var(--line-soft);
+}
+
+/* ---------- topic rows ---------- */
+
+.topic {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 0 16px;
+    padding: 17px 22px 17px 18px;
+    border-bottom: 1px solid var(--line-soft);
+}
+
+.topic:last-child { border-bottom: none; }
+.topic:hover { background: rgba(38, 44, 62, .55); }
+.topic.done .topic-name { color: var(--slate-dim); text-decoration: line-through; text-decoration-thickness: 1px; }
+
+.tick {
+    grid-row: 1 / span 3;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--ink);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    color: transparent;
+    transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+
+.tick svg { width: 11px; height: 11px; }
+.tick:hover { border-color: var(--accent-dim); }
+
+.topic.done .tick {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--ink);
+}
+
+.topic-name {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--cream);
+    margin: 0;
+}
+
+.topic-tag {
+    display: inline-block;
+    min-width: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-right: 6px;
+}
+
+.topic-desc {
+    color: var(--slate);
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 5px 0 0;
+    max-width: 76ch;
+}
+
+.res {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 11px;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    background: var(--surface-raised);
+    border: 1px solid var(--line);
+    color: var(--slate);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 999px;
+    transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s var(--ease);
+}
+
+.pill svg { width: 13px; height: 13px; flex: none; }
+
+.pill:hover {
+    color: var(--cream);
+    background: var(--surface-hi);
+    border-color: var(--accent-dim);
+    transform: translateY(-1px);
+}
+
+.pill.video:hover { color: var(--jade); }
+.pill.slides:hover { color: var(--azure); }
+.pill.mindmap:hover { color: var(--violet); }
+.pill.notes:hover { color: var(--amber); }
+.pill.images:hover { color: var(--amber); }
+.pill.mcq:hover { color: var(--cream); }
+
+.pill.off {
+    opacity: .4;
+    border-style: dashed;
+    cursor: default;
+    background: transparent;
+}
+
+.pill.off:hover { transform: none; color: var(--slate); border-color: var(--line); background: transparent; }
+
+mark {
+    background: var(--accent-wash);
+    color: var(--accent);
+    border-radius: 3px;
+    padding: 0 2px;
+}
+
+.empty {
+    text-align: center;
+    color: var(--slate-dim);
+    padding: 60px 20px;
+    font-size: 14px;
+}
+
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 980px) {
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .rail { display: none; }
+}
+
+@media (max-width: 720px) {
+    .shell { padding: 0 18px; }
+    .topbar-inner { padding: 10px 18px; flex-wrap: wrap; }
+    .search-wrap { flex: 1 1 100%; margin-left: 0; order: 3; }
+    .kbd { display: none; }
+    .home-hero { padding: 56px 0 4px; }
+    .subject-hero { padding: 36px 0 26px; }
+    .tally-cell { flex-basis: 50%; padding-right: 16px; }
+    .chapter summary { gap: 12px; padding: 15px 16px; }
+    .ch-bar { display: none; }
+    .topic { padding: 15px 16px 15px 14px; grid-template-columns: 26px minmax(0, 1fr); }
+    .subject-tagline { min-height: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    html { scroll-behavior: auto; }
+}
+
+    </style>
+</head>
+
+<body data-page="maths1b" data-subject="maths1b">
+
+    <div class="topbar">
+        <div class="topbar-inner">
+            <a class="back" href="index.html">All subjects</a>
+            <span class="topbar-title">Mathematics 1B</span>
+            <div class="search-wrap">
+                <input id="search" type="search" autocomplete="off" placeholder="Search topics">
+                <span class="kbd">/</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="shell">
+
+        <section class="subject-hero" id="subject-head"></section>
+
+        <div class="toolbar">
+            <div class="progress">
+                <span class="progress-track"><span class="progress-fill" id="progress-fill"></span></span>
+                <span id="progress-text">0/0 done</span>
+                <span aria-hidden="true">·</span>
+                <span id="result-count"></span>
+            </div>
+            <div class="toolbar-actions">
+                <button class="btn" id="expand-all">Expand all</button>
+                <button class="btn" id="collapse-all">Collapse all</button>
+            </div>
+        </div>
+
+        <div class="layout">
+            <nav class="rail" aria-label="Chapters">
+                <div class="rail-head">Chapters</div>
+                <div id="rail-links"></div>
+            </nav>
+            <div id="chapters"></div>
+        </div>
+
+    </main>
+
+    <script>
+window.PORTAL_DATA = {"subjects":[{"id":"maths1b","name":"Mathematics 1B","short":"1B","page":"maths-1b.html","tagline":"Coordinate geometry, 3D and calculus foundations.","accent":"#7FA7F0","chapters":[{"num":1,"title":"Locus","topics":[{"num":"1.1","title":"Conceptual Foundation of Locus","desc":"Definition of Locus, geometric constraints (equidistant / constant ratio), working rule using a moving point P(h, k).","res":{"video":"https://drive.google.com/file/d/1_G010WnaeS7u4RScADTIE9cnGcSbQYyB/view","slides":"https://drive.google.com/file/d/1DwvpGSQMx2XiDwyGDRd1aml79LcarK-e/view","mindmap":null,"notes":"https://drive.google.com/file/d/1tCpcSyHxtrplsYU7QMjFl2MDIUhHI5Yu/view","images":null,"mcq":"https://docs.google.com/document/d/1SwXaMrWNfbfcgDA4oqFGbD25KCPAinrBDKZeBrPXL-0/edit","test":null,"extra":[]}},{"num":"1.2","title":"Definition of Locus","desc":"Meaning of locus, fixed point, fixed line, variable point, conditions for a locus, difference between locus and curve.","res":{"video":"https://drive.google.com/file/d/1sgY1ezatVBdiQRQF2iIEycNx3FxSqPKc/view","slides":"https://drive.google.com/file/d/10HoZT3tgOd-qZ5RbZgycLUUcfBINNjSi/view","mindmap":null,"notes":"https://drive.google.com/file/d/1iTNeKyUFXmeMHzTt9TBzJFAmHxLuzBc_/view","images":null,"mcq":"https://docs.google.com/document/d/1iSyNPpVvUTx9QKDoz7PmuAIa6U9SZDHT2hPJnt-W0ck/edit","test":null,"extra":[]}},{"num":"1.3","title":"Basic Concepts","desc":"Cartesian coordinate system, ordered pair (x, y), distance between two points, midpoint, section formula (basics), equation of a curve, variables/parameters, geometric interpretation of equations.","res":{"video":"https://drive.google.com/file/d/1MMPSDF4kKnRMDdwhgMQnLghFZUmK7oMn/view","slides":"https://drive.google.com/file/d/1FnahpaC_nLfCUn4M0XZNBbhypx8P57V2/view","mindmap":null,"notes":"https://drive.google.com/file/d/1zyHUSD7-0TfW5J3srB6dJtNLHJLyZ0TS/view","images":null,"mcq":"https://docs.google.com/document/d/1Uow9-Gya5Qnquxbiul2XR5augYsbS42BFLeAnxMBA5I/edit","test":null,"extra":[]}},{"num":"1.4","title":"Methods of Finding Locus","desc":"Direct method, distance method, coordinate geometry method, using definition, using geometrical properties, elimination of parameter method, transformation method (basic).","res":{"video":"https://drive.google.com/file/d/1IAUKP22fBZKSLVS2sgpL1oLcxvVrx0Rk/view","slides":"https://drive.google.com/file/d/1qS2749lAAQXZ9dkQSy2JBbq-qSZ7YZHr/view","mindmap":null,"notes":"https://drive.google.com/file/d/1M9oDR_svtRnL-M_EDrIJ70EfZ5dQMuqx/view","images":null,"mcq":"https://docs.google.com/document/d/1Sj_MDJ5uZuod5x7xGSH4EYmB46D6TvnbRyLbSjwrzzI/edit","test":null,"extra":[]}},{"num":"1.5","title":"Standard Locus Problems","desc":"Point equidistant from two fixed points / two intersecting lines, constant distance from a fixed point/line, sum/difference of distances constant, constant ratio of distances, midpoint locus, mixed problems.","res":{"video":"https://drive.google.com/file/d/1w7ESdyX8bK7EMbg2wetSZBmc8zQc0qXV/view","slides":"https://drive.google.com/file/d/19zWvpxigYhr-uowP7bBGDsRarXXqzX_r/view","mindmap":null,"notes":"https://drive.google.com/file/d/1hVIriJGkF61jxuqpgtsvV6XYNruyaI_0/view","images":null,"mcq":"https://docs.google.com/document/d/1wB1MDkqys2gP7fPKFPBHWrN93XB3WtYXJURVOcV4MsU/edit","test":null,"extra":[]}},{"num":"1.6","title":"Applications of Locus","desc":"Finding equations of curves, construction of geometrical figures, engineering / physics (motion) applications, computer graphics, navigation & GPS, satellite tracking, problem solving using locus.","res":{"video":"https://drive.google.com/file/d/1C_wLM2KXCSF-XuNqEJrZgj0eiOp3vlrH/view","slides":"https://drive.google.com/file/d/1kYtsVGY4goq4SrCRVsZP73mgREvF_Mr9/view","mindmap":null,"notes":"https://drive.google.com/file/d/1BpSzuf9JxAefX7-H7b1d1bc_nIfLxj1h/view","images":null,"mcq":"https://docs.google.com/document/d/1tfHZbaB2Y1pLJRBADNJQE7rL3jA35WCfxZjtzPRxghE/edit","test":null,"extra":[]}}]},{"num":2,"title":"Transformation of Axes","topics":[{"num":"2.1","title":"Introduction","desc":"What is transformation of axes, purpose and applications, difference between translation and rotation.","res":{"video":"https://drive.google.com/file/d/1cI-kp-2GiSZMVOBs6HpG9Sx3JZU3l8_f/view","slides":"https://drive.google.com/file/d/1CWYyybSjm58ApIHtpvaBAyTTu3xvOfu2/view","mindmap":null,"notes":"https://drive.google.com/file/d/198NL0qVId0rP7Uncz-JrK4PQWz7gPWfc/view","images":null,"mcq":"https://docs.google.com/document/d/1_vN52QSCLSeyLw_pCuGv6NK_wBJKrzHSFYX4MtnV1EE/edit","test":null,"extra":[]}},{"num":"2.2","title":"Cartesian Coordinate System Review","desc":"Coordinate axes, origin, coordinates of a point, distance from origin.","res":{"video":"https://drive.google.com/file/d/1M33xoVZ9aUBOV2Iu1l326VX9TydPUN7j/view","slides":"https://drive.google.com/file/d/13QaSVJ96XJPxunB5JYCWM8YJ46blLXOX/view","mindmap":null,"notes":"https://drive.google.com/file/d/1oJNmQnIDCT3UKdjJ2VIEiC4K0vJkscGZ/view","images":null,"mcq":"https://docs.google.com/document/d/1Wz2zqFc6Zws_W5FDtAguquFF7NA3OaGTJNthdmcJ_40/edit","test":null,"extra":[]}},{"num":"2.3","title":"Translation (Shift) of Axes","desc":"Concept of shifting the origin, new origin, relation between old & new coordinates, translation formulas & derivation, transformation of equations, examples, applications.","res":{"video":"https://drive.google.com/file/d/19IDKPtljp0YI-RGpNLH4S__ySwx1JkcC/view","slides":"https://drive.google.com/file/d/1LgX2gq0hXUc0e4Hp8nUpUgEQj7x5rvNQ/view","mindmap":null,"notes":"https://drive.google.com/file/d/1YJ2Wp7lD-t3FfGjfRlxngdU1rP3me2Xs/view","images":null,"mcq":"https://docs.google.com/document/d/1bfQLgJMSaT2DRKczWyK--H95IX1Nzu6tVETB_vWsaEg/edit","test":null,"extra":[]}},{"num":"2.4","title":"Rotation of Axes","desc":"Concept of rotation, clockwise/anticlockwise rotation, angle of rotation, coordinate transformation formulas & derivation, transformation of equations, examples, applications.","res":{"video":"https://drive.google.com/file/d/1k8jc40Us7_7trCZCosBllwlafkmdnPZa/view","slides":"https://drive.google.com/file/d/1vXTLJHLyTI8DsFFVv0zhmW0ZBnWYBJk3/view","mindmap":null,"notes":"https://drive.google.com/file/d/1vdUwQaE41jXc3Pwe7RBXX1fkbxubJYjA/view","images":null,"mcq":"https://docs.google.com/document/d/1ibefx34OdemV7BSg6ihSQ5MFiBVsdeemqkXfbHsecb4/edit","test":null,"extra":[]}},{"num":"2.5","title":"Combined Transformation","desc":"Translation followed by rotation, rotation followed by translation, combined transformation formulas, examples.","res":{"video":"https://drive.google.com/file/d/1txLUyO98JC6k_2QDxuDFt3gEYmVwmU6k/view","slides":"https://drive.google.com/file/d/1BtlmlKBt2GxFWGjdjcrN0zTbgYp4k2Eg/view","mindmap":null,"notes":"https://drive.google.com/file/d/1CRR9WWPZUhUfgl9_iIshsvBar4GhJ9Hk/view","images":null,"mcq":"https://docs.google.com/document/d/16gZM1aaxgQW9wf1FctpX3WzPSGybVFQ17QVoypbDICs/edit","test":null,"extra":[]}},{"num":"2.6","title":"Removal of the xy-Term","desc":"General second-degree equation, condition for eliminating the xy-term, formula for angle of rotation, derivation, worked examples, applications in conic sections.","res":{"video":"https://drive.google.com/file/d/1MQpjbnRWvHwpodCFwtZGWxmfQ1EpI7rj/view","slides":"https://drive.google.com/file/d/1EQKn1SB7_Ywg_q_LYTL9nF8Ay8BTeuWf/view","mindmap":null,"notes":"https://drive.google.com/file/d/1kMYO2I7lzEAEJneUtu5kFrwl-gYEU8wS/view","images":null,"mcq":"https://docs.google.com/document/d/1HSGO6SedeBb6DNEHkQz7WKoUWl88RnqrDA7BYkzoYyA/edit","test":null,"extra":[]}},{"num":"2.7","title":"Transformation of Curves","desc":"Effect of translation/rotation on straight lines, circles, parabolas, ellipses and hyperbolas.","res":{"video":null,"slides":null,"mindmap":null,"notes":null,"images":null,"mcq":"https://docs.google.com/document/d/1l3gGu4sOgdxjiXQUD-cYNpLaMQIHfSw7KfEkJ_LKGxQ/edit","test":null,"extra":[]}}]},{"num":3,"title":"The Straight Line","topics":[{"num":"3.1","title":"Revision of Fundamental Results","desc":"Distance formula, section formula (internal/external), midpoint formula, area of a triangle, condition for collinearity, slope of a line.","res":{"video":"https://drive.google.com/file/d/1qsT4fb45TAearBVoC1WMwLM7RbE8aXp0/view","slides":"https://drive.google.com/file/d/1swyh69sdRydFxNgOtid2hS4JM-ldBPnU/view","mindmap":null,"notes":"https://drive.google.com/file/d/1VgHpwxyQpwoIy9zwJevqqWfWAHnWhtlb/view","images":null,"mcq":"https://docs.google.com/document/d/1fz6DYj33MldD8WRWcEck-LUMAcdckXJKkyWfPHqvkCM/edit","test":null,"extra":[]}},{"num":"3.2","title":"Forms of the Equation of a Line","desc":"Horizontal & vertical lines, point-slope, two-point, slope-intercept, intercept, normal, symmetric/parametric and general forms; reduction between forms.","res":{"video":"https://drive.google.com/file/d/1diXQVUM2KEV8T94VU6gAJ1v-pnHaGw0U/view","slides":"https://drive.google.com/file/d/1zx6jBJKm9Iq4v-QOt05KXFj-BqDWmSkS/view","mindmap":null,"notes":"https://drive.google.com/file/d/1cXjPsUM1bmvy6RZgAuw060Bkehoq_zks/view","images":null,"mcq":"https://docs.google.com/document/d/1ecBotCMBrtNh3FpaRstU5CV1345juFQUnMN7qdOghyM/edit","test":null,"extra":[]}},{"num":"3.3","title":"Intersections, Concurrency, and Families","desc":"Intersection of two lines, condition for concurrency of three lines, family of straight lines L1 + λL2 = 0.","res":{"video":"https://drive.google.com/file/d/1JI5E-h2XeMIAhwEztGK1DqoDoQ3Y-Sch/view","slides":"https://drive.google.com/file/d/1S7vYsCLVMAVk2KWuvjRavxzWWUPf7cgA/view","mindmap":null,"notes":"https://drive.google.com/file/d/1wet7YKb6qFxo1aGuVHPBJL-eFUYRW8Tn/view","images":null,"mcq":"https://docs.google.com/document/d/1nUn2x-CjNUjjPY_ZBJ3du--WsuxNW-_ti4tWyQSMoek/edit","test":null,"extra":[]}},{"num":"3.4","title":"Angles and Metrics","desc":"Angle between two lines, condition for parallel/perpendicular lines, perpendicular distance from a point, distance between two parallel lines.","res":{"video":"https://drive.google.com/file/d/10K_gA-NLtdzMK_Q8sHYfyqjzuavbHZhB/view","slides":"https://drive.google.com/file/d/1AOGgzocx1Gh-U_moBoBWqyFFpxR9Q_u-/view","mindmap":null,"notes":"https://drive.google.com/file/d/1xifIV3S56-k-_Vjh53A40hnNJu6f3nwp/view","images":null,"mcq":"https://docs.google.com/document/d/1se5aid4i8Hq7sB2VmEhLaWKnzKR1PRv6_93VysP8eRs/edit","test":null,"extra":[]}},{"num":"3.5","title":"Properties Related to a Triangle","desc":"Centroid, incenter, orthocenter, circumcenter, and Euler's line property.","res":{"video":"https://drive.google.com/file/d/11O8wD4RAb1nqKlg0MI0uVs8_8_QpZHK7/view","slides":"https://drive.google.com/file/d/1TZ6Yi2FW_FQVoGB9Yv1galLEwW3DAHhf/view","mindmap":null,"notes":"https://drive.google.com/file/d/1_OU36W1jZ3BHlYq4O5TLNdCGJHhvDwI4/view","images":null,"mcq":"https://docs.google.com/document/d/1RnpnSF-IjV7u5MkrqitJRsPDVzMJLvrNIPyvz3Xhiak/edit","test":null,"extra":[]}}]},{"num":4,"title":"Pair of Straight Lines","topics":[{"num":"4.1","title":"Homogeneous Equations of Second Degree","desc":"Lines through the origin ax² + 2hxy + by² = 0, condition for real lines h² ≥ ab, condition for imaginary lines h² < ab, splitting the middle term.","res":{"video":"https://drive.google.com/file/d/1OyEuP3jzHdNI_OIVA4UkhAQANSLgK_ZM/view","slides":"https://drive.google.com/file/d/17f-4VvKebvrO823vq35knHfFNWdqmYkw/view","mindmap":null,"notes":"https://drive.google.com/file/d/1Cu0280WZcQ8R7y_SeiTrsa9hwyAMQOPz/view","images":null,"mcq":"https://docs.google.com/document/d/1W17ralfg3-2cDj0pwaoFrEsMzS85N5nICcRjmVaHzLw/edit","test":null,"extra":[]}},{"num":"4.2","title":"Angles and Conditions","desc":"Formula for the acute angle between the lines, condition for perpendicular lines (a + b = 0), condition for coincident/parallel lines (h² = ab).","res":{"video":"https://drive.google.com/file/d/15zxjL6Fr1mzsZN8oOXGBANRf4G5BH3wv/view","slides":"https://drive.google.com/file/d/1X1vkS3uolb3K2ImKQTWCiC6fXXNRnPxz/view","mindmap":null,"notes":"https://drive.google.com/file/d/1kpmsxjamMe7UrewoWLOGDZZ4jiNPli2H/view","images":null,"mcq":"https://docs.google.com/document/d/1sn8zP3bIUxrUxVvVvHaW_dAEIztWvGJ2J_Qb3khVvdE/edit","test":null,"extra":[]}},{"num":"4.3","title":"Angle Bisectors","desc":"Joint equation of the angle bisectors; the two bisectors are always perpendicular to each other.","res":{"video":"https://drive.google.com/file/d/1zh7kuEfBtXLA2l4_9WQbW0Iw3pn5J6A8/view","slides":"https://drive.google.com/file/d/1oYAAZ0s7ZuYQ81Bp5xt6_QoZ4YDav2m2/view","mindmap":null,"notes":"https://drive.google.com/file/d/1wEktpzaeNXwtdBshW_CV0qgUEf7DdFUn/view","images":null,"mcq":"https://docs.google.com/document/d/13famB4sijitWqKKlLNxnkgB7viMXNdeIu4KPwunyqUQ/edit","test":null,"extra":[]}},{"num":"4.4","title":"General Second-Degree Equation","desc":"General form ax² + 2hxy + by² + 2gx + 2fy + c = 0, condition to represent a pair of lines, point of intersection.","res":{"video":"https://drive.google.com/file/d/1cay3DqG_zw-mvBXHWjPw1bAPPJCzKnEF/view","slides":"https://drive.google.com/file/d/1gEforXmoJ9inA972GSTogoQ_piMoF_-l/view","mindmap":null,"notes":"https://drive.google.com/file/d/1wEGIrpd_65-3bd8Fj_53GUVjckY1zfc6/view","images":null,"mcq":"https://docs.google.com/document/d/1HWyI-t2rR8MPPdgkXR10CnQzPNEH1YgbCAZFy5HF6FE/edit","test":null,"extra":[]}},{"num":"4.5","title":"Parallel Lines and Distance","desc":"Condition for parallel lines h² = ab, af² = bg², fg ≠ ch; distance between the parallel lines.","res":{"video":"https://drive.google.com/file/d/15TYp2ra82z0mQkR2tzGO8odpg4dfLQyO/view","slides":"https://drive.google.com/file/d/1VWJbx3_PMthDjKdyWhpM5QrR4do8j6yN/view","mindmap":null,"notes":"https://drive.google.com/file/d/1AnjwlsDu8M71R2NRBelqwTDCdPcE_QQe/view","images":null,"mcq":"https://docs.google.com/document/d/1RO1_PLuiNdAtVxE9aBSHUrfb7Oo4KzuFzVsZHXeoNI4/edit","test":null,"extra":[]}},{"num":"4.6","title":"Homogenization","desc":"Finding the joint equation of lines connecting the origin to the intersection points of a curve and a line.","res":{"video":"https://drive.google.com/file/d/1SZaSE61tM8V1dzKpZQVC8cGWEeMJ7WSh/view","slides":"https://drive.google.com/file/d/1xQFURsCkmw76SJAVFMTzegtxtOjtnJGh/view","mindmap":null,"notes":"https://drive.google.com/file/d/1UfMD8hKbT22Q4Jp1PDh1JrJEZOFznGPh/view","images":null,"mcq":"https://docs.google.com/document/d/1-uoYVsnL9jgWfZAf_f5A2wBZ0fGc6TtZSTqlVow6Y1U/edit","test":null,"extra":[]}}]},{"num":5,"title":"3D Coordinates","topics":[{"num":"5.1","title":"Introduction to Three-Dimensional Geometry","desc":"Need for 3D coordinate geometry, coordinate axes & planes in space, octants, sign convention, representing a point as (x, y, z).","res":{"video":"https://drive.google.com/file/d/1xs48vCSVs_zlUymErqHgKxhXgP5gggQt/view","slides":"https://drive.google.com/file/d/13LP3LQuIqxbYMkZRKJ-CnwRQiX6QfK8N/view","mindmap":null,"notes":"https://drive.google.com/file/d/1khYfENAIt4Lzs2VpfJWzJK3LNp3fzcH8/view","images":null,"mcq":"https://docs.google.com/document/d/1-FyOiuntb_Fq0h4RJ_3r3oED8e2pFCfeTXpUdZR0PkU/edit","test":null,"extra":[]}},{"num":"5.2","title":"Coordinates of a Point","desc":"Plotting points in 3D space, identifying the octant of a point, distance of a point from the coordinate planes and axes.","res":{"video":"https://drive.google.com/file/d/1dmg9D1S9vxmxf1UO5QgE8Ywe7VlFePJN/view","slides":"https://drive.google.com/file/d/16IDMSlUUyYng1_sjFpUnja7q6mdw_2VF/view","mindmap":null,"notes":"https://drive.google.com/file/d/1XjGOAVo6Z8Hs6vQHnDLNKhT6hvdKELp6/view","images":null,"mcq":"https://docs.google.com/document/d/1HKrIwVlvkS8SpMZPoBInbg15kRUKn3x39S_tnpovdAc/edit","test":null,"extra":[]}},{"num":"5.3","title":"Distance Between Two Points","desc":"Distance formula in 3D, applications and numerical problems.","res":{"video":"https://drive.google.com/file/d/17g0HaOjsHbxFjCKjejMgnEPEQxgGaWNi/view","slides":"https://drive.google.com/file/d/1KyunfMLG6MoxeuZ9AKcgUqkFzsNgCC4_/view","mindmap":null,"notes":"https://drive.google.com/file/d/1DuZoYmt_yJfFfeiudbspTALCtGIHyIF5/view","images":null,"mcq":"https://docs.google.com/document/d/1OfFftmTfijwcK7MePt9iI9CKwfwh_Y3eCWU3HausEu0/edit","test":null,"extra":[]}},{"num":"5.4","title":"Section Formula","desc":"Internal division, external division, applications, finding unknown coordinates.","res":{"video":"https://drive.google.com/file/d/1HTjhbOS7aQbyhmexLNwSd7ZSyIIBfCCo/view","slides":"https://drive.google.com/file/d/1X1aYm1SQOEumpv3V0mANQVooVCY5b4L8/view","mindmap":null,"notes":"https://drive.google.com/file/d/1_V6L_RR8xlE0fGeFiSKxZI3oxBuFNneR/view","images":null,"mcq":"https://docs.google.com/document/d/1SY4gaIIJQQmvBuOIMjfGwFdOP6nQyENpBscIJ_0s4w4/edit","test":null,"extra":[]}},{"num":"5.5","title":"Midpoint Formula","desc":"Midpoint of a line segment in 3D, applications and problems.","res":{"video":"https://drive.google.com/file/d/1at0kLiW8kt5DFmeq5YZw9xBQ2MuOF089/view","slides":"https://drive.google.com/file/d/1Wad2jZFVmmrmVbOCvGJEpn6EcIfj6WJV/view","mindmap":null,"notes":"https://drive.google.com/file/d/1e0wp9J51mhz6d8UrdIoGrpo5JLyV7Eru/view","images":null,"mcq":"https://docs.google.com/document/d/1PnJk-Pg3huw2xtR6Za-dT7CtgvTZ0JngjpeurdT_5Xc/edit","test":null,"extra":[]}},{"num":"5.6","title":"Centroid of a Triangle","desc":"Coordinates of the centroid, properties of centroid, numerical problems, finding unknown vertices.","res":{"video":"https://drive.google.com/file/d/1BRFk6utWTe5Qwn30xozg3VHEho5Gn43Z/view","slides":"https://drive.google.com/file/d/19UzsOC5g9iVo2x7XIuebxYavSZf5kOmX/view","mindmap":null,"notes":"https://drive.google.com/file/d/1N4zH_PUWtqbNQEaVEvTSG7svFr1eUPmm/view","images":null,"mcq":"https://docs.google.com/document/d/1YQCx9DttXtAQDxQVKvrfiYnVI1BQmJ9Z6fQ0gjdvWLw/edit","test":null,"extra":[]}},{"num":"5.7","title":"Applications / Mixed Problems","desc":"Distance + section formula, midpoint + centroid, coordinate-based proof problems, JEE/Board-level objective & subjective questions.","res":{"video":"https://drive.google.com/file/d/1V9OKqepo6gs2mZQSHZUjj47OPMu0FKvp/view","slides":"https://drive.google.com/file/d/10ZsQIkeeszHGWdArrxD8DWnSp8iPROUH/view","mindmap":null,"notes":"https://drive.google.com/file/d/1TrXnXT-pXv9Y_deI8S_QiwEfCcaBn9U6/view","images":null,"mcq":"https://docs.google.com/document/d/10kGRNa2pzf4wkwCmbLPgA9jVXFvkk-wnZiyb__sVw3E/edit","test":null,"extra":[]}}]},{"num":6,"title":"Direction Cosines & Direction Ratios","topics":[{"num":"6.1","title":"Direction Angles & Direction Cosines (DCs)","desc":"Direction angles α, β, γ; DCs l = cosα, m = cosβ, n = cosγ; fundamental identity l² + m² + n² = 1; DCs of the coordinate axes.","res":{"video":"https://drive.google.com/file/d/1SJVhfr8oiFmGr_MgW4g24aLKztAlRJWN/view","slides":"https://drive.google.com/file/d/1AT8A6LB-9lAK0n2qJhMKAR0UN7zabYzO/view","mindmap":null,"notes":"https://drive.google.com/file/d/1DAlybJa4jIBNrQcjj_IwpXRwfiqTvs2N/view","images":null,"mcq":"https://docs.google.com/document/d/1tTOWH-c9amjwgdlQd1Ilm5yj_lRdC_Y_SnmeAVk7QcM/edit","test":null,"extra":[]}},{"num":"6.2","title":"Direction Ratios (DRs)","desc":"Any three numbers proportional to the DCs, proportionality constant l/a = m/b = n/c = k, DRs vs DCs distinction.","res":{"video":"https://drive.google.com/file/d/1DvTuF-_KHYb-pHiDnWMqnstLzPR5OWM8/view","slides":"https://drive.google.com/file/d/11GG1oVrSK8ebh_luxiBifwOwcylqs-79/view","mindmap":null,"notes":"https://drive.google.com/file/d/1f_PHx4_HgoXFJqVgF3Hw72XnpChGUjE_/view","images":null,"mcq":"https://docs.google.com/document/d/1igw2CVeFnvKxuZxgcRrvYwR5huoEkkyrd_mqyiWGR_w/edit","test":null,"extra":[]}},{"num":"6.3","title":"Mathematical Relations Between DCs and DRs","desc":"Converting DRs to DCs by normalization, DCs as unit vector components.","res":{"video":"https://drive.google.com/file/d/16k40Z3yUxx0VzoNKZXuCf36ZXahAS7a5/view","slides":"https://drive.google.com/file/d/1r5QSyE0Gyx-zKDv_JUTM0GfGNXw1v-6q/view","mindmap":null,"notes":"https://drive.google.com/file/d/1YS2vVVwEyo1hOn8TqC157_MzrscPHIg8/view","images":null,"mcq":"https://docs.google.com/document/d/1jefKX4PVboEPFN4YjfPkmtgTiuVAgMQ00b4W5f7hSbs/edit","test":null,"extra":[]}},{"num":"6.4","title":"Geometry-Based Core Formulations","desc":"DRs/DCs of a line through two points, angle between two intersecting lines, conditions for parallel and perpendicular lines.","res":{"video":"https://drive.google.com/file/d/1xXBoGjBPWaH9BDAe9rllmzcPVrFrb4a_/view","slides":"https://drive.google.com/file/d/1wuC4a0lStLVhE0LrG5UoyMb5RY6EXFrc/view","mindmap":null,"notes":"https://drive.google.com/file/d/1BA0tAles-5J6_cHkoh-lPr_a1gSoN_wX/view","images":null,"mcq":"https://docs.google.com/document/d/1zLRChvepgnd-v3MEwlnEE1mB8uFzy7qyQwc3fGr3QUc/edit","test":null,"extra":[]}},{"num":"6.5","title":"Practice Problem Typologies","desc":"Angle→DCs, DRs→DCs, points→DRs/DCs, testing collinearity, finding missing components for orthogonal/parallel vectors.","res":{"video":"https://drive.google.com/file/d/1eHW8YXnZo9RsuLmg4w0RcTkQ3qtoWgX-/view","slides":"https://drive.google.com/file/d/1qmtGMKzvYe8jwPIU9F2EncIg4YWIaIgQ/view","mindmap":null,"notes":"https://drive.google.com/file/d/1P7DlLiL6mYjK3ZmsLKEJTqgw0_h1Ygdy/view","images":null,"mcq":"https://docs.google.com/document/d/1XpdTxhoVs209J0l1nJfQ9vuVgce0-NbIvaKvyDg1ENc/edit","test":null,"extra":[]}}]},{"num":7,"title":"The Plane","topics":[{"num":"7.1","title":"Formulate from Point and Normal","desc":"Equation of a plane through a point with a given normal vector: a(x-x1) + b(y-y1) + c(z-z1) = 0.","res":{"video":"https://drive.google.com/file/d/1F9YccIJLel-OTiA1FNUXnurqGtr1uN_S/view","slides":"https://drive.google.com/file/d/1QdJuuKkskUxhK8tf-zgjuEwWJSPRZ8hJ/view","mindmap":null,"notes":"https://drive.google.com/file/d/1B03pGpArRwWSazPIbrm7PZBXWSgnVZ4J/view","images":null,"mcq":"https://docs.google.com/document/d/1Jd8jhgH7EIsR0nkHc0Dlc3RZ1K6TWxA7fzcUF517M20/edit","test":null,"extra":[]}},{"num":"7.2","title":"Convert from Vector Form","desc":"Converting a vector equation r·n = d into Cartesian form via the dot product.","res":{"video":"https://drive.google.com/file/d/1PpsYCVteMbCu5NdrwOOBnqIbgUqBDl0n/view","slides":"https://drive.google.com/file/d/1E-Uae5ndo8kk26AmKCZjsfwbJfVSPp8F/view","mindmap":null,"notes":"https://drive.google.com/file/d/1UwyLlo0oq9N-Vps7QG1YYPId0pNVq_yW/view","images":null,"mcq":"https://docs.google.com/document/d/10tpgXDPRwXGtA60g98RHb3AQmMq8YWuK1T7srglsL6w/edit","test":null,"extra":[]}},{"num":"7.3","title":"Determine Intercept Form","desc":"Intercept form x/a + y/b + z/c = 1 when a plane cuts the axes at (a,0,0), (0,b,0), (0,0,c).","res":{"video":"https://drive.google.com/file/d/1Y8UGng3BWoEuyWbgxeGDlzApxCU30ZXi/view","slides":"https://drive.google.com/file/d/1D_BUXuOmiXZYBbiQ6SiXbUCY1gIvrlqW/view","mindmap":null,"notes":"https://drive.google.com/file/d/1Kq9GKd4F4UbSGRPFalkl-h-l5axQcG1C/view","images":null,"mcq":"https://docs.google.com/document/d/108Xpkm9jgDbwEPi-zowyc1nVq5feMn6G21grnGl_ZAE/edit","test":null,"extra":[]}},{"num":"7.4","title":"Solve Through Three Points","desc":"Equation of a plane through three non-collinear points using a 3×3 determinant.","res":{"video":"https://drive.google.com/file/d/19t9cR-HjWs0gfGSV7K36SxXy2F06WG4i/view","slides":"https://drive.google.com/file/d/1OlPM1XBWZXgzVJnvB44KBsUHlISkWxCz/view","mindmap":null,"notes":"https://drive.google.com/file/d/1AEGmO6Qtohwx1aD90Ckc3_e44Tav3X5t/view","images":null,"mcq":"https://docs.google.com/document/d/1_ibMNJWcEm6AEaTRk1BIo38zyTcWGQUhOjD7P1i_Ouw/edit","test":null,"extra":[]}}]},{"num":8,"title":"Limits and Continuity","topics":[{"num":"8.1","title":"Intervals and Neighbourhoods","desc":"Real number line, types of intervals, set-builder notation, boundedness (supremum/infimum), neighbourhood and deleted neighbourhood of a point, interior points.","res":{"video":"https://drive.google.com/file/d/1QkwWBaMjpBtikrdXg-TK6FN5ni_VsL59/view","slides":"https://drive.google.com/file/d/1_XrXtv7RVdFP79m7UivR_A7Ks4H-PQI3/view","mindmap":null,"notes":"https://drive.google.com/file/d/1fpiqBW7tFbJqB50aRC3M-FtYaPeLha5q/view","images":null,"mcq":"https://docs.google.com/document/d/1CbwZflfbXwUN5oFLuVkN7ZbC2DmyMzkteT4HHsq5GBE/edit","test":null,"extra":[]}},{"num":"8.2","title":"Limits of Functions","desc":"Intuitive concept, ε-δ and Heine definitions, one-sided limits, existence condition, algebra of limits, limits at infinity, infinite limits, indeterminate forms.","res":{"video":"https://drive.google.com/file/d/1N_4x08cr0TROYe7hgY7nQpHVC0Rdly7C/view","slides":"https://drive.google.com/file/d/14M0MNOiVkMGGCuUJ9HjaqrsIodnhuDEU/view","mindmap":null,"notes":"https://drive.google.com/file/d/17Nx6Iz4XshiqPvD18M9gk7_d_j22ZSaU/view","images":null,"mcq":"https://docs.google.com/document/d/1q2Z9QniikfpHfv0Z9x5STwWK8PQzjitmPqx0kl7bH2I/edit","test":null,"extra":[]}},{"num":"8.3","title":"Methods for Evaluating Limits","desc":"Direct substitution, algebraic manipulation, trigonometric substitution, L'Hôpital's rule, Taylor/Maclaurin expansions, squeeze theorem.","res":{"video":"https://drive.google.com/file/d/1R4XQ7BvD0qcYEzNYbEePGjgPHd1Wl_On/view","slides":"https://drive.google.com/file/d/15gZpvWreQzT8sItzKBQ3WdcKqu7PKXdR/view","mindmap":null,"notes":"https://drive.google.com/file/d/11BQi5VDh2dVG_30n4EKWBkUA0g5iBaLJ/view","images":null,"mcq":"https://docs.google.com/document/d/1xLVqgz1LamoEYHyO75_5QKeKLych-2ue6RlxAiNsgy0/edit","test":null,"extra":[]}},{"num":"8.4","title":"Standard and Special Limits","desc":"Algebraic (xⁿ-aⁿ)/(x-a), trigonometric (sinx/x, tanx/x), exponential (eˣ-1)/x, logarithmic ln(1+x)/x, Euler's number limits.","res":{"video":"https://drive.google.com/file/d/1NCs-S7pyMQyki5niGyj0KzPi2HVYljbS/view","slides":"https://drive.google.com/file/d/11gBPXWcsYJXIKHeP7iHGm5TvI712viet/view","mindmap":null,"notes":"https://drive.google.com/file/d/14d9dYjugfiF-fFq5dUgDPQFxWylLvczT/view","images":null,"mcq":"https://docs.google.com/document/d/1Gpxyd0MQDw2Obunv70GizXEvU0UzUqRzZc0YD0LYqWI/edit","test":null,"extra":[]}},{"num":"8.5","title":"Continuity at a Point","desc":"Three conditions for continuity, ε-δ definition, one-sided (right/left) continuity.","res":{"video":"https://drive.google.com/file/d/1hDAxsEOKBNuscTFzbLwM7QK-cOzmETos/view","slides":"https://drive.google.com/file/d/1XvfXZYg2KoR2JfwBnHznvWBM_G_H6V_A/view","mindmap":null,"notes":"https://drive.google.com/file/d/1BxWCSqqiB4vndDcSAuprY9USYrN37dqJ/view","images":null,"mcq":"https://docs.google.com/document/d/1rcZbRNa6-zBGMLcPeb0GuU9p7h_0oD13tYaQV8tVhr4/edit","test":null,"extra":[]}},{"num":"8.6","title":"Continuity in an Interval","desc":"Open and closed interval continuity, algebra of continuous functions, continuity of composite functions.","res":{"video":"https://drive.google.com/file/d/1-EL5mITdK0dGNGo8NjQMGt2C8EcfGu2U/view","slides":"https://drive.google.com/file/d/1vL_MAzeicH9Sd_GwsYq7AKGRqUwpxtbo/view","mindmap":null,"notes":"https://drive.google.com/file/d/1D1V9Vp7P4jYeH4mPf-usGm2gZjlhaIK6/view","images":null,"mcq":"https://docs.google.com/document/d/1bGwu_HjSMWgct5xfBeSwwpBYPKkGGaL33RsjS3hiShE/edit","test":null,"extra":[]}},{"num":"8.7","title":"Discontinuity and Classification","desc":"Point of discontinuity, removable discontinuity, jump discontinuity, essential/infinite and oscillating discontinuity.","res":{"video":"https://drive.google.com/file/d/1bRaKR37J5pP6zF0XN8opCp9-qiUXhp07/view","slides":"https://drive.google.com/file/d/1fG8GgvEQoHMIJRqsz0wQBSowIsGwuPiA/view","mindmap":null,"notes":"https://drive.google.com/file/d/1vFVkKPRiEpCEetnR7AEzRBQgKgoj3qwZ/view","images":null,"mcq":"https://docs.google.com/document/d/1Yd_gIkmMxofdat7qsmNKfGvlxlhYbv_V0fepMSDDkPs/edit","test":null,"extra":[]}},{"num":"8.8","title":"Fundamental Theorems of Continuous Functions","desc":"Boundedness theorem, extreme value theorem, intermediate value theorem, location of roots theorem, uniform continuity.","res":{"video":"https://drive.google.com/file/d/13hQJDB7tD2YafALaXB92gIPl82vagd5f/view","slides":"https://drive.google.com/file/d/1_cEZX98Dc9v36hyftwenq_JEomk3m5tY/view","mindmap":null,"notes":"https://drive.google.com/file/d/19WbgxtPa_g8Kr1BIBhjIuV-IzON01rh4/view","images":null,"mcq":"https://docs.google.com/document/d/1V93SWy6VskXhT3aqP9PykGLrGwtFauT9gUtipiS_v1A/edit","test":null,"extra":[]}}]},{"num":9,"title":"Differentiation","topics":[{"num":"9.1","title":"Introduction & First Principle","desc":"Geometric interpretation (slope of tangent), physical interpretation (rate of change), first principle f'(x) = lim h→0 [f(x+h)-f(x)]/h, differentiability, LH/RH derivatives.","res":{"video":"https://drive.google.com/file/d/1y3KIDp9afGRwCU1gAg0OlbYc4mVI0feF/view","slides":"https://drive.google.com/file/d/14Pd_SjQ76FokSxzG2xo50aQ8w1o2_Oyx/view","mindmap":null,"notes":"https://drive.google.com/file/d/1O7RHxu7WJPz4XQC8t-gSNnxosh9QH5Bs/view","images":null,"mcq":"https://docs.google.com/document/d/1fJIrlIeAbs4uOltZeQUIWr7G7Jc1otfl1VpuNgUVRfE/edit","test":null,"extra":[]}},{"num":"9.2","title":"Elementary Properties of Derivatives","desc":"Derivative of a constant, linearity rule (sum/difference), constant multiple rule.","res":{"video":"https://drive.google.com/file/d/1pK-WVNixSRYEwwmh5QLpZtiOR0ALOOXi/view","slides":"https://drive.google.com/file/d/1pDCM0fShnQk8Vnvx_l16mvLvpfTlRVi2/view","mindmap":null,"notes":"https://drive.google.com/file/d/1GEV1675yJJJlb0ilwnez-1uUoUZWO4Pe/view","images":null,"mcq":"https://docs.google.com/document/d/1aR6sw8ol36LPhh-__KMYkJUnA47DLsHQKL9qmdVuQB8/edit","test":null,"extra":[]}},{"num":"9.3","title":"Derivatives of Standard Functions","desc":"Algebraic (power rule), exponential, logarithmic, trigonometric, inverse trigonometric, hyperbolic and inverse hyperbolic functions.","res":{"video":"https://drive.google.com/file/d/1z9JbZ3u4pyqLhZvq3kpWuEQUFcBym33c/view","slides":"https://drive.google.com/file/d/1gBD9DBvD_TgPhuqonB5zTjaIn89kJwIK/view","mindmap":null,"notes":"https://drive.google.com/file/d/19ctBupIjmfhXk4J7hVq2eF9pkc3rWKO6/view","images":null,"mcq":"https://docs.google.com/document/d/10xj-iLIuuteRCrKxyhgx4ch65pdbgQ7xk1yTbUuO9Bw/edit","test":null,"extra":[]}},{"num":"9.4","title":"Core Methods of Differentiation","desc":"Product rule, quotient rule, chain rule.","res":{"video":"https://drive.google.com/file/d/1Cs5NnuS3WwYaJqj8yMAfI5dxtvi1LGJH/view","slides":"https://drive.google.com/file/d/15JT-ogvz0jFQkgLl2-Zj_AF5pBX-UDgD/view","mindmap":null,"notes":"https://drive.google.com/file/d/1uudCo220G4PVj8ABSBQF-fEbjyGu6BYR/view","images":null,"mcq":"https://docs.google.com/document/d/1Gu13_4eccBHnDIDqlV2_gSD_xl4vVxS6uSnqvEDiocw/edit","test":null,"extra":[]}},{"num":"9.5","title":"Advanced Differentiation Techniques","desc":"Implicit differentiation, logarithmic differentiation, parametric differentiation, differentiation of infinite series, derivative of a function w.r.t. another function.","res":{"video":"https://drive.google.com/file/d/1EAeF1R7_OCHNL7CZu0P3e8E6b7Ot_Uxr/view","slides":"https://drive.google.com/file/d/1g6xhZb5cRmcJb37O4yTln2-FxFijdlfx/view","mindmap":null,"notes":"https://drive.google.com/file/d/1wP-CP6UB4xuf-3N2fuvExH-p3HpSjkhT/view","images":null,"mcq":"https://docs.google.com/document/d/11HeYPa7EWeE8wIp0UURTcTn0VXcsFCLHAUqa9sNs5sI/edit","test":null,"extra":[]}},{"num":"9.6","title":"Higher-Order Derivatives","desc":"Second-order derivative notation, concavity and points of inflection, parametric second derivative, n-th order derivatives and Leibniz theorem.","res":{"video":"https://drive.google.com/file/d/1bXKlH5eFWK8gFzuR4MX69ExnRWGZHG-x/view","slides":"https://drive.google.com/file/d/1Qg94A4DU75JBCFcqw_gt5alWyUNeH3qn/view","mindmap":null,"notes":"https://drive.google.com/file/d/1NJaxDLg9VZVkqVglsUionz7V8E5-0iY8/view","images":null,"mcq":"https://docs.google.com/document/d/1ETzM0kCbFnbE9vK3XTOhd65lDq9RqWzPZlNmPiDt6uY/edit","test":null,"extra":[]}}]},{"num":10,"title":"Applications of Derivatives","topics":[{"num":"10.1","title":"Derivative as a Rate of Change","desc":"dy/dx as the instantaneous rate of change, velocity v = ds/dt, acceleration a = dv/dt, related rates via the chain rule.","res":{"video":"https://drive.google.com/file/d/1nd7GoeOwF0gG7Oa001Qy5IV13A3HMy3e/view","slides":"https://drive.google.com/file/d/1QOLLvAfIjV62W_huXW3oDkz1I9i38Dcl/view","mindmap":null,"notes":"https://drive.google.com/file/d/1NQpFVahA614f8z3BFzDnv7vS8iYlDuRo/view","images":null,"mcq":"https://docs.google.com/document/d/14AjjDzBWxp7COoecugx8Z_0D5VzYqrNLvkzUgcZxZhg/edit","test":null,"extra":[]}},{"num":"10.2","title":"Geometrical Interpretation (Tangents and Normals)","desc":"Slope of tangent m_T = f'(x1), slope of normal m_N = -1/m_T.","res":{"video":"https://drive.google.com/file/d/1hL23WN7DRPNDKUTjq4rjalGtsC-q6hJi/view","slides":"https://drive.google.com/file/d/1ZPC7NbkZQEwRqjMWQ9vmEHh7ZuHleNw5/view","mindmap":null,"notes":"https://drive.google.com/file/d/1tYXm7BaoirUjmLUPxMXlKh3jlkdrYwuK/view","images":null,"mcq":"https://docs.google.com/document/d/1Zkp5bhK1aC4dw5I0ZJpIpvf5nT2RqzRLF_YLC2a51Ow/edit","test":null,"extra":[]}},{"num":"10.3","title":"Equations of Tangent and Normal","desc":"Point-slope equations of the tangent and normal lines at a point on a curve.","res":{"video":"https://drive.google.com/file/d/1wjQ-bmcq-1dzMwcq-y1dTzhNvgxWsO2A/view","slides":"https://drive.google.com/file/d/1n91Vha3-qTiW6qr3hwoJt1ztTo0KKuwQ/view","mindmap":null,"notes":"https://drive.google.com/file/d/1OHQQBmW1-rLQrQv8e_X5CxOJdctNToAG/view","images":null,"mcq":"https://docs.google.com/document/d/17NkEOqw6pOP3_zM9-uEtKaG_j8VH-3n6jswXRRoQkp8/edit","test":null,"extra":[]}},{"num":"10.4","title":"Lengths of Tangent, Normal, Subtangent, and Subnormal","desc":"Formulas for the length of tangent, normal, subtangent and subnormal at a point on a curve.","res":{"video":"https://drive.google.com/file/d/1yYzZBTwrs8a4599_gdg_JAfwg81AOUFC/view","slides":"https://drive.google.com/file/d/1Xe8JUjTewBmz_nB76LVTsEiJTenOG_Of/view","mindmap":null,"notes":"https://drive.google.com/file/d/1d6kU3zBZL_2sDCAPiyiVwLOZHSyCtBkw/view","images":null,"mcq":"https://docs.google.com/document/d/1H9BOHE5o7Ly2srdlUegb5ZZw7EzM9HHyW38mr7was7k/edit","test":null,"extra":[]}},{"num":"10.5","title":"Angle Between Two Curves and Orthogonality","desc":"Angle between two intersecting curves via their tangent slopes, orthogonality condition m1·m2 = -1.","res":{"video":"https://drive.google.com/file/d/1hbk5dAMMBJM0aAVoO4D-yfNwKzrg7408/view","slides":"https://drive.google.com/file/d/16jr_rIMsCtTuWG_LYnYAlsFZSmxef-JT/view","mindmap":null,"notes":"https://drive.google.com/file/d/1dvdIVmZezrpRp4X_oEpUdorx9w5qaYMT/view","images":null,"mcq":"https://docs.google.com/document/d/1gCku_lNeMIECzDYs6-CgE8f_-bJ-nriEm3La1_HLbmA/edit","test":null,"extra":[]}},{"num":"10.6","title":"Errors and Approximations","desc":"Δy ≈ dy = f'(x)·Δx; absolute, relative and percentage error.","res":{"video":"https://drive.google.com/file/d/1K_t4NJhfSwmgRN7XmhWezuALXGZlXB-E/view","slides":"https://drive.google.com/file/d/1q8JMRKUZETFtxjk6UAa30ahgq-3BLM9M/view","mindmap":null,"notes":"https://drive.google.com/file/d/1hiN-aapTSB87N1XGqLWdjTW5z6OC3yFr/view","images":null,"mcq":"https://docs.google.com/document/d/1dO8Mm-qWcSur0-hNvUOtoOxRyMA4xomhKYOXoFv8R40/edit","test":null,"extra":[]}},{"num":"10.7","title":"Mean Value Theorems","desc":"Rolle's Theorem and Lagrange's Mean Value Theorem (LMVT).","res":{"video":"https://drive.google.com/file/d/1bEK13K3m1g0vx8yfFtp5nmuWA4LiRrxF/view","slides":"https://drive.google.com/file/d/1EQdLeIACRDwWcxP5iLNyDEGF_0isPQg-/view","mindmap":null,"notes":"https://drive.google.com/file/d/1D_7NH3WW3zrypmN-PwfieltY6aPiHYSM/view","images":null,"mcq":"https://docs.google.com/document/d/1_MwrupJq4VDVTD2P23O0LOAnX7u0QBPiiajYb8i207c/edit","test":null,"extra":[]}},{"num":"10.8","title":"Increasing and Decreasing Functions","desc":"Strictly increasing / decreasing conditions, stationary and critical points.","res":{"video":"https://drive.google.com/file/d/1Dyu3oGxi_4-yMFWiUGmRN688Go58adZl/view","slides":"https://drive.google.com/file/d/11P5hipSF3Qs-3XnMmiq--sDQAG04IWRq/view","mindmap":null,"notes":"https://drive.google.com/file/d/1rIF1_hKfn2NvsBggtnzt_hFCEX7FSP5J/view","images":null,"mcq":"https://docs.google.com/document/d/1sw9lkroy2uk5x3BTdcw2Il3OeHuboNCYYaklguEfekQ/edit","test":null,"extra":[]}},{"num":"10.9","title":"Maxima and Minima (Applications)","desc":"First derivative test and second derivative test for local maxima and minima.","res":{"video":"https://drive.google.com/file/d/1Ihqg93B3DOAZFLEMFQwch24eU-XY0dQ1/view","slides":"https://drive.google.com/file/d/1ijoSPFO_nHqtgb_p3XXhd_y_qyaPmRXB/view","mindmap":null,"notes":"https://drive.google.com/file/d/1CTJRkb5f-_5zHRv-Jt7PPBODeM_95RXJ/view","images":null,"mcq":"https://docs.google.com/document/d/1ucy1YdJ4v5zv78dScISWChr0mr5BeaWFvDh1SPKAg3Q/edit","test":null,"extra":[]}}]}]}]};
+    </script>
+    <script>
+/* ============================================================
+   Study Portal — shared logic
+   Reads window.PORTAL_DATA (assets/data.js)
+   ============================================================ */
+
+(function () {
+    'use strict';
+
+    var DATA = window.PORTAL_DATA;
+    var KINDS = ['video', 'slides', 'mindmap', 'notes', 'images', 'mcq', 'test'];
+
+    var LABEL = {
+        video: 'Video',
+        slides: 'Slides',
+        mindmap: 'Mind map',
+        notes: 'Notes',
+        images: 'Images',
+        mcq: 'MCQs',
+        test: 'Test'
+    };
+
+    /* Chemistry shows Images before Video before Slides, per request —
+       every other subject keeps the default KINDS order. */
+    var PILL_ORDER = {
+        chemistry: ['images', 'video', 'slides', 'mindmap', 'mcq', 'test']
+    };
+    function orderFor(subject) { return PILL_ORDER[subject.id] || KINDS; }
+
+    var ICON = {
+        images: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>',
+        video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M17 9.5l4-2.3v9.6l-4-2.3"/></svg>',
+        slides: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>',
+        mindmap: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2.3"/><circle cx="17" cy="5" r="2.3"/><circle cx="17" cy="19" r="2.3"/><path d="M7 11l7.5-4.5M7 13l7.5 4.5"/></svg>',
+        notes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+        mcq: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2a2.5 2.5 0 114 2c-.9.7-1.5 1.2-1.5 2.3M12 17h.01"/></svg>',
+        test: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+        check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg>',
+        arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+        back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>',
+        search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>',
+        chevron: '<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+        book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2.5 2.5 0 016.5 2H20v18H6.5A2.5 2.5 0 004 22z"/><path d="M4 17.5A2.5 2.5 0 016.5 15H20"/></svg>'
+    };
+
+    /* ---------- tiny persistent store (falls back to memory) ---------- */
+
+    var mem = {};
+    var store = {
+        get: function (k) {
+            try { return JSON.parse(localStorage.getItem(k)) || null; }
+            catch (e) { return mem[k] || null; }
+        },
+        set: function (k, v) {
+            try { localStorage.setItem(k, JSON.stringify(v)); }
+            catch (e) { mem[k] = v; }
+        }
+    };
+
+    /* ---------- helpers ---------- */
+
+    function esc(s) {
+        return String(s == null ? '' : s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    function highlight(text, q) {
+        var out = esc(text);
+        if (!q) return out;
+        var re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+        return out.replace(re, '<mark>$1</mark>');
+    }
+
+    function subjectById(id) {
+        for (var i = 0; i < DATA.subjects.length; i++) {
+            if (DATA.subjects[i].id === id) return DATA.subjects[i];
+        }
+        return null;
+    }
+
+    function eachTopic(subject, fn) {
+        subject.chapters.forEach(function (ch) {
+            ch.topics.forEach(function (t) { fn(t, ch); });
+        });
+    }
+
+    function topicCount(subject) {
+        var n = 0;
+        subject.chapters.forEach(function (c) { n += c.topics.length; });
+        return n;
+    }
+
+    function kindCounts(subject) {
+        var c = {};
+        KINDS.forEach(function (k) { c[k] = 0; });
+        eachTopic(subject, function (t) {
+            KINDS.forEach(function (k) { if (t.res[k]) c[k]++; });
+        });
+        return c;
+    }
+
+    /* Kinds a subject is *expected* to have — used for coverage and for
+       showing "not added yet" placeholders. A kind counts as expected when
+       it exists for at least a quarter of the subject's topics. */
+    function expectedKinds(subject) {
+        var counts = kindCounts(subject), total = topicCount(subject);
+        return KINDS.filter(function (k) { return counts[k] >= total * 0.25; });
+    }
+
+    function resourceTotal(subject) {
+        var n = 0;
+        eachTopic(subject, function (t) {
+            KINDS.forEach(function (k) { if (t.res[k]) n++; });
+            n += (t.res.extra || []).length;
+        });
+        return n;
+    }
+
+    function chapterCoverage(ch, kinds) {
+        if (!kinds.length || !ch.topics.length) return 0;
+        var have = 0;
+        ch.topics.forEach(function (t) {
+            kinds.forEach(function (k) { if (t.res[k]) have++; });
+        });
+        return have / (ch.topics.length * kinds.length);
+    }
+
+    /* ============================================================
+       HOME PAGE
+       ============================================================ */
+
+    function renderHome() {
+        var grid = document.getElementById('subjects');
+        if (!grid) return;
+
+        var totals = { chapters: 0, topics: 0, resources: 0 };
+
+        var html = DATA.subjects.map(function (s) {
+            var st = s.stats || (function () {
+                var kinds = expectedKinds(s);
+                return {
+                    chapters: s.chapters.length,
+                    topics: topicCount(s),
+                    resources: resourceTotal(s),
+                    cov: s.chapters.map(function (ch) {
+                        return { num: ch.num, cov: chapterCoverage(ch, kinds) };
+                    })
+                };
+            })();
+
+            totals.chapters += st.chapters;
+            totals.topics += st.topics;
+            totals.resources += st.resources;
+
+            var spark = st.cov.map(function (c) {
+                return '<i class="spark-cell" style="opacity:' + (0.14 + 0.86 * c.cov).toFixed(2) +
+                    '" title="Chapter ' + c.num + ' · ' + Math.round(c.cov * 100) + '% of resources added"></i>';
+            }).join('');
+
+            return '' +
+                '<a class="subject-card" data-subject="' + s.id + '" href="' + s.page + '">' +
+                '<div class="subject-card-top">' +
+                '<h2 class="subject-name">' + esc(s.name) + '</h2>' +
+                '<span class="subject-code">' + esc(s.short) + '</span>' +
+                '</div>' +
+                '<p class="subject-tagline">' + esc(s.tagline) + '</p>' +
+                '<div class="spark">' + spark + '</div>' +
+                '<div class="spark-legend">' + st.chapters + ' chapters · brighter = more resources ready</div>' +
+                '<div class="subject-meta">' +
+                '<span>' + st.topics + ' topics · ' + st.resources + ' links</span>' +
+                '<span class="subject-go">Open ' + ICON.arrow + '</span>' +
+                '</div>' +
+                '</a>';
+        }).join('');
+
+        grid.innerHTML = html;
+
+        var tally = document.getElementById('tally');
+        if (tally) {
+            tally.innerHTML = [
+                [DATA.subjects.length, 'Subjects'],
+                [totals.chapters, 'Chapters'],
+                [totals.topics, 'Topics'],
+                [totals.resources, 'Resource links']
+            ].map(function (c) {
+                return '<div class="tally-cell"><div class="tally-num">' + c[0] +
+                    '</div><div class="tally-label">' + c[1] + '</div></div>';
+            }).join('');
+        }
+    }
+
+    /* ============================================================
+       SUBJECT PAGE
+       ============================================================ */
+
+    function renderSubject(id) {
+        var s = subjectById(id);
+        if (!s) return;
+
+        document.documentElement.setAttribute('data-subject', s.id);
+        document.title = s.name + ' — Study Portal';
+
+        var kinds = expectedKinds(s);
+        var counts = kindCounts(s);
+        var doneKey = 'studyportal:' + s.id + ':done';
+        var done = store.get(doneKey) || {};
+        var activeFilters = {};
+        var query = '';
+
+        /* ---- header ---- */
+        var head = document.getElementById('subject-head');
+        head.innerHTML =
+            '<p class="eyebrow">' + esc(s.short) + ' · ' + s.chapters.length + ' chapters</p>' +
+            '<h1>' + esc(s.name.split(' ')[0]) + (s.name.split(' ').length > 1 ? ' <em>' + esc(s.name.split(' ').slice(1).join(' ')) + '</em>' : '') + '</h1>' +
+            '<p class="lede">' + esc(s.tagline) + '</p>' +
+            '<div class="legend" id="filters"></div>';
+
+        /* ---- filter chips ---- */
+        var filterBox = document.getElementById('filters');
+        filterBox.innerHTML = orderFor(s).filter(function (k) { return counts[k] > 0; }).map(function (k) {
+            return '<button class="chip" data-kind="' + k + '" aria-pressed="false">' +
+                ICON[k] + LABEL[k] + ' <span class="chip-count">' + counts[k] + '</span></button>';
+        }).join('');
+
+        filterBox.addEventListener('click', function (e) {
+            var chip = e.target.closest('.chip');
+            if (!chip) return;
+            var k = chip.dataset.kind;
+            activeFilters[k] = !activeFilters[k];
+            chip.setAttribute('aria-pressed', activeFilters[k] ? 'true' : 'false');
+            render();
+        });
+
+        /* ---- toolbar ---- */
+        document.getElementById('expand-all').addEventListener('click', function () {
+            document.querySelectorAll('.chapter').forEach(function (d) { d.open = true; });
+        });
+        document.getElementById('collapse-all').addEventListener('click', function () {
+            document.querySelectorAll('.chapter').forEach(function (d) { d.open = false; });
+        });
+
+        /* ---- search ---- */
+        var search = document.getElementById('search');
+        search.placeholder = 'Search ' + s.name + ' chapters and topics';
+        search.addEventListener('input', function () {
+            query = this.value.trim();
+            render();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === '/' && document.activeElement !== search) {
+                e.preventDefault(); search.focus();
+            } else if (e.key === 'Escape' && document.activeElement === search) {
+                search.value = ''; query = ''; render(); search.blur();
+            }
+        });
+
+        var startQ = new URLSearchParams(location.search).get('q');
+        if (startQ) { search.value = startQ; query = startQ.trim(); }
+
+        /* ---- rail ---- */
+        document.getElementById('rail-links').innerHTML = s.chapters.map(function (ch) {
+            return '<a class="rail-link" href="#ch-' + ch.num + '" data-ch="' + ch.num + '">' +
+                '<span>' + String(ch.num).padStart(2, '0') + '</span><span>' + esc(ch.title) + '</span></a>';
+        }).join('');
+
+        /* ---- progress ---- */
+        function updateProgress() {
+            var total = topicCount(s), n = 0;
+            Object.keys(done).forEach(function (k) { if (done[k]) n++; });
+            var pct = total ? Math.round(n / total * 100) : 0;
+            document.getElementById('progress-fill').style.width = pct + '%';
+            document.getElementById('progress-text').textContent = n + '/' + total + ' done';
+        }
+
+        /* ---- resource pills ---- */
+        function pills(t) {
+            var shown = orderFor(s).filter(function (k) { return t.res[k] || kinds.indexOf(k) > -1; });
+            var html = shown.map(function (k) {
+                var url = t.res[k];
+                if (!url) {
+                    return '<span class="pill off ' + k + '">' + ICON[k] + LABEL[k] + ' · soon</span>';
+                }
+                return '<a class="pill ' + k + '" href="' + esc(url) + '" target="_blank" rel="noopener">' +
+                    ICON[k] + LABEL[k] + '</a>';
+            }).join('');
+
+            (t.res.extra || []).forEach(function (x) {
+                html += '<a class="pill notes" href="' + esc(x.url) + '" target="_blank" rel="noopener">' +
+                    ICON.notes + esc(x.name) + '</a>';
+            });
+
+            return html || '<span class="pill off">Nothing added yet</span>';
+        }
+
+        /* ---- main render ---- */
+        function render() {
+            var list = document.getElementById('chapters');
+            var q = query.toLowerCase();
+            var filterKeys = Object.keys(activeFilters).filter(function (k) { return activeFilters[k]; });
+            var out = [];
+            var shownTopics = 0;
+
+            s.chapters.forEach(function (ch) {
+                var chMatch = !q || ch.title.toLowerCase().indexOf(q) > -1 ||
+                    ('chapter ' + ch.num).indexOf(q) > -1;
+
+                var topics = ch.topics.filter(function (t) {
+                    var okQ = !q || chMatch ||
+                        t.title.toLowerCase().indexOf(q) > -1 ||
+                        (t.desc || '').toLowerCase().indexOf(q) > -1 ||
+                        String(t.num).indexOf(q) > -1;
+                    var okF = !filterKeys.length || filterKeys.every(function (k) { return !!t.res[k]; });
+                    return okQ && okF;
+                });
+
+                if (!topics.length) return;
+                shownTopics += topics.length;
+
+                var cov = chapterCoverage(ch, kinds);
+                var bars = 5, on = Math.round(cov * bars);
+                var bar = '';
+                for (var i = 0; i < bars; i++) bar += '<i class="' + (i < on ? 'on' : '') + '"></i>';
+
+                var doneInCh = ch.topics.filter(function (t) { return done[ch.num + '.' + t.num]; }).length;
+
+                var rows = topics.map(function (t) {
+                    var key = ch.num + '.' + t.num;
+                    return '<div class="topic' + (done[key] ? ' done' : '') + '" data-key="' + key + '">' +
+                        '<button class="tick" aria-label="Mark topic as done" aria-pressed="' + (done[key] ? 'true' : 'false') + '">' + ICON.check + '</button>' +
+                        '<div>' +
+                        '<p class="topic-name"><span class="topic-tag">' + esc(t.num) + '</span>' + highlight(t.title, query) + '</p>' +
+                        (t.desc ? '<p class="topic-desc">' + highlight(t.desc, query) + '</p>' : '') +
+                        '<div class="res">' + pills(t) + '</div>' +
+                        '</div></div>';
+                }).join('');
+
+                out.push(
+                    '<details class="chapter" id="ch-' + ch.num + '"' + (q ? ' open' : '') + '>' +
+                    '<summary>' +
+                    '<span class="ch-num">' + String(ch.num).padStart(2, '0') + '</span>' +
+                    '<span class="ch-head">' +
+                    '<span class="ch-title">' + highlight(ch.title, query) + '</span>' +
+                    '<span class="ch-meta">' + ch.topics.length + ' topics · ' + doneInCh + ' done · ' + Math.round(cov * 100) + '% resourced</span>' +
+                    '</span>' +
+                    '<span class="ch-bar">' + bar + '</span>' +
+                    ICON.chevron +
+                    '</summary>' +
+                    '<div class="topics">' + rows + '</div>' +
+                    '</details>'
+                );
+            });
+
+            list.innerHTML = out.length ? out.join('') :
+                '<p class="empty">No topic matches that. Try a chapter name, a topic number like 4.2, or clear the filters.</p>';
+
+            document.getElementById('result-count').textContent =
+                (query || filterKeys.length) ? shownTopics + ' matching topics' : topicCount(s) + ' topics';
+
+            updateProgress();
+            observeChapters();
+        }
+
+        /* ---- tick handling (delegated) ---- */
+        document.getElementById('chapters').addEventListener('click', function (e) {
+            var btn = e.target.closest('.tick');
+            if (!btn) return;
+            var row = btn.closest('.topic');
+            var key = row.dataset.key;
+            done[key] = !done[key];
+            store.set(doneKey, done);
+            row.classList.toggle('done', !!done[key]);
+            btn.setAttribute('aria-pressed', done[key] ? 'true' : 'false');
+            var summary = row.closest('.chapter').querySelector('.ch-meta');
+            var chNum = row.closest('.chapter').id.replace('ch-', '');
+            var ch = s.chapters.filter(function (c) { return String(c.num) === chNum; })[0];
+            if (ch && summary) {
+                var d = ch.topics.filter(function (t) { return done[ch.num + '.' + t.num]; }).length;
+                summary.textContent = summary.textContent.replace(/· \d+ done/, '· ' + d + ' done');
+            }
+            updateProgress();
+        });
+
+        /* ---- rail highlighting ---- */
+        var io = null;
+        function observeChapters() {
+            if (io) io.disconnect();
+            if (!('IntersectionObserver' in window)) return;
+            io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (en) {
+                    if (!en.isIntersecting) return;
+                    var num = en.target.id.replace('ch-', '');
+                    document.querySelectorAll('.rail-link').forEach(function (a) {
+                        a.classList.toggle('active', a.dataset.ch === num);
+                    });
+                });
+            }, { rootMargin: '-70px 0px -72% 0px' });
+            document.querySelectorAll('.chapter').forEach(function (c) { io.observe(c); });
+        }
+
+        /* open a chapter when linked from the rail */
+        document.getElementById('rail-links').addEventListener('click', function (e) {
+            var a = e.target.closest('.rail-link');
+            if (!a) return;
+            var target = document.querySelector(a.getAttribute('href'));
+            if (target) target.open = true;
+        });
+
+        render();
+
+        if (location.hash) {
+            var t = document.querySelector(location.hash);
+            if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); }
+        }
+    }
+
+    /* ---------- boot ---------- */
+
+    window.Portal = { renderHome: renderHome, renderSubject: renderSubject, ICON: ICON };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var back = document.querySelector('.back');
+        if (back) back.insertAdjacentHTML('afterbegin', ICON.back);
+        var si = document.querySelector('.search-wrap');
+        if (si) si.insertAdjacentHTML('afterbegin', ICON.search);
+
+        var page = document.body.dataset.page;
+        if (page === 'home') renderHome();
+        else if (page) renderSubject(page);
+    });
+})();
+
+    </script>
+</body>
+
+</html>

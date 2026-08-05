@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biology — Study Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #090d0a;
+            --surface: #10160f;
+            --surface-2: #151d14;
+            --line: #23301f;
+            --line-soft: #1a241a;
+            --text: #eef3ea;
+            --muted: #8fa088;
+            --muted-2: #64735f;
+            --leaf: #5fbf77;
+            --leaf-bright: #8fe3a3;
+            --leaf-dim: #2c4530;
+            --amber: #e3b559;
+            --root: #c98a5e;
+            --artery: #c1443c;
+            --notes: #b98ad9;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            /* Biology-themed backdrop: soft leaf-glow washes + a faint DNA helix / vein tracery */
+            background:
+                radial-gradient(ellipse 900px 500px at 15% -5%, rgba(95, 191, 119, 0.09), transparent 60%),
+                radial-gradient(ellipse 700px 500px at 100% 20%, rgba(227, 181, 89, 0.05), transparent 55%),
+                radial-gradient(ellipse 800px 600px at 50% 100%, rgba(193, 68, 60, 0.05), transparent 60%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%235fbf77' stroke-opacity='0.05' stroke-width='1.4'%3E%3Cpath d='M20 0 C 60 25, 60 75, 20 100 C -20 125, -20 175, 20 200'/%3E%3Cpath d='M120 0 C 160 25, 160 75, 120 100 C 80 125, 80 175, 120 200'/%3E%3Cpath d='M20 10 L 40 18 M20 30 L 45 40 M20 50 L 40 60 M20 70 L 45 80 M20 90 L 40 98'/%3E%3Cpath d='M120 10 L 100 18 M120 30 L 95 40 M120 50 L 100 60 M120 70 L 95 80 M120 90 L 100 98'/%3E%3C/g%3E%3Cg fill='none' stroke='%23e3b559' stroke-opacity='0.035' stroke-width='1'%3E%3Cpath d='M0 160 Q 55 140 110 165 T 220 160'/%3E%3Cpath d='M0 180 Q 55 200 110 178 T 220 185'/%3E%3C/g%3E%3C/svg%3E"),
+                var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+        }
+
+        .notice {
+            background: var(--surface-2);
+            border-bottom: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 12.5px;
+            text-align: center;
+            padding: 8px 16px;
+        }
+        .notice b { color: var(--amber); font-weight: 600; }
+
+        .portal-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 14px 18px 0;
+        }
+        .portal-back a {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--muted);
+            text-decoration: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            transition: color .2s ease;
+        }
+        .portal-back a:hover { color: var(--leaf-bright); }
+        .portal-back svg { width: 14px; height: 14px; }
+
+        header.hero {
+            padding: 36px 18px 24px;
+            max-width: 880px;
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11.5px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--leaf);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .eyebrow::before {
+            content: "";
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--leaf);
+            box-shadow: 0 0 8px var(--leaf);
+        }
+
+        h1 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: clamp(26px, 6vw, 46px);
+            line-height: 1.08;
+            margin: 0 0 10px;
+            letter-spacing: -0.01em;
+        }
+        h1 em { font-style: italic; color: var(--leaf-bright); font-weight: 500; }
+
+        .hero-sub {
+            color: var(--muted);
+            font-size: 14.5px;
+            max-width: 60ch;
+            margin: 0 0 20px;
+        }
+
+        .legend { display: flex; flex-wrap: wrap; gap: 8px; }
+        .legend span {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: var(--muted-2);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 5px 11px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .legend .n { color: var(--leaf-bright); font-weight: 500; }
+        .legend .n.c-slides { color: #7aa8d9; }
+        .legend .n.c-mindmap { color: var(--amber); }
+        .legend .n.c-mcq { color: #d98e8e; }
+        .legend .n.c-mock { color: #c98ad9; }
+        .legend .n.c-notes { color: var(--notes); }
+
+        .jump {
+            max-width: 880px;
+            margin: 0 auto 4px;
+            padding: 0 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .jump a {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11.5px;
+            color: var(--muted);
+            text-decoration: none;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            padding: 5px 8px;
+        }
+        .jump a:hover, .jump a:active { color: var(--leaf-bright); border-color: var(--leaf); }
+
+        main { max-width: 880px; margin: 0 auto; padding: 16px 18px 100px; }
+
+        .part-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 30px 2px 14px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--muted-2);
+        }
+        .part-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--line);
+        }
+
+        /* ---- chapter ---- */
+        .chapter {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            margin-bottom: 10px;
+            background: var(--surface);
+            overflow: hidden;
+            scroll-margin-top: 14px;
+        }
+        .chapter > summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 16px;
+        }
+        .chapter > summary::-webkit-details-marker { display: none; }
+        .chapter > summary::marker { content: ""; }
+
+        .chapter-num {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            color: var(--leaf);
+            border: 1px solid var(--leaf-dim);
+            border-radius: 6px;
+            padding: 3px 7px;
+            flex-shrink: 0;
+        }
+        .chapter-title { font-family: 'Fraunces', serif; font-weight: 500; font-size: 16.5px; flex: 1; min-width: 0; }
+        .chapter-tagline { font-size: 12px; color: var(--muted-2); display: block; margin-top: 2px; font-weight: 400; font-family: 'Inter', sans-serif; }
+        .chapter-count { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted-2); flex-shrink: 0; align-self: flex-start; margin-top: 3px; }
+        .chapter-arrow {
+            width: 9px; height: 9px;
+            border-right: 1.5px solid var(--muted);
+            border-bottom: 1.5px solid var(--muted);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+        .chapter[open] > summary .chapter-arrow { transform: rotate(-135deg); }
+        .chapter-body-inner { border-top: 1px solid var(--line); }
+
+        .chapter-extras {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--line-soft);
+            background: var(--surface-2);
+        }
+        .chapter-extras .ce-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10.5px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--muted-2);
+            margin-right: 2px;
+        }
+
+        /* ---- topic ---- */
+        .topic { border-bottom: 1px solid var(--line-soft); }
+        .topic:last-child { border-bottom: none; }
+        .topic > summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 12px 16px 12px 26px;
+        }
+        .topic > summary::-webkit-details-marker { display: none; }
+        .topic > summary::marker { content: ""; }
+        .topic-num { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--root); flex-shrink: 0; width: 34px; }
+        .topic-title { font-size: 13.5px; flex: 1; min-width: 0; }
+        .topic-fill { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--muted-2); flex-shrink: 0; }
+
+        .res-grid { display: flex; flex-direction: column; gap: 7px; padding: 2px 16px 14px 26px; }
+        .res {
+            display: flex; align-items: center; gap: 9px;
+            padding: 10px 12px;
+            border-radius: 9px;
+            border: 1px solid var(--line);
+            background: var(--surface-2);
+            color: var(--text);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .res-ic { width: 15px; height: 15px; flex-shrink: 0; border-radius: 3px; }
+        .res--video .res-ic { background: var(--leaf); }
+        .res--slides .res-ic { background: #7aa8d9; }
+        .res--mindmap .res-ic { background: var(--amber); }
+        .res--mcq .res-ic { background: #d98e8e; }
+        .res--mocktest .res-ic { background: #c98ad9; }
+        .res--notes .res-ic { background: var(--notes); }
+        .res--empty .res-ic { background: var(--line); }
+        .res--pending .res-ic { background: var(--artery); }
+        a.res:active { border-color: var(--leaf); background: #182016; }
+        .res--empty, .res--pending { color: var(--muted-2); }
+        .res-tag { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted-2); }
+        .res--multi { flex-wrap: wrap; }
+        .res-parts { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+        .res-part {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: var(--leaf-bright);
+            text-decoration: none;
+            border: 1px solid var(--leaf-dim);
+            border-radius: 6px;
+            padding: 4px 9px;
+        }
+        .res-part:active { background: var(--leaf-dim); }
+        .res--slides .res-part, .res--mcq .res-part, .res--notes .res-part { color: var(--text); border-color: var(--line); }
+
+        .missing-note {
+            margin: 10px 16px 14px 26px;
+            padding: 10px 12px;
+            border: 1px dashed var(--artery);
+            border-radius: 9px;
+            background: rgba(193, 68, 60, 0.07);
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        .missing-note b { color: var(--amber); }
+
+        footer {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 10px 18px 60px;
+            color: var(--muted-2);
+            font-size: 12px;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        @media (max-width:480px) {
+            h1 { font-size: 24px; }
+            .chapter > summary { padding: 13px 12px; gap: 9px; }
+            .chapter-title { font-size: 15px; }
+            .chapter-count { display: none; }
+            .topic > summary { padding: 11px 12px 11px 18px; gap: 8px; }
+            .topic-title { font-size: 13px; }
+            .res-grid { padding: 2px 12px 12px 18px; }
+            .res { font-size: 12.5px; padding: 9px 10px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="portal-back">
+        <a href="index.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            Study Portal
+        </a>
+    </div>
+
+    <div class="notice">Opening from inside WhatsApp? Tap <b>⋮ → Open in Chrome</b> first — in‑app browsers sometimes block Drive video playback.</div>
+
+    <header class="hero">
+        <div class="eyebrow">Class 11 · Biology · NEET / TS&AP EAMCET</div>
+        <h1>Field Notes for <em>Biology</em></h1>
+        <p class="hero-sub">Chapters 1–19, all in one place. Tap a chapter to open its topics, tap a topic to reveal its resources. Only the button you tap opens — video stays video, slides stay slides.</p>
+        <div class="legend">
+            <span><span class="n">●</span> Video</span>
+            <span><span class="n c-slides">●</span> Slides</span>
+            <span><span class="n c-mindmap">●</span> Mind Map</span>
+            <span><span class="n c-mcq">●</span> 150 MCQ PDF</span>
+            <span><span class="n c-mock">●</span> Online Mock Test</span>
+            <span><span class="n c-notes">●</span> Extra Notes</span>
+        </div>
+    </header>
+
+    <nav class="jump">
+        <a href="#ch1">Ch 1</a><a href="#ch2">Ch 2</a><a href="#ch3">Ch 3</a><a href="#ch4">Ch 4</a>
+        <a href="#ch5">Ch 5</a><a href="#ch6">Ch 6</a><a href="#ch7">Ch 7</a><a href="#ch8">Ch 8</a>
+        <a href="#ch9">Ch 9</a><a href="#ch10">Ch 10</a><a href="#ch11">Ch 11</a><a href="#ch12">Ch 12</a>
+        <a href="#ch13">Ch 13</a><a href="#ch14">Ch 14</a><a href="#ch15">Ch 15</a><a href="#ch16">Ch 16</a>
+        <a href="#ch17">Ch 17</a><a href="#ch18">Ch 18</a><a href="#ch19">Ch 19</a>
+    </nav>
+
+    <main>
+        <div class="part-divider">Unit III–IV · Diversity &amp; Structural Organisation</div>
+
+        <details class="chapter" id="ch1">
+            <summary>
+                <span class="chapter-num">01</span>
+                <span class="chapter-title">The Living World</span>
+                <span class="chapter-count">3 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">1.1</span>
+                        <span class="topic-title">What is Living?</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1veomB8q2JMSM_Nt9stqTONrsXCT3QbjQ/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1Wbj_2Meclv611KuQpHCQRQTUMo8RBA3c/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1le8a9KXV6AOFfnD1d1L6kpYs9hQoSoG5/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/1m19KqTaKe9TukISBuAA-Fl4EKVwwYLQL/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">1.2</span>
+                        <span class="topic-title">Diversity in the Living World</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1-c43Mu3bq_RLZCNJPMk80npIWpNvioWK/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/114ngFYK5Q_2VkH1GyKOxpkX-EXB7WDln/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1hGelbJVEnTADgUeZqz5KpEBsxEqd4VOW/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1E4IG9Ux-tSwkI2BlyDTjn1G5qa4_2cAP/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">1.3</span>
+                        <span class="topic-title">Taxonomic Categories</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/19TEDXgeoHHWtrcCdMR7jsw8B3dgks60C/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1Nw6bWo_QGldr_H-claC1X-4c6h1h3G2p/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1lEJdujIzwdMs-ytNQGBwerggUdNRmC26/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1P4JTrnx0ne7CL7U2v37djUKE9iGig88k/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+        <details class="chapter" id="ch2">
+            <summary>
+                <span class="chapter-num">02</span>
+                <span class="chapter-title">Biological Classification</span>
+                <span class="chapter-count">6 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">2.1</span>
+                        <span class="topic-title">Kingdom Monera</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1ebDakjfxCMh4srsZ8fb_l34r1ULE2kt8/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1nqQeQK4VIaW0Gmvxx_Uw8EGYplUUR5Zj/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/11UTAXycpt9PvrUK4CgfXR8o1td_z9kNS/view" target="_blank" rel="noopener">Part 3</a><a class="res-part" href="https://drive.google.com/file/d/1uq3KusC6FmQN7N-24X1RZEdoiS_FMsxb/view" target="_blank" rel="noopener">Part 4</a><a class="res-part" href="https://drive.google.com/file/d/1QcxwOqx2q5F6yIbzF35U3TK-X67Zn4nT/view" target="_blank" rel="noopener">Part 5</a><a class="res-part" href="https://drive.google.com/file/d/1WPagCGo54a17_BjURAVkbnhwQG7DMuf2/view" target="_blank" rel="noopener">Part 6</a><a class="res-part" href="https://drive.google.com/file/d/196gZn7BB3CAQaO0-RwHnTIQUGLIwOlvE/view" target="_blank" rel="noopener">Part 7</a><a class="res-part" href="https://drive.google.com/file/d/14sjzlS3uzHHQu7Vlpc8rmVUU1afMzCw4/view" target="_blank" rel="noopener">Part 8</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/15alS2HL_ax5KYP1ae-NJeCK_CsUna0sS/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">2.2</span>
+                        <span class="topic-title">Kingdom Protista</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/11OS7XnY1ZTAm2vBzJHhTrdou6angTaEa/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/14deMXtglDxvx8msLw9flMIIutjH4Reko/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1D2yU5bYRKBohglN61y4gLLh1Dsl_snLp/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">2.3</span>
+                        <span class="topic-title">Kingdom Fungi</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1JTSfy8CIpM-j1m2HhLImsx24ESQYqrur/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1nRk3vIl8eoUR3BiZ2yM4gsmnyzwAZIh2/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">2.4</span>
+                        <span class="topic-title">Kingdom Plantae</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1rtuZMMApcyOax6IaABIryiNKufO4qyI4/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/12zkEAqOpl5E5zWVo0QMpAhW69_Wyazq4/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1xkexxo8iPqh2z2p1WXfs0RKnBtrNB9gn/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">2.5</span>
+                        <span class="topic-title">Kingdom Animalia</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1_xCZ1Zd0tiwiN0K4JKIeXWa0X8XeU6DT/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1UYOT1QgdME471mqUZwRnEWPI--MR9W1E/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">2.6</span>
+                        <span class="topic-title">Viruses, Viroids, Prions and Lichens</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1hjVT9MpY4e5bCqyf0go24xvDthN4XLjd/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1ZGE0OvXYuQMpgz1qTjpuR8sYQuEjv0Wq/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+        <details class="chapter" id="ch3">
+            <summary>
+                <span class="chapter-num">03</span>
+                <span class="chapter-title">Plant Kingdom</span>
+                <span class="chapter-count">5 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">3.1</span>
+                        <span class="topic-title">Algae</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1REHumObtMXISEqwS8o_OxgY5aSzaWoY1/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/10Wh28vtNeoaqnNhJ43Cbm5ZZ5pQ41k3A/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">3.2</span>
+                        <span class="topic-title">Bryophytes</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1-wKmVF9d6bySvhwyKFI6nqJo9fhRuuEB/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1dFREUepUHqRtDwK9O7L_ZwwiSAVMlUrm/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">3.3</span>
+                        <span class="topic-title">Pteridophytes</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/190Vkh3ZZ7ln5KCUKrXoLFyAFQVMXMLUE/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1xSoQA8rQ4QcZma6kE80fH-2_WyNxxjop/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">3.4</span>
+                        <span class="topic-title">Gymnosperms</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1uI997-k5tvaSiQKcP0ThbbDJZ4rci_P5/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">3.5</span>
+                        <span class="topic-title">Angiosperms</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1nDpRCFn_-MHHEh3xwtYMcaJEddz_Kgs9/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+        <details class="chapter" id="ch4">
+            <summary>
+                <span class="chapter-num">04</span>
+                <span class="chapter-title">Animal Kingdom</span>
+                <span class="chapter-count">3 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">4.1</span>
+                        <span class="topic-title">Basis of Classification</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1VIOE-XqRdRGdC2prmoG5h4bv_BeXeK7i/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1hZH5fvIdo8CH32XPuBcxtAZHw3iLLTn4/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1y5I3F34hK0r1mABHauSWtql6PlV7NkDX/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/12L6WN1j_Jv7a_DK5srU3koJPf-lgAZK1/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">4.2</span>
+                        <span class="topic-title">Classification of Animals</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1ovWIu5IWf_51BtXQmN_yugmAanmdrQA3/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/19tab3bFjV-OFmYebnD1vhaVCkizL1Ek8/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1PiKW_ZoRxRm7jdGl_bElfgMqYV2IBD1t/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">4.3</span>
+                        <span class="topic-title">Additional material (sent as 4.3)</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-tag">Coming soon</span></span>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1dViP5IAH5yGWVp0v2sm3MUlNcMetIa8W/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+        <details class="chapter" id="ch5">
+            <summary>
+                <span class="chapter-num">05</span>
+                <span class="chapter-title">Morphology of Flowering Plants</span>
+                <span class="chapter-count">9 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">5.1</span>
+                        <span class="topic-title">The Root</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1Tooffab9JvJLgq3lVuFdfOL_p8t_JEbZ/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1rVwYLZd9evJLrnKPKKFEiSMNcorqbwss/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <a class="res res--slides" href="https://docs.google.com/document/d/1tkRswgCP66jvSWSLMZ6SrOvqGdl1lwzgimsDbYJ6cPM/edit" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">5.2</span>
+                        <span class="topic-title">The Stem</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1YqUeUC-iEMNcywJe56kSmqapBmE3PAzy/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1Ew0RF7A0pcTxx1nGysSPdNSr3lv4vPk-/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1BsoNfF92LlqQ3cd9XJziDMCKb1rrZoBN/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">5.3</span>
+                        <span class="topic-title">The Leaf</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1J55AtGEha5q7iJSglcLNDeovRDfpeO6Q/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1HhkJL4TBiOjexzxlVjbMakyAnT2Bt1eY/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1nueDMTJeOGZ-j-22cU28D3K0RXi55Trr/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">5.4</span>
+                        <span class="topic-title">The Inflorescence</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1A-s4Q9LTB3ErK5pJ-KSyNy980C8Rv59q/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1cVwO75QjGR6_bM1y1X23S8MmHEgqLf2X/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1htJhSdDscUVlUzZjh2IyVJT6aR8JziUM/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">5.5</span>
+                        <span class="topic-title">The Flower</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/11GGv7KQW8rillqCDNxP15tyE7M5w4sbf/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1psnxD1ZOoerBVw2nsrVHLvPTXKQkF_Zs/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">5.6</span>
+                        <span class="topic-title">The Fruit</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/13NEGEG-KIpKScKmae7DnmTrQ96qY9Mk-/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1fsAAYboLJFF7bCcMPYpwmthvjleM8mlG/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">5.7</span>
+                        <span class="topic-title">The Seed</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1paJ66ActOmhjP7r8C8_Fro6gKuA3lMfV/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1QaqyppgwdoXsnd3rBYrAYZVmhR--zLTZ/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">5.8</span>
+                        <span class="topic-title">Semi-technical Description of a Flowering Plant</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/10OX_Wz-E6ykdUTlx59_xNyk_j1u7OLc8/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">5.9</span>
+                        <span class="topic-title">Description of Important Families</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1Mn66Apuye_NHvhLMT_Eo4UsSl-MtOJd9/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+        <details class="chapter" id="ch6">
+            <summary>
+                <span class="chapter-num">06</span>
+                <span class="chapter-title">Anatomy of Flowering Plants</span>
+                <span class="chapter-count">3 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">6.1</span>
+                        <span class="topic-title">The Tissues</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1-kkiTu_smq86ZMZatbTvTGEWaKgGL7T9/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1xEIMA9kBSxdbhJ_z4Mirmo_so7UvHIBa/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1UqOm3aqegURJc7JwLQUZyXUedOVpj18E/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">6.2</span>
+                        <span class="topic-title">Tissue System</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/143ImZ4Zkf_tXlZxqeXV_-FUFzvveTJeF/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1yuag0jJW0cxQ-skTHiICuQo75epxWGGD/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1YRoosd0whQI1AzE4EuhOPmABqpCA3_eR/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">6.3</span>
+                        <span class="topic-title">Anatomy of Dicotyledonous and Monocotyledonous Plants</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1I3xFeEbs0oQXX32cUENBcb04KdadABL9/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1yGtkTefZiNk_c4V3HJU17vIy9_FMlgsL/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1b4-NBnxoIC3Vne0-8VbuqgXUaXdycPBr/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+        <details class="chapter" id="ch7">
+            <summary>
+                <span class="chapter-num">07</span>
+                <span class="chapter-title">Structural Organisation in Animals</span>
+                <span class="chapter-count">5 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">7.1</span>
+                        <span class="topic-title">Animal Tissues</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1HVy0ObEh5Nft5cK7ZP7coB4IO-fbdvnc/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1PLbcl_V6kvmuNzNSNwuONHwnYL0bNvih/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1yeIbgQkGrTA5izIb79_sD1wbtxqBjDJ5/view" target="_blank" rel="noopener">Part 3</a><a class="res-part" href="https://drive.google.com/file/d/1VP1cNLeT-d_9_xa_xzMYTzn_FfEae_6G/view" target="_blank" rel="noopener">Part 4</a><a class="res-part" href="https://drive.google.com/file/d/1G5lriu3G-jX1hpX5sGMW1vxJEwAfZk2X/view" target="_blank" rel="noopener">Part 5</a><a class="res-part" href="https://drive.google.com/file/d/1NdMN4_20Zri_I3YJwasqC7ArkMHTVzZI/view" target="_blank" rel="noopener">Part 6</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1xcOgyIC7Son2VP2Tzzs6lKVf3Qm2Hs3z/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">7.2</span>
+                        <span class="topic-title">Morphology and Anatomy of Frog</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1wXSwLyjBzJQxrxBPQKPjfuX1NdF0iCpg/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/19gtkU3UbVnmZXpKZymh_VIV_wjY9QeKI/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1-OubPdsrfrmNm-euWsZnc5uIyO4zn7Iw/view" target="_blank" rel="noopener">Part 3</a><a class="res-part" href="https://drive.google.com/file/d/1ITOKACE2X0uNfPKygkTCTn0rsw-gV99M/view" target="_blank" rel="noopener">Part 4</a><a class="res-part" href="https://drive.google.com/file/d/1SCCq_bXCsanV3pVxefmz5i3dvvDceSU7/view" target="_blank" rel="noopener">Part 5</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1TqDMbsqFo5pCuRe18iB-O5o5qXFtG0Ty/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">7.3</span>
+                        <span class="topic-title">Additional material (sent as 7.3)</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-tag">Coming soon</span></span>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1DRhI-KUATOQWjOFfAZkPA4MTd9aCtA7E/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">7.4</span>
+                        <span class="topic-title">Additional material (sent as 7.4)</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-tag">Coming soon</span></span>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1-uRE7nGOxTucKf773C3dCXgHwwe0JfQ-/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">7.5</span>
+                        <span class="topic-title">Additional material (sent as 7.5)</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-tag">Coming soon</span></span>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1pxzvSlbFBovrhnAJVsQ5G70TQUQz5HcO/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+        <details class="chapter" id="ch8">
+            <summary>
+                <span class="chapter-num">08</span>
+                <span class="chapter-title">Cell: The Unit of Life</span>
+                <span class="chapter-count">4 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">8.1</span>
+                        <span class="topic-title">What is a Cell?</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1Ulg8ZyNraimZQYhw5ZXQ3Xw9mg_An66G/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1_-iBqFRdWf08XdmbKFfopAZs5FbckR5-/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1Tkn89CHJai9uj1wbIwAjc-WsydhMXEik/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">8.2</span>
+                        <span class="topic-title">An Overview of Cell</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1gWBrIvEL-K31siFbUUt39u5cjTDWjwny/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1b67h12WInNcR8QwhUiggh9eWSDQUe6np/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1lPMVUyV5hCNnp832i9oyCbDszoo5wXgY/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">8.3</span>
+                        <span class="topic-title">Prokaryotic Cells</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/13Xic26kUIkDwoY7ETDE_ux4kJRZ_yOH_/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1aH7sZQkYS4UfZriN6Gdj-_roaFT6CZEZ/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1NEl0Yg-Fwkh_ne7XdwGZ1K5SiZ87K9-a/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">8.4</span>
+                        <span class="topic-title">Eukaryotic Cells</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/16mc0BpSQYSTKqxGQqFWMPRA-CSCLsVGl/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1djpER5iajvHSQKMF-iOizwtsGxHvG2vG/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+        <div class="part-divider">Unit V–VI · Plant Physiology &amp; Reproduction</div>
+
+        <details class="chapter" id="ch9">
+            <summary>
+                <span class="chapter-num">09</span>
+                <span class="chapter-title">Biomolecules</span>
+                <span class="chapter-count">5 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">9.1</span>
+                        <span class="topic-title">Chemical Composition of Living Cells</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1xg3eXLIUFYC09cGeE4KaLL0hbOtdYndW/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/12pjiXDLAuWBmSlmWxHPkLFcu86w6CxM0/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">9.2</span>
+                        <span class="topic-title">Carbohydrates, Proteins and Lipids</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1E4guqHtYhVfFU4ud-WRJyaq_6z-ErbWF/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">9.3</span>
+                        <span class="topic-title">Nucleic Acids</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1MvbR6RohVhJ_QGdHmn1oeTDUwwLJTQST/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">9.4</span>
+                        <span class="topic-title">Concept of Metabolism</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1qs0bC0om0xDj2YqJ0aFHBKNqUbA1oQvN/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">9.5</span>
+                        <span class="topic-title">Enzymes</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1j0V7y_ciMdV5JaB_PAZxdrThpNfECXPn/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+        <details class="chapter" id="ch10">
+            <summary>
+                <span class="chapter-num">10</span>
+                <span class="chapter-title">Cell Cycle and Cell Division</span>
+                <span class="chapter-count">5 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">10.1</span>
+                        <span class="topic-title">Cell Cycle</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1Nq2x8zNqZ8Fpzk0wmFuWxOhP7_aSRPyA/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">10.2</span>
+                        <span class="topic-title">M Phase</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/110pPJapR_8YWC3XXh91y7xy3KVjWkLT2/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1bYWdSyXAGXUSU-fIuimkctmemCicbBNw/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">10.3</span>
+                        <span class="topic-title">Significance of Mitosis</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/15UbMv8PnKPDjfYS7-mpDPrNrZetC9sPV/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">10.4</span>
+                        <span class="topic-title">Meiosis</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1pUL4fpEfUYsiudxcCRKORyaQgefKgURH/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">10.5</span>
+                        <span class="topic-title">Significance of Meiosis</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1kJafUnXIBEYbo8a1WWJW3sbqm-XV16Ci/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1mNAD2C2FWCU64gZ7zwyg6TP-SMCKUntt/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+        <details class="chapter" id="ch11">
+            <summary>
+                <span class="chapter-num">11</span>
+                <span class="chapter-title">Photosynthesis in Higher Plants</span>
+                <span class="chapter-count">7 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">11.1</span>
+                        <span class="topic-title">Early Experiments</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/17991JKp0zTqBo9Na-0m7l8X5m9u6bTNn/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1NhcFnK8b9erQ6iUCYPqpxmr5E6TTvvW_/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1iuDdFV5SB2fju2whfepRIKjNapXSZ5b2/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1Ws9ku6GawOSLlzZHjuYwnbc62NzhApim/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">11.2</span>
+                        <span class="topic-title">Site of Photosynthesis</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1i-qnD63UomViwLJD-padRLZWfFUDHhDE/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/183vbsUuBmheccFXve1sMMJUfupJf_MSX/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1PSTDiPcBJ1hHmGL2h6-dqe2bM2G0VzyI/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1F-3Ul8oLwC81tlUJdN_fVJZyo4v8k-AL/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">11.3</span>
+                        <span class="topic-title">Light Reaction (Photochemical Phase)</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/14oBh9I2YVAHEBDBMo83ZFv0Hj6l-G1WY/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1Clj9z1sj6KbvXzrO1gY9YYNS3LtxZQAa/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1Zs2W3e5rjkcsBaUsr7a4aOlC2UP3jej4/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1GfAHpRg4hcYkX2or6H993mk89PKap8yn/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">11.4</span>
+                        <span class="topic-title">Chemiosmotic Hypothesis</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1ipzd0f7eQK9JXSRDaRwMhn5JtU5dnbWq/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/10tnuSvyLDZOOjYIzZw5ST4WEEtzcyoNm/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1cJQ4_kkTFqDB2hAxFx99V7Y8u5dbfOlZ/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1r0ykFRgPHzQFiNjBXvR9GhZR4SGBVcev/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">11.5</span>
+                        <span class="topic-title">Dark Reaction (Calvin &amp; Hatch-Slack Cycles)</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/15k99Z5olK2561I39prKF_IBTth8E8AtD/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/161-krU0m4N0hWu_-UsB1ltcW_i4ZvBIC/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1An5v7hYmsUcH3dMy-Eo3S5tCGP4tOpGT/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1Bp2lHPEZk8WORRbaw8jGTX3OT59-RnHv/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">11.6</span>
+                        <span class="topic-title">Photorespiration – The C2 Pathway</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1-jK2zQfVUuOoVPXbBn6TbiaiBTmfEqaa/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1TDpx6GA5y0Go1LuOcQVg35-QZX8kxYuZ/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">11.7</span>
+                        <span class="topic-title">Factors Affecting Photosynthesis</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1lu68Bnwixgjhtn3Xc8TNANyZEz2ijm6C/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/11JLsXLcPqtptdA4JCqxzMAs7UVZEEgdm/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/12ODQcYWw28-IIhAdaXKclfDIpCzRJ7Ot/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+        <details class="chapter" id="ch12">
+            <summary>
+                <span class="chapter-num">12</span>
+                <span class="chapter-title">Respiration in Plants</span>
+                <span class="chapter-count">6 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">12.1</span>
+                        <span class="topic-title">Do Plants Breathe?</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1HpDrNS9dLHfBOF5A58rSruXSeM76J3YH/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1JW9OZqr2xmsjWCN1KJDC5NEpEV8K12t9/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1P8Vnmby2GTV14OXS9SxhvleGjqbFfJBn/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <div class="res res--slides res--multi"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-parts"><a class="res-part" href="https://docs.google.com/document/d/1zjUKjA20jCTB90AZD9ka9inr6ZSSMotnVp9fZQ9ZKxk/edit" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1YUz7LyDOY2dAdMea4xqZXeqcbVq5I4vy/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">12.2</span>
+                        <span class="topic-title">Glycolysis (EMP Pathway)</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1u626rgVYWzH7sTfjEn0h-MQWv_c4i7CZ/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1AUerWPxvktkBsFmVhlrG-3KW74DJ3zy7/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1OHoK0X_ke_xTKvvM6IAyn-S8niJ3knWy/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">12.3</span>
+                        <span class="topic-title">Fermentation (Anaerobic Respiration)</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1n7kGuoPevlplPh0pZ_f3qzZb1DjKSvMy/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1ZOR2gaXvZCSnDRbfddhFnM3A5lG0EihY/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1xUPluT5uD0reXVdTPXAVcIYCddhLd8Xi/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/10VGmwyCzqa7YAgvIyHYZTou5UUU3gibR/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">12.4</span>
+                        <span class="topic-title">Aerobic Respiration</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1WxxDLBLGcOMXhq_J-DX_nK5GsnwwRe9X/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1l0i31D3C1M26sY1n2i4Chu8qGk5BC6CG/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">12.5</span>
+                        <span class="topic-title">Amphibolic Pathway</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1gRPD1lrcwehQNlMcIJBQ9YtgEKgmTZuc/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1oX3PokSUlaYTAo2y4ZuPQCkcN2GixNaM/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1SvibYP3ANEIHalYG7Fwaq4i6g_3Gc-Fd/view" target="_blank" rel="noopener">Part 3</a><a class="res-part" href="https://drive.google.com/file/d/1PMAs1VR5J6HnfGzxYtWR1GRywvLbLdj2/view" target="_blank" rel="noopener">Part 4</a><a class="res-part" href="https://drive.google.com/file/d/1xlOAJDBk8Zc12zPry5ozs8KlCApiQiO9/view" target="_blank" rel="noopener">Part 5</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1UVkSJHNE2sWnBqIT0QUBPXblJCcirXBj/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">12.6</span>
+                        <span class="topic-title">Respiratory Quotient</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1DysGOH5jdP3ZfgDjGNlsYkopPCYGgm4A/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/17nx0enzyM5sbAiQImmQL_wPuG7jABf2W/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1tV3y8hjc3RUGXR3p-1OTaspQYjRsW42B/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1Lsns7GxC8Gy9Gw4SI2S1Y0FD9piHi5Yj/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+        <details class="chapter" id="ch13">
+            <summary>
+                <span class="chapter-num">13</span>
+                <span class="chapter-title">Plant Growth and Development</span>
+                <span class="chapter-count">4+ topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">13.1</span>
+                        <span class="topic-title">Growth</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1M1AvtmtYIIzDX-wGnwFwHr_hb2gVBymL/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1VHkcgQfcaGB9dF-le6jlBmyBr-ejt0EZ/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1iP1yLfY5WwcBVCj3S-pIso2hKn831-XH/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1p7uLaST19JwdHWbcYNKZ2Z0UnzoNspBg/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">13.2</span>
+                        <span class="topic-title">Differentiation, Dedifferentiation and Redifferentiation</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1OTveQg_LnPsZKFbugJJRvJUmOMl1wYE-/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/10urYxwLLucFiKCxId6Q3O8a16yjpFpEj/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1VPI-i98gQcVVw2GJ4uW0UfuseFIQbwBt/view" target="_blank" rel="noopener">Part 3</a><a class="res-part" href="https://drive.google.com/file/d/19zr1H2bi5_tc0uzO3MdvPtHufF83qczD/view" target="_blank" rel="noopener">Part 4</a></span></div>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/17WtEZZVl7GyFjHh_5dmuJXF-NwSLfq9e/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">13.3</span>
+                        <span class="topic-title">Development</span>
+                        <span class="topic-fill">1/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1UcoD4KxmbxJuGzvd7vqybJMXMHIxWkzA/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1bNlC9-PT4fRWEk7G6BZVVtlLdwTNVd70/view" target="_blank" rel="noopener">Part 2</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">13.4</span>
+                        <span class="topic-title">Plant Growth Regulators</span>
+                        <span class="topic-fill">1/5+</span>
+                    </summary>
+                    <div class="res-grid">
+                        <div class="res res--video res--multi"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1CY3FiapvRcZXjVlOc6rJqKLltSw2inSA/view" target="_blank" rel="noopener">Part 1</a><a class="res-part" href="https://drive.google.com/file/d/1GFoqYx1IIlt8xNDx1DOT_FB1TWJQ_OjL/view" target="_blank" rel="noopener">Part 2</a><a class="res-part" href="https://drive.google.com/file/d/1WyXEGlVIOjsrZ3PugKLRzJi7JVo3h-3i/view" target="_blank" rel="noopener">Part 3</a></span></div>
+                        <span class="res res--pending"><span class="res-ic" aria-hidden="true"></span>Slides<span class="res-tag">Link not recovered</span></span>
+                        <span class="res res--pending"><span class="res-ic" aria-hidden="true"></span>Mind Map<span class="res-tag">Unconfirmed</span></span>
+                        <span class="res res--pending"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Unconfirmed</span></span>
+                        <span class="res res--pending"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Unconfirmed</span></span>
+                    </div>
+                </details>
+
+                <div class="missing-note"><b>Heads up —</b> your source file for Chapter 13 cut off mid-way through topic 13.4 (the Slides link wasn't fully included), and the chapter header said "5 topics" while only 4 were present — so there's likely a 13.5 (and possibly 13.6, e.g. Photoperiodism / Vernalisation) missing entirely. I didn't invent any links for these — paste the rest of your original chapter‑13 block and I'll drop it in exactly as‑is.</div>
+            </div>
+        </details>
+
+        <div class="part-divider">Unit VII · Human Physiology</div>
+
+        <details class="chapter" id="ch14">
+            <summary>
+                <span class="chapter-num">14</span>
+                <span class="chapter-title">Breathing &amp; Exchange of Gases<span class="chapter-tagline">From nostril to alveolus — how air moves in, how gases cross the membrane, and how the brainstem keeps the rhythm.</span></span>
+                <span class="chapter-count">6 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">14.1</span>
+                        <span class="topic-title">Respiratory Organs &amp; Anatomy</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-tag">Coming soon</span></span>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1bcfWM8Fim14WsXYBvXH9Tcq7pzHUY5Lv/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1UfBqYqfKvEMKbkFF33Y5j5-JUi1m91r6/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/1I2zYWnzRCHJlh3ABaJPNJ0VXePETnr1B/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">14.2</span>
+                        <span class="topic-title">Mechanism of Breathing</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1-29vVfXZ0w4sVgzO_fjENqj-vTmsJuVA/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1rqjdAfbNelSl07sVy-2CNCL-cQUHy5Ob/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1172jjzmWHPO6gvxIPoMT5B2UFvSOOrcI/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/1WmW2LyvUQX8Ue3KMnumqFv_VLe1uWEMn/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                        <a class="res res--notes" href="https://drive.google.com/file/d/16xvfEbCj-YhHGwIjaHeZ3KUFgWlZCjOH/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Notes</a>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">14.3</span>
+                        <span class="topic-title">Exchange of Gases</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1KGZBDLWx2SHHjTf8YneigGZo2dt_ztR0/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1LqA0Zm-Rd23kxTnP05oTWKyToPNdEmNJ/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/11LKbTU-0qyGso0dJ5RZVphEh81muHyIL/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <div class="res res--mcq res--multi"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1V9uDOlCvJ_Bwj51yRRyiHRxLuTp2_WSo/view" target="_blank" rel="noopener">Set 1</a><a class="res-part" href="https://drive.google.com/file/d/19SSA5LE4ZTwF80RSr8lM1GGWJUOm_7hP/view" target="_blank" rel="noopener">Set 2</a></span></div>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">14.4</span>
+                        <span class="topic-title">Transport of Gases</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1Bv_VnbxRrOC6TZswAQp8K2QAmRv3H5em/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1CGi3QmuGYbrLmUwinIDdS3WjcIVZ7P66/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1tJ0Au5TlJ4VzgKgZzJy5wcOB3oKY5n3z/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">14.5</span>
+                        <span class="topic-title">Regulation of Respiration</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1Lhx8urcWiCuixVeDVJX5_g9m94yClJH9/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1Tt0_pAu1EfIRu0ZxnnPpv_lHJ6MYOBY1/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1Vpu2-1m9pqytVtvRMAlaJVpo0qlIFOQF/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">14.6</span>
+                        <span class="topic-title">Disorders of the Respiratory System</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1_aGoGhxTg2ks9C12t2dkX1qYuz8AANeK/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1ySaxlmfzvd2dwYqza5-gKpgsAYJOCkfN/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1fBjvQR_T85A083tD9BVSz4Pa6V1b0Cut/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/1Ce9nFNHSU5x4-UZGmVBMxVSbh6ElMz1G/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="chapter" id="ch15">
+            <summary>
+                <span class="chapter-num">15</span>
+                <span class="chapter-title">Body Fluids &amp; Circulation<span class="chapter-tagline">Blood, lymph, and the double-loop pump — plus the nervous and chemical dials that speed it up or slow it down.</span></span>
+                <span class="chapter-count">6 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">15.1</span>
+                        <span class="topic-title">Blood</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1z5HrXePZZXszOfIjpmmxZ1DcdrikbGun/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1a15OnCAt71M7AH6nROpizrQTpVWJKQXh/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1eZRJyJoXNEHR2lhjyNH3GkY0733qFu7R/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/1BE_bwDMp3T-k_5xq_x-U5TktKr5pWIc0/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">15.2</span>
+                        <span class="topic-title">Lymph (Tissue Fluid)</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1pdbBj2pk1dRhHLjjRIfOkuc5FoAWwgOA/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1NANSUNOEWGlzHZXUotJwmJmxNCgT6YJM/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1mSMc3_jKq6zO7alLxoDOL6dzAcS_OysO/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/1NasVugO9ncjWgu050Xie6XJekW5VuBPm/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">15.3</span>
+                        <span class="topic-title">Circulatory Pathways</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1p9bQk5aEiYZO1DbRapeHI-MoN7mDmM7G/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1eJ6UfLl3mZqTHXMRh5M4XnfG5tWCLmH1/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/13Z2M-ORsuAq3fiAjlQKOEfyFdwo51rNa/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/1pTB9Qt7DvgM2pzz-CJljkBrDK3HXm5ZY/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">15.4</span>
+                        <span class="topic-title">Double Circulation</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1QKd57P3mwxcpiv-7TDvJMUWepVnej42F/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/13PY5jC690QWFjlnkilnFqMTxWLMp5snY/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1GIuD3mjz7BRQ9IfQkh3vtOsjGpXHDI6p/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">15.5</span>
+                        <span class="topic-title">Regulation of Cardiac Activity</span>
+                        <span class="topic-fill">2/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-tag">Coming soon</span></span>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1MmM6fzyDvMrg9GlThCPLcqoTQw18WCJ4/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1sTtDBA1Q8055OnO4KwgHcOCT6jsvM7-Z/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                        <div class="res res--notes res--multi"><span class="res-ic" aria-hidden="true"></span>Extra Notes<span class="res-parts"><a class="res-part" href="https://next-india.my.canva.site/" target="_blank" rel="noopener">Canva Notes</a><a class="res-part" href="https://app.notion.com/share/5355f1f6776d819193f70003450fc534/3a05f1f6776d819f806900a96bc855e8" target="_blank" rel="noopener">Notion Notes</a></span></div>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">15.6</span>
+                        <span class="topic-title">Disorders of the Circulatory System</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1X6LktNuJ4jOpQFIcCNyRF5swx93FnrAz/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1rh1qvJGjRgj4FQI4sprMfJ9ljqDBz-4m/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/171LkRGzVSejDy_0fi8EHWtZyXijFG2jp/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                        <div class="res res--notes res--multi"><span class="res-ic" aria-hidden="true"></span>Extra Notes<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/1pE2SJdwhxljDNsP28SjGSZL_BePLlCWC/view" target="_blank" rel="noopener">Notes</a><a class="res-part" href="https://app.notion.com/share/5355f1f6776d819193f70003450fc534/3a05f1f6776d8176a2a300a998423c9d" target="_blank" rel="noopener">Notion Notes</a></span></div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="chapter" id="ch16">
+            <summary>
+                <span class="chapter-num">16</span>
+                <span class="chapter-title">Excretory Products &amp; their Elimination<span class="chapter-tagline">The nephron's filter-reabsorb-secrete line, the counter-current trick, and every organ helping the kidneys out.</span></span>
+                <span class="chapter-count">7 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">16.1</span>
+                        <span class="topic-title">Human Excretory System</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1QCzkHYmBtXDxDqF7Ppe0sqawTEEBSbyt/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1IvJM5URcAa01AYHvogQpwqgnOvKixf7_/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/12E4RypS8ojQlXZ_gtkXer9O_WEdsvPAD/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                        <a class="res res--notes" href="https://app.notion.com/share/5355f1f6776d819193f70003450fc534/3a05f1f6776d81d4b44300a93cf57041" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Notion Notes</a>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">16.2</span>
+                        <span class="topic-title">Urine Formation</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1UTPMEXQqxtDm7rdNvOLFDlKo0GLlVno7/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1WePXUhBfnRUKILYls8zO0SBWi_cfK3pj/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/17JVGyKqEyOL0tBfY99MPiIKun1Bt_T_P/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/1C8Uzq5J80I5D_nA-xLj8t8nlTPw4g2nx/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">16.3</span>
+                        <span class="topic-title">Function of the Tubules</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1l6_yO1cmHAApwfj6BlBGyzmTQEehaRlQ/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1LYUpVHHtPPRXl-m13alzSJC5UYa9xLKa/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1S9mg_pUy034_-qN_wdkQbj7PZdFK8hbS/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/10KjraxiZ6ZLqDdpJM4_p5nLfO_qJPNry/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">16.4</span>
+                        <span class="topic-title">Mechanism of Concentration of the Filtrate</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1baPfqN4Gy8XT5u34XSSt_TmPksLDVudD/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1JVidtfq3eMvmHggvJT7g0Ud2YI_owpxc/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1eC8ZEZdDuPn-K6IeWcbTYnvwFkHeiok8/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/15n2wekFyNC8122njeGAZ1cMngbGCJlD_/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">16.5</span>
+                        <span class="topic-title">Regulation of Kidney Function</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Video<span class="res-tag">Coming soon</span></span>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1a5eBLoI8BYADAUlFa8baVnsAC8JbQmdc/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1fgRQLZyYNLAZESkeYyrZk69hItxdF9WP/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/11t2YupaDsM3pBNJs3P8aozGROQ6R4SN9/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">16.6</span>
+                        <span class="topic-title">Micturition &amp; Role of Other Organs</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1l74s2rbu7F-o-JL_k7Kpu4L-fwM3pFda/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1qTArhbiGWJFpF6d2vnBPvimnes96SCvz/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1a1GQSa1McPVCLA8q--w2ndlaebnpZa7O/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/14yCZ_zElMI8Jd8zE8uP0Sgo44NFVJ-QH/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                        <a class="res res--notes" href="https://drive.google.com/file/d/1rW0__ytan9vaBwDljA7ThUMMC3h-98GU/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Notes</a>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">16.7</span>
+                        <span class="topic-title">Disorders of the Excretory System</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1XwjVzdCqZpomBm-8xrZB60I_gUnjjhiB/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1DiAk9udqBJ0SrQ5O01e_Qqglp44qev6S/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1InkHc7of8RMCz6IE0O38tuK4lWlqTsm7/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/14yCZ_zElMI8Jd8zE8uP0Sgo44NFVJ-QH/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="chapter" id="ch17">
+            <summary>
+                <span class="chapter-num">17</span>
+                <span class="chapter-title">Locomotion &amp; Movement<span class="chapter-tagline">From an amoeboid macrophage to sliding filaments in your bicep — and the 206 bones giving it leverage.</span></span>
+                <span class="chapter-count">5 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">17.1</span>
+                        <span class="topic-title">Types of Movement</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1wJDMubjXYFBWT21cH4crnd0ml3a0nHT4/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1C-SlLJuoGI4gCYAVDYZk7T0MSgqJhdC3/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1ZfvyC0I_Dxq0JEYCl2z5NxG_hYHCRDUB/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/114Z87zQwha8VTsOODdpjkicwitId1f3T/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">17.2</span>
+                        <span class="topic-title">Skeletal Muscle Structure</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1G4jFyqS_ktjjirs7lVSxB7QN9WWl5eye/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/114-aGH2_tE0bItf6g-kJ-7JHq2WTlRXx/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1nvOLd2DHqRZgOjVdROnqY9KP65hsdmVF/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">17.3</span>
+                        <span class="topic-title">Mechanism of Muscle Contraction</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1wVRLDQUKBjWXcrwduaBGpq3YBBnmKMco/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1dcLDMseiWhn80CUpufsPdJcTjw5Qglye/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1fOObAGHTWWAhvaxhnL9xo7rd8TfHL17F/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/16OoCk2zTS-_FZJeFcdgQNW8SenpqBLQG/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">17.4</span>
+                        <span class="topic-title">Skeletal System</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/15c9CO82fL-XGy9J_n4UMm7wIngPXLa_T/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/12A1LtC-EFfkLjH9CQrxRGZsCI7dCQ7DG/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1Sl778uTOvPZHEuPG8_6HPIL31SJfPZXD/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/1KbetwZKDU1--KCklszYRXlArwDjPRVjy/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                        <div class="res res--notes res--multi"><span class="res-ic" aria-hidden="true"></span>Extra Notes<span class="res-parts"><a class="res-part" href="https://drive.google.com/file/d/158oU6Y1a0v-8w9ozw_4T6GVZb-HRWuya/view" target="_blank" rel="noopener">Notes</a><a class="res-part" href="https://drive.google.com/file/d/1qaNMcHtsBVhJaZypce-D3DkHbTZ4NS40/view" target="_blank" rel="noopener">Notes</a><a class="res-part" href="https://drive.google.com/file/d/1PezeJSdoCFSoFRws6YAH0UPiQ9lPC76V/view" target="_blank" rel="noopener">Notes</a></span></div>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">17.5</span>
+                        <span class="topic-title">Joints</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1sDqtITtr7NT0NREGmYnHBEF78cUcLx4b/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1tRL9ymgoggQrOVbqX8wTDfVb_ctcKfWX/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1ws1BvnRxoqPbBfQkKBZ8zw0QfM9pCapw/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/1VY2vLr6yvzhl3YKiV6weqvRbNU-Qd6Nl/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="chapter" id="ch18">
+            <summary>
+                <span class="chapter-num">18</span>
+                <span class="chapter-title">Neural Control &amp; Coordination<span class="chapter-tagline">A neuron flips polarity for a millisecond and the signal travels the length of the body — this is that story.</span></span>
+                <span class="chapter-count">4 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+                <div class="chapter-extras">
+                    <span class="ce-label">Chapter-wide MCQs</span>
+                    <a class="res res--mcq" href="https://drive.google.com/file/d/1RqEdr9k9lm0Z0Y2or_VuDVPnm7CAWGQR/view" target="_blank" rel="noopener" style="padding:8px 13px;border-radius:20px;">150 MCQ PDF</a><a class="res res--mcq" href="https://drive.google.com/file/d/1nlkTyhW1nKmaw8XLDXpA4C0QdmKxeGxp/view" target="_blank" rel="noopener" style="padding:8px 13px;border-radius:20px;">150 MCQ PDF</a>
+                </div>
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">18.1</span>
+                        <span class="topic-title">Neural System &amp; Neuron Structure</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1eFXfTYUBKXO-LFawQWNeLxpN1TB7PzCQ/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/19PdHKog9t_qBuKGOzrmjyFtyp3Wk6GBp/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1dQmrZGaU3T_Z51cveE7uhtoD54wjnL2X/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">18.2</span>
+                        <span class="topic-title">Human Neural System</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/13QdbIkqSQYiOwctGlGvBTnEnHjcn9X3B/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1F8PkloJZ58HYDtmVRK1-YBrJSKjleCPu/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1WDaClN6XBCkd_uH2OLL9P5AVcjdVPSiH/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">18.3</span>
+                        <span class="topic-title">Central Nervous System (Brain Structure)</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1U63B15guuEardiJzS3bTZKP1nbWuMQUR/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1eKVfaxbsWJ6HPrwqa75U3ByDjszcc-pp/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1pOwOcUNLEQThWCUzCHClEcOJMtvfXnDQ/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">18.4</span>
+                        <span class="topic-title">Generation &amp; Conduction of Nerve Impulse</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1BMmdP9fHorVDiaaruGfdlhcN69-kCCek/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1JNEUVaxgdUrK-W0JUdkI_qb-hCk3gt7W/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1pmHxpOc_bpHBpLrHVeKxia04PLeIjpWN/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="chapter" id="ch19">
+            <summary>
+                <span class="chapter-num">19</span>
+                <span class="chapter-title">Chemical Coordination &amp; Integration<span class="chapter-tagline">Nine glands, dozens of hormones, two delivery mechanisms — the slower, longer-range partner to the nervous system.</span></span>
+                <span class="chapter-count">4 topics</span>
+                <span class="chapter-arrow" aria-hidden="true"></span>
+            </summary>
+            <div class="chapter-body-inner">
+                <div class="chapter-extras">
+                    <span class="ce-label">Chapter-wide MCQs</span>
+                    <a class="res res--mcq" href="https://docs.google.com/document/d/1xVR88-qhDgZtf5zmkLYh57TGKgD_DoZY80qCPmAG2P0/edit" target="_blank" rel="noopener" style="padding:8px 13px;border-radius:20px;">150 MCQ PDF</a>
+                </div>
+
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">19.1</span>
+                        <span class="topic-title">Endocrine Glands &amp; Hormones</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1eD2pjzClME-LUXc-wn_WduSa9koBYbut/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1j-VKniEyeKPiokcgEhQWA92G9mC8TMu4/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1QsVGM1FuE6geV6OExw6OVseHZlWwfywu/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/19-VNEvA6aNnds7hN2r-wom-AYhiBMz5b/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">19.2</span>
+                        <span class="topic-title">Human Endocrine System</span>
+                        <span class="topic-fill">4/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1daADhx46ijTecoXxDa_4rcFqzDp5HUKv/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1Ycyk7IOR3QKPttFOPv-v0ydNvJ5hopRQ/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1Pf6k4sT8LqBzWbGHrnjFR2Jk2xmO48kQ/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <a class="res res--mcq" href="https://drive.google.com/file/d/1nJA1XqAdbkVGjesUivUq7uAFKFzJwccY/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">19.3</span>
+                        <span class="topic-title">Hormones of Heart, Kidney &amp; GI Tract</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1U2vIEszJKqKRX6NUMS9SwmSJPBBVCEEb/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/11YaOfw3awgBRZmx-piCSq8bTIPiG5JNN/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1qceK845Q90iyDFqdEaZn6BQ8WD3Z-HMJ/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                        <a class="res res--notes" href="https://docs.google.com/document/d/1xZ3YCbyruSXntx3OfZyM9BinYtT0dU9iW8bqqV6vyJc/edit" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Notes Doc</a>
+                    </div>
+                </details>
+                <details class="topic">
+                    <summary>
+                        <span class="topic-num">19.4</span>
+                        <span class="topic-title">Mechanism of Hormone Action</span>
+                        <span class="topic-fill">3/5</span>
+                    </summary>
+                    <div class="res-grid">
+                        <a class="res res--video" href="https://drive.google.com/file/d/1YuionBtx9l6-UEPkU4lBHkSZ3Qh8lQSe/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Video</a>
+                        <a class="res res--slides" href="https://drive.google.com/file/d/1UVsyrlSXbjizhRkt0Oz0uGhtb2_LFc-h/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Slides</a>
+                        <a class="res res--mindmap" href="https://drive.google.com/file/d/1CPqEQJLjOCAv_1Q4L3Y-5c_zUZOpauxU/view" target="_blank" rel="noopener"><span class="res-ic" aria-hidden="true"></span>Mind Map</a>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>150 MCQ PDF<span class="res-tag">Coming soon</span></span>
+                        <span class="res res--empty"><span class="res-ic" aria-hidden="true"></span>Online Mock Test<span class="res-tag">Coming soon</span></span>
+                    </div>
+                </details>
+            </div>
+        </details>
+
+    </main>
+
+    <footer>NCERT BIOLOGY · CLASS XI · CHAPTERS 1–19 · RESOURCE INDEX · MERGED &amp; CONTINUOUS</footer>
+
+</body>
+
+</html>

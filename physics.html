@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics — Study Portal</title>
+    <meta name="description" content="Mechanics to oscillations — the full first-year arc. 14 chapters with videos, slides, mind maps, notes and MCQs.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23161A24'/><rect x='7' y='7' width='7' height='7' rx='2' fill='%235FBFAE'/><rect x='18' y='7' width='7' height='7' rx='2' fill='%235FBFAE' opacity='.55'/><rect x='7' y='18' width='7' height='7' rx='2' fill='%235FBFAE' opacity='.55'/><rect x='18' y='18' width='7' height='7' rx='2' fill='%235FBFAE' opacity='.25'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+/* ============================================================
+   Study Portal — shared dark theme
+   Palette and type carried over from the Mathematics 1A sheet.
+   ============================================================ */
+
+:root {
+    --ink: #161A24;
+    --surface: #1F2433;
+    --surface-raised: #262C3E;
+    --surface-hi: #2E3549;
+    --line: #333B52;
+    --line-soft: #272E42;
+    --cream: #EDEAE1;
+    --slate: #9099B3;
+    --slate-dim: #5D6685;
+
+    --jade: #5FBFAE;
+    --amber: #E7A94C;
+    --violet: #C48BE0;
+    --azure: #7FA7F0;
+
+    --accent: var(--jade);
+    --accent-dim: #3B7A70;
+    --accent-dim: color-mix(in srgb, var(--accent) 42%, var(--ink));
+    --accent-wash: rgba(95, 191, 174, .14);
+    --accent-wash: color-mix(in srgb, var(--accent) 12%, transparent);
+
+    --radius: 14px;
+    --radius-sm: 10px;
+    --ease: cubic-bezier(.32, .72, 0, 1);
+}
+
+[data-subject="physics"] { --accent: var(--jade); }
+[data-subject="chemistry"] { --accent: var(--amber); }
+[data-subject="maths1a"] { --accent: var(--violet); }
+[data-subject="maths1b"] { --accent: var(--azure); }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(1200px 600px at 12% -12%, #232A3D 0%, transparent 58%),
+        radial-gradient(1000px 700px at 108% 8%, #202638 0%, transparent 55%),
+        var(--ink);
+    color: var(--cream);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+::selection { background: var(--accent-dim); color: var(--cream); }
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.shell {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ---------- shared type ---------- */
+
+.eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+}
+
+h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    margin: 0 0 16px;
+}
+
+h1 em {
+    font-style: italic;
+    color: var(--accent);
+}
+
+.lede {
+    color: var(--slate);
+    font-size: 16.5px;
+    line-height: 1.65;
+    max-width: 54ch;
+    margin: 0;
+}
+
+.mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ============================================================
+   HOME
+   ============================================================ */
+
+.home-hero {
+    padding: 92px 0 8px;
+}
+
+.home-hero .lede { margin-bottom: 40px; }
+
+.tally {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 64px;
+}
+
+.tally-cell {
+    flex: 1 1 140px;
+    padding: 20px 24px 20px 0;
+}
+
+.tally-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--cream);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.tally-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--slate-dim);
+    margin-top: 9px;
+}
+
+.subject-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 20px;
+    padding-bottom: 40px;
+}
+
+.subject-card {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    background: linear-gradient(180deg, var(--surface-raised) 0%, var(--surface) 100%);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px 26px 22px;
+    overflow: hidden;
+    transition: transform .35s var(--ease), border-color .25s ease, box-shadow .35s var(--ease);
+}
+
+.subject-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--accent);
+    opacity: .55;
+    transition: opacity .25s ease, width .3s var(--ease);
+}
+
+.subject-card:hover,
+.subject-card:focus-visible {
+    transform: translateY(-3px);
+    border-color: var(--accent-dim);
+    box-shadow: 0 18px 40px -24px rgba(0, 0, 0, .9);
+}
+
+.subject-card:hover::before { opacity: 1; width: 4px; }
+
+.subject-card-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
+.subject-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.subject-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+}
+
+.subject-tagline {
+    color: var(--slate);
+    font-size: 14.5px;
+    margin: 0 0 22px;
+    min-height: 44px;
+}
+
+/* signature: one square per chapter, filled by how complete its resources are */
+.spark {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+.spark-cell {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    background: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.spark-legend {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--slate-dim);
+    margin-bottom: 18px;
+}
+
+.subject-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-soft);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--slate-dim);
+    letter-spacing: 0.04em;
+}
+
+.subject-go {
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.subject-card:hover .subject-go svg { transform: translateX(3px); }
+.subject-go svg { width: 13px; height: 13px; transition: transform .3s var(--ease); }
+
+.home-foot {
+    border-top: 1px solid var(--line-soft);
+    margin-top: 24px;
+    padding: 26px 0 60px;
+    color: var(--slate-dim);
+    font-size: 13px;
+}
+
+/* ============================================================
+   SUBJECT PAGES
+   ============================================================ */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(22, 26, 36, .9);
+    background: color-mix(in srgb, var(--ink) 88%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-soft);
+}
+
+.topbar-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--slate);
+    text-decoration: none;
+    font-size: 13.5px;
+    white-space: nowrap;
+    transition: color .2s ease;
+}
+
+.back:hover { color: var(--accent); }
+.back svg { width: 14px; height: 14px; }
+
+.topbar-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-left: 1px solid var(--line);
+    padding-left: 16px;
+}
+
+.search-wrap {
+    margin-left: auto;
+    position: relative;
+    flex: 0 1 340px;
+}
+
+.search-wrap svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    color: var(--slate-dim);
+    pointer-events: none;
+}
+
+#search {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 9px 44px 9px 38px;
+    border-radius: 999px;
+    outline: none;
+    transition: border-color .2s ease, background .2s ease;
+}
+
+#search:focus { border-color: var(--accent-dim); background: var(--surface-raised); }
+#search::-webkit-search-decoration,
+#search::-webkit-search-cancel-button { -webkit-appearance: none; }
+#search::placeholder { color: var(--slate-dim); }
+
+.kbd {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--slate-dim);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 2px 6px;
+    pointer-events: none;
+}
+
+.subject-hero {
+    padding: 60px 0 34px;
+}
+
+.subject-hero .lede { margin-bottom: 26px; }
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--slate);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 7px 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.chip svg { width: 13px; height: 13px; }
+.chip:hover { color: var(--cream); border-color: var(--slate-dim); }
+
+.chip[aria-pressed="true"] {
+    color: var(--ink);
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
+.chip-count {
+    font-size: 10px;
+    opacity: .7;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 18px 0;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 30px;
+}
+
+.toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn {
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--slate);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color .2s ease, border-color .2s ease;
+}
+
+.btn:hover { color: var(--cream); border-color: var(--slate-dim); }
+
+.progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--slate-dim);
+    letter-spacing: 0.08em;
+}
+
+.progress-track {
+    width: 130px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--line);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width .45s var(--ease);
+}
+
+/* ---------- layout: rail + list ---------- */
+
+.layout {
+    display: grid;
+    grid-template-columns: 218px minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+    padding-bottom: 80px;
+}
+
+.rail {
+    position: sticky;
+    top: 78px;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+}
+
+.rail-head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate-dim);
+    padding: 0 0 12px 12px;
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 8px;
+}
+
+.rail-link {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--slate);
+    font-size: 13.5px;
+    line-height: 1.35;
+    border-left: 2px solid transparent;
+    transition: color .2s ease, background .2s ease, border-color .2s ease;
+}
+
+.rail-link span:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--slate-dim);
+}
+
+.rail-link:hover { color: var(--cream); background: var(--surface); }
+
+.rail-link.active {
+    color: var(--cream);
+    background: var(--surface);
+    border-left-color: var(--accent);
+}
+
+.rail-link.active span:first-child { color: var(--accent); }
+
+/* ---------- chapters ---------- */
+
+.chapter {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color .25s ease;
+    scroll-margin-top: 80px;
+}
+
+.chapter[open] { border-color: var(--accent-dim); }
+
+.chapter summary {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 22px;
+    cursor: pointer;
+    list-style: none;
+    transition: background .2s ease;
+}
+
+.chapter summary::-webkit-details-marker { display: none; }
+.chapter summary:hover { background: var(--surface-raised); }
+
+.ch-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    flex: none;
+    width: 26px;
+}
+
+.ch-head { flex: 1 1 auto; min-width: 0; }
+
+.ch-title {
+    display: block;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin: 0 0 3px;
+}
+
+.ch-meta {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--slate-dim);
+    letter-spacing: 0.08em;
+}
+
+.ch-bar {
+    flex: none;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+}
+
+.ch-bar i {
+    width: 5px;
+    height: 16px;
+    border-radius: 1.5px;
+    background: var(--line);
+    display: block;
+}
+
+.ch-bar i.on { background: var(--accent); }
+
+.chevron {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    color: var(--slate-dim);
+    transition: transform .3s var(--ease);
+}
+
+.chapter[open] .chevron { transform: rotate(180deg); color: var(--accent); }
+
+.topics {
+    border-top: 1px solid var(--line-soft);
+}
+
+/* ---------- topic rows ---------- */
+
+.topic {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 0 16px;
+    padding: 17px 22px 17px 18px;
+    border-bottom: 1px solid var(--line-soft);
+}
+
+.topic:last-child { border-bottom: none; }
+.topic:hover { background: rgba(38, 44, 62, .55); }
+.topic.done .topic-name { color: var(--slate-dim); text-decoration: line-through; text-decoration-thickness: 1px; }
+
+.tick {
+    grid-row: 1 / span 3;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--ink);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    color: transparent;
+    transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+
+.tick svg { width: 11px; height: 11px; }
+.tick:hover { border-color: var(--accent-dim); }
+
+.topic.done .tick {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--ink);
+}
+
+.topic-name {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--cream);
+    margin: 0;
+}
+
+.topic-tag {
+    display: inline-block;
+    min-width: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-right: 6px;
+}
+
+.topic-desc {
+    color: var(--slate);
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 5px 0 0;
+    max-width: 76ch;
+}
+
+.res {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 11px;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    background: var(--surface-raised);
+    border: 1px solid var(--line);
+    color: var(--slate);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 999px;
+    transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s var(--ease);
+}
+
+.pill svg { width: 13px; height: 13px; flex: none; }
+
+.pill:hover {
+    color: var(--cream);
+    background: var(--surface-hi);
+    border-color: var(--accent-dim);
+    transform: translateY(-1px);
+}
+
+.pill.video:hover { color: var(--jade); }
+.pill.slides:hover { color: var(--azure); }
+.pill.mindmap:hover { color: var(--violet); }
+.pill.notes:hover { color: var(--amber); }
+.pill.images:hover { color: var(--amber); }
+.pill.mcq:hover { color: var(--cream); }
+
+.pill.off {
+    opacity: .4;
+    border-style: dashed;
+    cursor: default;
+    background: transparent;
+}
+
+.pill.off:hover { transform: none; color: var(--slate); border-color: var(--line); background: transparent; }
+
+mark {
+    background: var(--accent-wash);
+    color: var(--accent);
+    border-radius: 3px;
+    padding: 0 2px;
+}
+
+.empty {
+    text-align: center;
+    color: var(--slate-dim);
+    padding: 60px 20px;
+    font-size: 14px;
+}
+
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 980px) {
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .rail { display: none; }
+}
+
+@media (max-width: 720px) {
+    .shell { padding: 0 18px; }
+    .topbar-inner { padding: 10px 18px; flex-wrap: wrap; }
+    .search-wrap { flex: 1 1 100%; margin-left: 0; order: 3; }
+    .kbd { display: none; }
+    .home-hero { padding: 56px 0 4px; }
+    .subject-hero { padding: 36px 0 26px; }
+    .tally-cell { flex-basis: 50%; padding-right: 16px; }
+    .chapter summary { gap: 12px; padding: 15px 16px; }
+    .ch-bar { display: none; }
+    .topic { padding: 15px 16px 15px 14px; grid-template-columns: 26px minmax(0, 1fr); }
+    .subject-tagline { min-height: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    html { scroll-behavior: auto; }
+}
+
+    </style>
+</head>
+
+<body data-page="physics" data-subject="physics">
+
+    <div class="topbar">
+        <div class="topbar-inner">
+            <a class="back" href="index.html">All subjects</a>
+            <span class="topbar-title">Physics</span>
+            <div class="search-wrap">
+                <input id="search" type="search" autocomplete="off" placeholder="Search topics">
+                <span class="kbd">/</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="shell">
+
+        <section class="subject-hero" id="subject-head"></section>
+
+        <div class="toolbar">
+            <div class="progress">
+                <span class="progress-track"><span class="progress-fill" id="progress-fill"></span></span>
+                <span id="progress-text">0/0 done</span>
+                <span aria-hidden="true">·</span>
+                <span id="result-count"></span>
+            </div>
+            <div class="toolbar-actions">
+                <button class="btn" id="expand-all">Expand all</button>
+                <button class="btn" id="collapse-all">Collapse all</button>
+            </div>
+        </div>
+
+        <div class="layout">
+            <nav class="rail" aria-label="Chapters">
+                <div class="rail-head">Chapters</div>
+                <div id="rail-links"></div>
+            </nav>
+            <div id="chapters"></div>
+        </div>
+
+    </main>
+
+    <script>
+window.PORTAL_DATA = {"subjects":[{"id":"physics","name":"Physics","short":"PHY","page":"physics.html","tagline":"Mechanics to oscillations — the full first-year arc.","accent":"#5FBFAE","chapters":[{"num":1,"title":"Physical World","topics":[{"num":"1.1","title":"What is Physics?","desc":"Definition of Physics, scope of Physics, fundamental forces in nature, unification and reductionism.","res":{"video":"https://drive.google.com/file/d/1XVO50IyK1FpyZb-6sQpUgJuH5rd0rcpK/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1vqUgqc8wU0y9VFeMJ8s-UlkpEsMWloxt/view?usp=sharing","notes":"https://drive.google.com/file/d/15frTkOSjBmHDwYHIUJp_dISRmPGSFPPJ/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/16b-p3E7ZGNILlVxIcsLNWA8sae7nbHXwWIbbcxQXWT8/edit?usp=sharing","test":null,"extra":[]}},{"num":"1.2","title":"Scope and Excitement of Physics","desc":"Macroscopic and microscopic domains, excitement of Physics, interdisciplinary nature, range of magnitudes.","res":{"video":"https://drive.google.com/file/d/1HxGDNXMllYJ9HdL2XhRGzQz2mTyTxBmK/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1e0UF7eCpDA2jaGDwTN2t699seeB3d-V2/view?usp=sharing","notes":"https://drive.google.com/file/d/1njRWc0VKsirVBaEFqbg5A4gLzNP-ZmQ9/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/14TQt-bfSWZnAYpc-rT6Pg1T-EqnleHBb6D5jABJcryU/edit?usp=sharing","test":null,"extra":[]}},{"num":"1.3","title":"Physics, Technology and Society","desc":"Relation between Physics and Technology, impact on society, contributions of Indian scientists.","res":{"video":"https://drive.google.com/file/d/1r1rvYGUzOy_pL8US8_Hi2CjSVkROZuvD/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1cbZT6jHoE-1E3PQQtei_P8Pt5QCLQGrQ/view?usp=sharing","notes":"https://drive.google.com/file/d/12aMNiScVx0VmVDb_ruIk9dDTwjqPKUty/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1Cli7oVm4_S8_JQ17KJp0nuXjABUTHf6KzCTZfptaGvk/edit?usp=sharing","test":null,"extra":[]}},{"num":"1.4","title":"Fundamental Forces in Nature","desc":"Gravitational force, electromagnetic force, strong nuclear force, weak nuclear force, their comparison.","res":{"video":"https://drive.google.com/file/d/1KmEqYmNlnAzd64FPbVzZ-jIbBmnI4B2o/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1r1rvYGUzOy_pL8US8_Hi2CjSVkROZuvD/view?usp=sharing","notes":"https://drive.google.com/file/d/1NfU2uADLk9qBh2hvEJGRE8z2qzkSL76_/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1fbQFOmFIpIE5xyMY0p9XYnZBq06UgIQiHxYhNxPwaXQ/edit?usp=sharing","test":null,"extra":[]}},{"num":"1.5","title":"Nature of Physical Laws","desc":"Conservation laws (energy, momentum, charge, angular momentum), symmetry and conservation principles.","res":{"video":"https://drive.google.com/file/d/1uWHN5DMlr5txuVeQGmIo1SNiEENKT8Yj/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1QlT46v-lZ_QuHCjPWd_alFQ4CVIMDPqI/view?usp=sharing","notes":"https://drive.google.com/file/d/13U97QpRg1zSd3PbbPDbg9wylQL1ZxQEk/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1NIlg5-AgclGPRl9_0VFeD0NyQF3y_bsFu7AFiZtHOMw/edit?usp=sharing","test":null,"extra":[]}}]},{"num":2,"title":"Units and Measurements","topics":[{"num":"2.1","title":"International System of Units (SI Units)","desc":"Need for units and measurement, seven SI base units, supplementary units, derived units, prefixes and rules for writing SI units.","res":{"video":"https://drive.google.com/file/d/1yVJlDSmCSa89z1DsLsJzZEdB8W0SJAo2/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1rVV-bzlCd2D0O4OLkdogxIKdZpjg8npe/view?usp=sharing","notes":"https://drive.google.com/file/d/1G6vVCRVjyvWFQYSf_YZMPKIx_zcVugY3/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1NCot3PuwsjGf9Jkp_YR7pbnAfJOLnU1G4W9hf5uHMqA/edit?usp=sharing","test":null,"extra":[]}},{"num":"2.2","title":"Measurement of Length, Mass and Time","desc":"Vernier callipers, screw gauge, parallax method, common/spring balance, simple pendulum, atomic clocks, and types of errors.","res":{"video":"https://drive.google.com/file/d/1FryTjQZH5StUUd8k2Dxp1pc6mUVz4_BF/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1FKUmahe3ISdurBSO_eKW6nkZGIVGJGZy/view?usp=sharing","notes":"https://drive.google.com/file/d/1MzePqyRhlW7qeBxhhRHdf1ggeq5uSjrY/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/11wwii2a1YxLikdXzJvJou3fWHmOhTywHgOegBc0yjnU/edit?usp=sharing","test":null,"extra":[]}},{"num":"2.3","title":"Significant Figures, Accuracy & Precision","desc":"Rules for significant figures, arithmetic with significant figures, rounding off, accuracy vs precision, uncertainty in measurement.","res":{"video":"https://drive.google.com/file/d/107HFVjGwrF6V_c9d8_v8ajl5MwCAZv4t/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1l6Nk7XAZqzX-pn-p68GgYpYzGepKFmk2/view?usp=sharing","notes":"https://drive.google.com/file/d/1Qmywy4wrakSXVQUTYEcLGnJRPerlFeou/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1_Ubgsep5AVYp2_AP6F99VokivOkkQrGIRtXpy8GtdUg/edit?usp=sharing","test":null,"extra":[]}},{"num":"2.4","title":"Dimensions of Physical Quantities","desc":"Dimensional formula and equations, fundamental & derived dimensions, dimensions of common quantities, applications.","res":{"video":"https://drive.google.com/file/d/1TaWzTWd8uqZf6j0zxXqIIqfjIa2Gk7SC/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1PIywRbULO-M64F2QpBTKDjBgS8OBL3Yy/view?usp=sharing","notes":"https://drive.google.com/file/d/1_28OkGdfp2rR79xAtfdcgvs4GXhfwBvF/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1_hrT6yCs-jNk8VjdxAb0WWg9dlauG5ZaSCLEnErLgrI/edit?usp=sharing","test":null,"extra":[]}},{"num":"2.5","title":"Dimensional Analysis and its Applications","desc":"Principle of homogeneity, deriving physical relations, unit conversion, and limitations of dimensional analysis.","res":{"video":"https://drive.google.com/file/d/1Vh5hfFUbWhSYsr0gLmHtEgggquTQxvCF/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/13pjNNJz54CSRUZ3CPm-bhkJpWzLiZV5y/view?usp=sharing","notes":"https://drive.google.com/file/d/1MsQc6HCqWHa1NzisUl7uJENYaAUddUaZ/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1m4wr3YlQLofwBDpubKeffqRgQISFizucZX0kdT53NUA/edit?usp=sharing","test":null,"extra":[]}}]},{"num":3,"title":"Motion in a Straight Line","topics":[{"num":"3.1","title":"Introduction to Motion and Basic Concepts","desc":"Frame of reference, path length, distance vs displacement, position-time graph.","res":{"video":"https://drive.google.com/file/d/1nqm5GJMhJNwPrzWNI6TS6QecRPNvXsSS/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1uf0upqVOMJaZC6YT2uQ7yCc3PLU9QmWy/view?usp=sharing","notes":"https://drive.google.com/file/d/1q8qXlWo3MyFhOtb_DQFY0pT9oTVF8u22/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1OzwMVDOEMFnf_eTjlXFlbZHc3iDU_5Rt4122gLgf_Yc/edit?usp=sharing","test":null,"extra":[]}},{"num":"3.2","title":"Speed, Velocity and Acceleration","desc":"Average speed/velocity, instantaneous speed & velocity, uniform and non-uniform motion, acceleration.","res":{"video":"https://drive.google.com/file/d/1iolphW83CNWc6p3hFiZ9C98Qbp2EH1mb/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1AHreGxGJjlnB5Yr2rjIC_8f6J6mlvi8U/view?usp=sharing","notes":"https://drive.google.com/file/d/1yFt9qgSBXk2hf0EwxZohKxW13I4SlQJC/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1NOZ0UoxL-gFUHZhpX7v6L7qMIXEZ-zs09ggL6pAHcdc/edit?usp=sharing","test":null,"extra":[]}},{"num":"3.3","title":"Kinematic Equations for Uniformly Accelerated Motion","desc":"Derivations and applications of v = u + at, s = ut + ½at², v² = u² + 2as.","res":{"video":"https://drive.google.com/file/d/1i63j9SMIpE3mH73gBnFr-P2YRcQFC2P2/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1IlqoTkisbRQUMRO15tI1IrA1r6oW7CAl/view?usp=sharing","notes":"https://drive.google.com/file/d/1i2J--BsCGOfls2zfM3L3NAE-D4TZ13EI/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1fGFZHUZrbNxRtzfGk-mq_b2jslfvam8L20rnOscp3u4/edit?usp=sharing","test":null,"extra":[]}},{"num":"3.4","title":"Graphs in One-Dimensional Motion","desc":"Position-time, velocity-time and acceleration-time graphs; interpreting area and slope.","res":{"video":"https://drive.google.com/file/d/1nuLjqolFnBvR8gatlHQHOk8PiTAB0Pc5/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1w9uftkrfTXKqJRSRl73t4e7X7ffKFgaj/view?usp=sharing","notes":"https://drive.google.com/file/d/1RGzgp98FVgxrNOeUzZFZ0aDb_w0J2QXY/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1girL3nnJGBjIi4DEb0rrhUdTNE-1zYH5VF3TbYnmPf0/edit?usp=sharing","test":null,"extra":[]}},{"num":"3.5","title":"Relative Velocity and Advanced Concepts","desc":"Relative velocity in one dimension, daily-life applications, stopping distance, free fall under gravity.","res":{"video":"https://drive.google.com/file/d/1SdS0l8QHJjt96zb_1mxM2FjmxhrTDb03/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1hopH2q_FJQfwbEAwPp3HWu4hBYeKSOM1/view?usp=sharing","notes":"https://drive.google.com/file/d/1_XYCBHZ3QMgn0i0O2I_rdj5Dbia-gUdF/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1nLnnmc5k45yG7D0OiBc4ZB-k31RQxCG_NPLRskD3OQg/edit?usp=sharing","test":null,"extra":[]}}]},{"num":4,"title":"Motion in a Plane","topics":[{"num":"4.1","title":"Scalars and Vectors","desc":"Definition, types, representation, addition & subtraction (graphical & analytical), resolution into components, unit vectors, relative velocity.","res":{"video":"https://drive.google.com/file/d/1KtfQAXcw2rK4m9_MPx8j8xPHrVCajUjf/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1CrTA3WzW2G8vhJz8Chye1qpnBiSyyJ2Y/view?usp=sharing","notes":"https://drive.google.com/file/d/1rjVn53j9YQ0s-gPyI3YP_tjFWCj3mkqH/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/12L9ucRtX4ziJZ8jBPe5Da0oEcbZklbiyabcOTwlUOYo/edit?usp=sharing","test":null,"extra":[]}},{"num":"4.2","title":"Vector Operations and Motion in a Plane","desc":"Multiplication by scalar, analytical component method, position vector, displacement, velocity and acceleration in two dimensions.","res":{"video":"https://drive.google.com/file/d/10sY93jHE12Mcq3Mc6RPYgGS4gFp1mIPv/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1j8UpJndh8ARbaHp9f8DNJdKe8isEEd2o/view?usp=sharing","notes":"https://drive.google.com/file/d/12jzozsG-F5XBXlr54qw54TAIcwzzvJTU/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1AvdnxBRXlLA6m3m54t7PdOpN78bPTxB7FFdc70YwH4Q/edit?usp=sharing","test":null,"extra":[]}},{"num":"4.3","title":"Motion in a Plane with Constant Acceleration","desc":"Equations of motion in 2D, uniform acceleration, relative motion in a plane.","res":{"video":"https://drive.google.com/file/d/1weqJecnHX-YlPFwZvwLFYgZm-7h4t96R/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1gpoJbF2JfirKaiIon1e2OYMnMnpiX111/view?usp=sharing","notes":"https://drive.google.com/file/d/17QQkNXYb_Mk8wfx4yRBV48A4Flh1YdR-/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1X9sB15fVwx15ae_XvspWY7IV_C6JynKrFvRZbZJhf3o/edit?usp=sharing","test":null,"extra":[]}},{"num":"4.4","title":"Projectile Motion","desc":"Trajectory equation, time of flight, maximum height, horizontal range, maximum range, inclined-plane projection.","res":{"video":"https://drive.google.com/file/d/1mkKA-WhKQBb4_uJ7XzbwhuuUnWNmgilj/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1Qw-g-vNolhwhQzyTTlx6U6MZpfymaeES/view?usp=sharing","notes":"https://drive.google.com/file/d/1rzWlkdPp1M1rxt6mou07zL_dFXt2U_qr/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1KfNsdOxK_CFxhql1ZetG0jKBqM1ivXlk3j-oLA6wir0/edit?usp=sharing","test":null,"extra":[]}},{"num":"4.5","title":"Uniform Circular Motion","desc":"Angular quantities, relation between linear & angular velocity, centripetal acceleration & force, examples.","res":{"video":"https://drive.google.com/file/d/1tz12Drs9ORwK_pJ7z6Uda01Edxisvnrs/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1PmT7RY19wX2tDCRTeKqxYFpuMgrnmaFj/view?usp=sharing","notes":"https://drive.google.com/file/d/1W_XHWdXsX6Fjg9EKlrV1P7fjh1jmYaTY/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1ixvUrqzt76lW4EKjsk7-Caq9WcBsVjXXpV3jmDJ93_g/edit?usp=sharing","test":null,"extra":[]}}]},{"num":5,"title":"Laws of Motion","topics":[{"num":"5.1","title":"Aristotle's Fallacy and Concept of Force","desc":"Intuitive ideas vs scientific view, inertia, types of forces.","res":{"video":"https://drive.google.com/file/d/1lh-Ypmd6MwkfPDu5FxjqAq-fQsyz5ze1/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1LORYS-lQDbIbR2mSGMFHrBYp2tWRTnrJ/view?usp=sharing","notes":"https://drive.google.com/file/d/1_-hNSXkQdf0tIzKx77CaiztiDvJePFEH/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1uOcEwII8mYQfZCtzcFzWLYIbf7HkdYA1OGl0Aq_anNo/edit?usp=sharing","test":null,"extra":[]}},{"num":"5.2","title":"Newton's First Law of Motion","desc":"Law of inertia, equilibrium, examples, inertial frames.","res":{"video":"https://drive.google.com/file/d/1oCqfnJSs5zp12ZEGHrrdHhHOZUo3VSWO/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1X-5Vg6uEYUV-1c8SjEBZgN6xtkZy7H-C/view?usp=sharing","notes":"https://drive.google.com/file/d/1TLkIN1x1mEU2Ak2mi-n9czYciKU6o41x/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1uTqZcx_0Dqeln5NEBSTccWdxsQ7zVfFdQS_oSGujZJk/edit?usp=sharing","test":null,"extra":[]}},{"num":"5.3","title":"Newton's Second Law of Motion","desc":"Momentum, rate of change of momentum, F = ma, applications, impulse.","res":{"video":"https://drive.google.com/file/d/1hU6hrlPZtU_cCi80l6E99jLAvDP3Y_aF/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1r9TAtMUev35wSyBU35IiXgi6XuzveHeK/view?usp=sharing","notes":"https://drive.google.com/file/d/1W7K30Q-S0zvXmyiDsBkCNI_fTjbs5vgi/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1fMJ3L0b9J5K-L9Z7nN3X5Rl2O9KeF_8/edit?usp=sharing","test":null,"extra":[]}},{"num":"5.4","title":"Newton's Third Law of Motion","desc":"Action-reaction pairs, conservation of momentum, examples, rocket propulsion.","res":{"video":"https://drive.google.com/file/d/1F0X0O5gi36Lc5KWOc1pbD18TeD1cuPpL/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/10icmM8gS-dtpBVUpEt8Y2rCdacUUrucr/view?usp=sharing","notes":"https://drive.google.com/file/d/1DFr0RGSfZIgbGDp-xeccEZfvTFPh3bqO/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1gMK5N7b8P9Q1R2S3T4U5V6W7X8Y9Z0a/edit?usp=sharing","test":null,"extra":[]}},{"num":"5.5","title":"Friction and Circular Motion Applications","desc":"Static and kinetic friction, laws of friction, rolling friction, motion on inclined plane, circular motion with friction.","res":{"video":"https://drive.google.com/file/d/1vBa6bYYD9ZuMlrNl-YlqhJ_bFUEs3MFN/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1Wv2dpiKif6AWHVNwLgjJVX8XtGES5Zdw/view?usp=sharing","notes":"https://drive.google.com/file/d/1jEOL_96jZOAgzoGiasOKhbSR4TfuiLRx/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1hNO9P0Q1R2S3T4U5V6W7X8Y9Z0aB1cD/edit?usp=sharing","test":null,"extra":[]}}]},{"num":6,"title":"Work, Energy and Power","topics":[{"num":"6.1","title":"Work Done by Constant and Variable Force","desc":"Scalar product of force and displacement, work by constant/variable force, work by gravity and spring force, work-energy relation.","res":{"video":"https://drive.google.com/file/d/1Z-vdodjHUY3qw5n651dJHX-P9uD7zQxt/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/19_fNUDqLkUAZL71KWwpF5XTE3sFWIhFw/view?usp=sharing","notes":"https://drive.google.com/file/d/1jg9ISlLW3H18FsM6zLQX6uOGJiMVyjGg/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1yuvO7ZEU-LbP1MoW3IND2nVzMK_jRzvlF5mWzOoFLNA/edit?usp=sharing","test":null,"extra":[]}},{"num":"6.2","title":"Kinetic Energy and Work-Energy Theorem","desc":"Definition of kinetic energy, derivation and statement of work-energy theorem, work by net force, applications.","res":{"video":"https://drive.google.com/file/d/1NsQXEtiBSequhullMxnP9-9gDbIFFgsq/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1N4dJ0dSmUxbhCNLc9GDUS6nZy2FRTyHw/view?usp=sharing","notes":"https://drive.google.com/file/d/1VwQD7vA1wb7pdKgGYK1513E58x-3BD8h/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1ym9eQ--PvJavKCj1ZkyK2KGrdOlLazHqyRFLpXM5y_k/edit?usp=sharing","test":null,"extra":[]}},{"num":"6.3","title":"Potential Energy and Conservation of Mechanical Energy","desc":"Conservative and non-conservative forces, gravitational & elastic PE, mechanical energy conservation, PE curves.","res":{"video":"https://drive.google.com/file/d/1MPzzL6O9ClyPf_G4wUJ5Vi5xOwiVhNL0/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1Wrfp_15fMhZprmA9w4sxOzRsXObcf2qY/view?usp=sharing","notes":"https://drive.google.com/file/d/1URLihrnnHkGYurSdAIX1FuOyRNbu4_ZQ/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1LP2cJlHjYoxAEJILHU9EBWUK5z2RSoacG5eHMbzYdJI/edit?usp=sharing","test":null,"extra":[]}},{"num":"6.4","title":"Power","desc":"Definition of power, average and instantaneous power, relation between power and velocity, commercial units of energy.","res":{"video":"https://drive.google.com/file/d/1BS9BOXAEVeLTofdFnSbbRd9ze_Ac3Rjz/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1Rk4ccesKPw3qTGVnDs0LTS_fjR82Kt2e/view?usp=sharing","notes":"https://drive.google.com/file/d/1tKMsARadW1IC6PpLWvTu4RLeHvMfPf9K/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1oVN1WL8_P57pOHQ45ISdxwmRls4LEAwrABO-ukQT97w/edit?usp=sharing","test":null,"extra":[]}},{"num":"6.5","title":"Collisions and Conservation of Energy","desc":"Elastic and inelastic collisions, coefficient of restitution, conservation of momentum & energy, 1D/2D collisions.","res":{"video":"https://drive.google.com/file/d/1mXIofpTsgxAa4t4scZr0sJ5N1FDAfXXx/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1PexNk_-cn4wvLM9Vcu8nPzLAkIsolzU4/view?usp=sharing","notes":"https://drive.google.com/file/d/1Q5f74qOxpHbhVfzAwkEbBWrzgaN0zZB9/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1Vzpx4A3YZPvOuHgKht9W8mnFGwB9FGoEG6S1pMGbzxg/edit?usp=sharing","test":null,"extra":[]}}]},{"num":7,"title":"System of Particles and Rotational Motion","topics":[{"num":"7.1","title":"Centre of Mass and Motion of System of Particles","desc":"Centre of mass of two-particle/n-particle system and rigid body, motion of centre of mass, conservation of momentum.","res":{"video":"https://drive.google.com/file/d/1hhdz7Dszw8-kAvb4pp-EiiB-fZs9fNw9/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1qQyl5jsOMp3Ka5xFrRgFyX9vJQ4c-no5/view?usp=sharing","notes":"https://drive.google.com/file/d/1R9s9xw9ADj85dX9yCafHseXXhbrbCVOQ/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/16K3sV_7zSU5RTO-eeFaAYZrL_NNsFNHzXovzrFlQu-4/edit?usp=sharing","test":null,"extra":[]}},{"num":"7.2","title":"Torque and Angular Momentum","desc":"Moment of force, angular momentum of a particle/system, torque-angular momentum relation, conservation of angular momentum.","res":{"video":"https://drive.google.com/file/d/1KvwFdhCgdbLSbuMdXPZb449Y-pVrL8kC/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1Z1CLK2E5I5c_SurmZjAi6Ljr4xfS62nY/view?usp=sharing","notes":"https://drive.google.com/file/d/15lTkR6YCj7gTj3WCdFKiFQrAXDD0houO/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/13qoc3NxbvE1NvAUk6AudtJDx9lEBEYOgorKaxykRpc8/edit?usp=sharing","test":null,"extra":[]}},{"num":"7.3","title":"Equilibrium of Rigid Body","desc":"Principle of moments, centre of gravity, conditions for equilibrium of a rigid body.","res":{"video":"https://drive.google.com/file/d/1TzMI7_ZqQOPOplZw_NXXM3IL6fZNlDZb/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1KbiLWrP0rhspIkvA4-Qz-ynvmadtr3Zk/view?usp=sharing","notes":"https://drive.google.com/file/d/1GCARvcUaPv-k9UGMHKfu8EdiohfHtmwC/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1BcAGvrzIm4ePOuKl9y_R6lqFYdt-D7AEDcsOjxYfpvQ/edit?usp=sharing","test":null,"extra":[]}},{"num":"7.4","title":"Moment of Inertia","desc":"MI of a rigid body, radius of gyration, perpendicular and parallel axes theorems, MI of common objects.","res":{"video":"https://drive.google.com/file/d/1jvaPVqIHpavFKIxKCKQKXWbGxV2SsYJR/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1cFY6cIegtY9bNH1ZHrcgmjL5pkdRQ8mz/view?usp=sharing","notes":"https://drive.google.com/file/d/1YGRmOVoYbjIDVTOMhrVwhrwXokPSYkBW/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1sUgc6-nR3EFSw7pt206pKdxU_l6rB9VKEJd9hlxlIXY/edit?usp=sharing","test":null,"extra":[]}},{"num":"7.5","title":"Dynamics of Rotational Motion","desc":"Angular velocity/acceleration, torque and rotational equation of motion, work & power in rotation, rolling motion.","res":{"video":"https://drive.google.com/file/d/17ZW3iLfKpdD-QS-h8MS-63P6qnRZGywY/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1tbu5hq1oAKP_Rdm7KS1RdwA4BfZdi5sH/view?usp=sharing","notes":"https://drive.google.com/file/d/1f-OZh6Nizy_yelXZPfk3B_95TRxJij50/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1Qq-kxBDCi3nPNyHyo4TGzExfqIn3OFhdan4lT9TiqRo/edit?usp=sharing","test":null,"extra":[]}}]},{"num":8,"title":"Gravitation","topics":[{"num":"8.1","title":"Kepler's Laws and Universal Law of Gravitation","desc":"Kepler's three laws, Newton's universal law of gravitation, gravitational constant, properties of gravitational force.","res":{"video":"https://drive.google.com/file/d/1calDzVX8_CYdODew-F1l0Ao837Ni3i-E/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1Hl_8WSs6kgsvWVgi_xxcNMbisg0Hv5Dz/view?usp=sharing","notes":"https://drive.google.com/file/d/1F_ZnSvEfxsg_o9zCOcB8FJ4Cbi0q24iD/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/18UNjr-mb2OQlrdp4J7MBcEZJ5I301lbGvDnadTo19Mc/edit?usp=sharing","test":null,"extra":[]}},{"num":"8.2","title":"Acceleration due to Gravity and Gravitational Potential Energy","desc":"Variation of g with altitude/depth/latitude, gravitational potential energy, escape velocity.","res":{"video":"https://drive.google.com/file/d/1-qJRx_FEK2FE2iQrXt6HVVmFR7BmEesc/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1bkfMrsCleFwyKMPAzv4Cqc4WQYHTADz1/view?usp=sharing","notes":"https://drive.google.com/file/d/13oee7B4yLJMIOg0_LAmZ8dBlf1ilFk-b/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1LaAZLyK7bR3G3XdBrOfaksXr9G7XtiqOJ9XEg1Ssuss/edit?usp=sharing","test":null,"extra":[]}},{"num":"8.3","title":"Gravitational Potential","desc":"Gravitational potential, potential due to earth, PE of a system, relation between field and potential.","res":{"video":"https://drive.google.com/file/d/1WO--OeA5hcDEUAwYArCP7IlHbmI3g0yO/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1XJQe1nFEzD1h1CrdDKzIbtjn_WpABR2o/view?usp=sharing","notes":"https://drive.google.com/file/d/1kuTdMw_DVLmehmmbjfUhtsAwu6d5x-4_/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1o4oOXAriqh8McwqjBCDVyCyP5jP3SIO9TERzbUHaxGQ/edit?usp=sharing","test":null,"extra":[]}},{"num":"8.4","title":"Orbital Velocity and Satellites","desc":"Orbital velocity, time period of satellite, geostationary and polar satellites, energy of an orbiting satellite.","res":{"video":"https://drive.google.com/file/d/1CZzJJDw1VI-JMW8ZJ1R1bY_HeX6YcXRJ/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1DxAHW6TYobJ2_lMsDoyqs3AB-JLEn61y/view?usp=sharing","notes":"https://drive.google.com/file/d/1flrktP27-UCbz_xuObl_cqlTS7_kqcMN/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1JOYl23blEceWj_-ph23ZR7G7sRErlKhFh9IMfaq7Bco/edit?usp=sharing","test":null,"extra":[]}},{"num":"8.5","title":"Earth Satellites and Weightlessness","desc":"Weightlessness in satellites, artificial satellites, applications, gravitational field intensity.","res":{"video":"https://drive.google.com/file/d/1wD2okHk1FLOLDAbwHZZv0N3uDVDMCNxx/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1ySEvbg5ambXPxcF0ob4bfL-jBz5JwrAF/view?usp=sharing","notes":"https://drive.google.com/file/d/1WY_TkY3lqXiWAuYHwJLSb_FShteaiaXo/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1WPj0KKnhBiom0UXY0n4c1sSyhbiOXlZYmT6FzjKtRWU/edit?usp=sharing","test":null,"extra":[]}}]},{"num":9,"title":"Mechanical Properties of Solids","topics":[{"num":"9.1","title":"Elastic Behaviour of Solids","desc":"Elasticity, plasticity, stress and strain, Hooke's Law, elastic limit, types of stress/strain.","res":{"video":"https://drive.google.com/file/d/1JG-07NfPfthHPWKwrUYmk61VcFGHoZgK/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1SDHSt8ahWSpLz9tMHiBiVsI7XftWfbZS/view?usp=sharing","notes":"https://drive.google.com/file/d/1uddVJscpN6XYeS_qaOiWWgYSXhh_JcIA/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1aADm5olS2Iv2qYbZaSR8deAyHAUWkhrYKwG__yIMB6A/edit?usp=sharing","test":null,"extra":[]}},{"num":"9.2","title":"Stress-Strain Curve and Elastic Moduli","desc":"Stress-strain curve for materials, Young's/Shear/Bulk modulus, Poisson's ratio, relation between elastic constants.","res":{"video":"https://drive.google.com/file/d/1BEwrhWPn2zxrBU_Oy1OAXFiYjrqs6cQv/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1Fzm8iM2jXDa6MMn9hggP3EwmT_UYF-vS/view?usp=sharing","notes":"https://drive.google.com/file/d/1B1J-OnrgfnM9G17y7sNycX0hUNafOLHi/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/163viy-TL9TieRLXJ1hDonYFBA0-vLFTmWK1c9_6vaGo/edit?usp=sharing","test":null,"extra":[]}},{"num":"9.3","title":"Determination of Young's Modulus","desc":"Searle's method, factors affecting elastic modulus, elastic fatigue, elastic hysteresis.","res":{"video":"https://drive.google.com/file/d/1PLVtyO_lNlkBrb_XS9I-Jj8l9JOXzwV9/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1eUtxPB248XQrd3eytktmtv-MQxpTB156/view?usp=sharing","notes":"https://drive.google.com/file/d/1GjUwvyq3cpi_mVZCZnyChYzQQ1zZXPHW/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1uYEvcSzr0V1a_ykeuSpwq5VuKAM89ArAWNZXWRzcKOg/edit?usp=sharing","test":null,"extra":[]}},{"num":"9.4","title":"Applications of Elastic Behaviour","desc":"Applications in daily life (cantilever, beams, bridges), importance of elasticity in material selection.","res":{"video":"https://drive.google.com/file/d/1zFouINGv6smlV0cx9mISm1COtrOGDbqv/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1ynKztUH1Zzjl8JTIDSQof7gcawqsFq7a/view?usp=sharing","notes":"https://drive.google.com/file/d/1L6I88vmcZkaTOfAWQKj1tbA5DEe7NG7K/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1wuIl2UycVu2Twm9THmPD9X8arLh3gDtqmgnXDVoUz6c/edit?usp=sharing","test":null,"extra":[]}},{"num":"9.5","title":"Energy in Deformed Body","desc":"Elastic potential energy in stretched wire/spring, work done in stretching a wire, thermal stress and strain.","res":{"video":"https://drive.google.com/file/d/1WvFq64fzkTjVQO_5I8cVLxfQppRf1jsB/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1GN2OqZM1QrTRE3uT4po1Z9O2QfV9Zg46/view?usp=sharing","notes":"https://drive.google.com/file/d/1oCBaZjIc85agwwl6dcmSOeOLdeEdA02A/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/18WLUMK1Du1AFcFyTc9rUJotgzuly4U6Tqak7YISNXQc/edit?usp=sharing","test":null,"extra":[]}}]},{"num":10,"title":"Mechanical Properties of Fluids","topics":[{"num":"10.1","title":"Pressure and Pascal's Law","desc":"Pressure definition, Pascal's Law and applications (hydraulic lift/brakes), atmospheric, gauge and absolute pressure.","res":{"video":"https://drive.google.com/file/d/17HdXhnJ247JBDXB4KRTPxL-tgu8_d1Vs/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1fDXiy6wDv3VGd0ef-QX3ovan5jYqrzaI/view?usp=sharing","notes":"https://drive.google.com/file/d/18cICMsNaCj45XQKfpZ9wQfSvJZepQ1KH/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1_iurWNXar4mGs_FT9oa37MKi9YlFb8bf-BMC_tIH1-w/edit?usp=sharing","test":null,"extra":[]}},{"num":"10.2","title":"Streamline and Turbulent Flow","desc":"Ideal fluid, streamline flow, equation of continuity, Bernoulli's principle and applications.","res":{"video":"https://drive.google.com/file/d/1AT0eMqOb4m8szsUcq1wQJN0xoe36t4yh/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1qHQpucvbyewayQqB-sEaL7sglbDLKyZL/view?usp=sharing","notes":"https://drive.google.com/file/d/16aaYpXlyeczSDjUwt0Pv8xTnNCIuhRQd/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1iLeoubjbic3ulj9YEI55ryDK4Tdu7qNei-tEL1IHVBo/edit?usp=sharing","test":null,"extra":[]}},{"num":"10.3","title":"Viscosity","desc":"Viscosity, Newton's law of viscous force, Stokes' Law, terminal velocity, viscosity vs temperature.","res":{"video":"https://drive.google.com/file/d/1gOFFzo54ipjpYzm39CGTDnO1Ymrrk_-g/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1cQnQKccURQ-E02CBN-WTHyJT4W-eCjKV/view?usp=sharing","notes":"https://drive.google.com/file/d/1hnrrPvHP8xvML6_QUSofiddhTnlY38Cw/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1wCi43iUGGU1NCIQMlZN7TO_h-446SNvZGTF4QrO_zP8/edit?usp=sharing","test":null,"extra":[]}},{"num":"10.4","title":"Surface Tension","desc":"Surface tension, surface energy, angle of contact, capillary rise, excess pressure in drop/bubble.","res":{"video":"https://drive.google.com/file/d/14c7YbT8Zs5kVvEYp7-xyqQA0d93HDaWC/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1AJP9Qlh66SXIVlzL9M9KfcCGESbaixoS/view?usp=sharing","notes":"https://drive.google.com/file/d/1FBuEyW4BZVmtxg93wz6e1b_3rABQXfp5/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1TBCVtkZ2uhw_RT_1Tu5lFqoxlkYsZZ4t9Un64KLiPPM/edit?usp=sharing","test":null,"extra":[]}},{"num":"10.5","title":"Applications and Fluid Dynamics","desc":"Applications of Bernoulli's principle and surface tension, Reynolds number, critical velocity.","res":{"video":"https://drive.google.com/file/d/1KAZtLZH7kROzbRqECwB8HEh6_IkI2aks/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1NKEr9bQ6jslciEAPu3Jcg_jpEbLaEiAb/view?usp=sharing","notes":"https://drive.google.com/file/d/1eRoAvUhXgzBgYTTdFoDgbMPDMsnmRyGo/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/13L6fX5XSRHQkIK9qNwAAd2NnHv_9SPjKftmEaZKZdgg/edit?usp=sharing","test":null,"extra":[]}}]},{"num":11,"title":"Thermal Properties of Matter","topics":[{"num":"11.1","title":"Temperature and Thermal Expansion","desc":"Temperature and heat, measurement of temperature, linear/areal/volume expansion, anomalous expansion of water.","res":{"video":"https://drive.google.com/file/d/10uaCSK7z6h3OVXoKwpuaWVO1nlgYhet7/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1SKG1rhhLIInl0wKmxLvzpAUdLIVXLPaI/view?usp=sharing","notes":"https://drive.google.com/file/d/1lTFmR3hASF9CkHXcQLbwxf47OP_U_6hE/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1oAiArdjrgAibkHK_czbUQ_cvBIxY8PLuCPSJwORI2Xs/edit?usp=sharing","test":null,"extra":[]}},{"num":"11.2","title":"Specific Heat Capacity and Calorimetry","desc":"Specific/molar heat capacity, calorimetry, latent heat (fusion & vaporisation), heat transfer.","res":{"video":"https://drive.google.com/file/d/1-YJlsNmNCiuzYEMNdpulqfXZ-HBcEEPN/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1rn6LHIb2cBAilHBobZz57AbmVrHAZiIU/view?usp=sharing","notes":"https://drive.google.com/file/d/1fykuGAamufqni7kp9m6nnNhLSvup0vhH/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/188MxWovt7VXOOeIHgogLxh3fPggOvPzp4m47aNnN3As/edit?usp=sharing","test":null,"extra":[]}},{"num":"11.3","title":"Change of State and Latent Heat","desc":"Melting, boiling, sublimation, latent heat, regelation, effect of pressure on melting/boiling point.","res":{"video":"https://drive.google.com/file/d/1lGS4ltT2MLsGXfwExJ6xLwyJ-UvJcn9u/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1AUKsAwwE_RiHR_iUxpvawnvdj2MVy7Dg/view?usp=sharing","notes":"https://drive.google.com/file/d/1oG03lWXgyEpD0VFlzPvgT6uQrbeX_Kxq/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1ZZauiJRvFPUt5cPlKToBKSUfI3SFppjkRM4Xcfs4XeE/edit?usp=sharing","test":null,"extra":[]}},{"num":"11.4","title":"Heat Transfer Mechanisms","desc":"Conduction, convection, radiation, thermal conductivity, Newton's law of cooling, black-body radiation, Stefan's & Wien's laws.","res":{"video":"https://drive.google.com/file/d/1a9OZYIPAZbSJJIrFlO0ybH110Bl0j5mB/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/18RqtUwwV1yUWFmygB4cxwoppLJJUweM8/view?usp=sharing","notes":"https://drive.google.com/file/d/1JlioFybHF5tBMFN3wbIaR0omIudQ_5Tv/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1VaI7GWH93QszExWwK-GJ_tzAC6gdfrOAUBRjFsVc-3s/edit?usp=sharing","test":null,"extra":[]}},{"num":"11.5","title":"Applications of Thermal Properties","desc":"Practical applications of thermal expansion, specific heat and heat transfer in daily life and technology.","res":{"video":"https://drive.google.com/file/d/1Nz9SYZQLmXGaBaMl8j6sEr11FxkUBsqV/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1wfziicKEDBIPxR5QdjdbIbATq5kdOChS/view?usp=sharing","notes":"https://drive.google.com/file/d/1A5NWllRTu8iPDp8jXr4bosJdYQVmOlx0/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1Vc6kaeUrLXBfA9T-VeFJpKNyI6AFuJzNQBIGNQKXvXc/edit?usp=sharing","test":null,"extra":[]}}]},{"num":12,"title":"Thermodynamics","topics":[{"num":"12.1","title":"Thermal Equilibrium and Zeroth Law","desc":"Thermal equilibrium, Zeroth Law of Thermodynamics, temperature as a thermodynamic variable.","res":{"video":"https://drive.google.com/file/d/1gh3A_6xF8UjHy8TTYEaRRKkjGBZzsuJ3/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1UaSOF_gUNFz1HReExPKvEb_ZsNy49NLq/view?usp=sharing","notes":"https://drive.google.com/file/d/1dxmCRl4V1d_QUuMhbRVz8ylodXCQ2KlR/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1KeX3TIk4_q3Gxg7x-FCWNgDhbaPjfTWb5BNjyLDXc6c/edit?usp=sharing","test":null,"extra":[]}},{"num":"12.2","title":"First Law of Thermodynamics","desc":"Internal energy, work done by/on the system, heat, First Law, specific heat capacity of ideal gas, state variables.","res":{"video":"https://drive.google.com/file/d/1A1RV4wA5j-LKhBYD89bh3t8XhX_OfbML/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1jlVLcJ4I3ECpnZUo2KTUK-Xaa3OcLNlp/view?usp=sharing","notes":"https://drive.google.com/file/d/1BhubiXs2qsWTCF9MGeWiyqKclw339CtH/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1q34Hw-jvYnqJFYmuK1rze_XydfoKTcuCbFgENii6b68/edit?usp=sharing","test":null,"extra":[]}},{"num":"12.3","title":"Thermodynamic Processes","desc":"Quasi-static, isothermal, adiabatic, isochoric, isobaric processes; work in isothermal/adiabatic; PV diagrams.","res":{"video":"https://drive.google.com/file/d/1oAl5WNColTe4LCL8VlRPbXvJy0Z_qfb-/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1w_z26xWPoYHXlXeEnANURyaApYUUXb6z/view?usp=sharing","notes":"https://drive.google.com/file/d/1Hvactes7FgE642i5Yx6_P0of90kJ4C18/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1-i6XS-EM_-QGC8QHx2x1XGz-UbeZZ9qFN6hotZRMCVc/edit?usp=sharing","test":null,"extra":[]}},{"num":"12.4","title":"Second Law of Thermodynamics","desc":"Reversible/irreversible processes, heat engines, Carnot engine efficiency, refrigerator & heat pump, Clausius/Kelvin-Planck statements.","res":{"video":"https://drive.google.com/file/d/1C0g_TbJlTf6wFFMJ64jyYlVoGk3hNCtB/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1eRQzmrpp6SUzdGaNeAouDqeGT9_uPRXW/view?usp=sharing","notes":"https://drive.google.com/file/d/1JbRDAA2-gh1wfhmtnwjkKL_9sE5aHcUC/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1VXFAQDyaSg-fNhCaXuQhd3RK0_JOxnsK1UthPFMDMlM/edit?usp=sharing","test":null,"extra":[]}},{"num":"12.5","title":"Carnot Engine and Entropy","desc":"Carnot cycle, Carnot theorem, practical applications of second law, basic concept of entropy.","res":{"video":"https://drive.google.com/file/d/1Y0dfQOm-d1DyM6V2W6aZX_rpSf5CVP__/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1sx0QBJkvTls6lV2EvTl6DmRcpvxkW25d/view?usp=sharing","notes":"https://drive.google.com/file/d/1qUYBjSNv1y1jrtHF2AjjLumXbgCQ7shS/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1S_AWwy1BgeCtp72idmG8gvE5VsviUjodkQ-BAumhDWk/edit?usp=sharing","test":null,"extra":[]}}]},{"num":13,"title":"Kinetic Theory","topics":[{"num":"13.1","title":"Molecular Nature of Matter","desc":"Molecular constitution of matter, behaviour of gases, kinetic theory of an ideal gas, its assumptions.","res":{"video":"https://drive.google.com/file/d/1EDBEkRc8r9POjKiZo2a8eP-_OFayJ5t3/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1Khyuf0XC6bgW3fcbCR3v27y4OYu6bkVU/view?usp=sharing","notes":"https://drive.google.com/file/d/1ms-AcLhHJPuhIg0y2IbvgqwZJK3zbFvB/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1bAPnD1wZKCTrd88XGnqUSvD3zptrwR-DLQGno-1FYBo/edit?usp=sharing","test":null,"extra":[]}},{"num":"13.2","title":"Pressure of an Ideal Gas","desc":"Kinetic interpretation of pressure, derivation of pressure exerted by a gas, kinetic energy-temperature relation.","res":{"video":"https://drive.google.com/file/d/1geOfnRr1oqg5SwUsXgRcP85UP14qrQKh/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1LN2aZ-R8bnSQ5jqoTHxbPu1dq4V7RVov/view?usp=sharing","notes":"https://drive.google.com/file/d/1t0Xm5zoTMlsKmqtMQ3l083Ek_TsRxHx3/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1m6MEdDGifH7M7AnuxxMpgIQ6zf-tYIZiCVfT7ADrcGs/edit?usp=sharing","test":null,"extra":[]}},{"num":"13.3","title":"Kinetic Theory and Gas Laws","desc":"Boyle's, Charles's, Gay-Lussac's Laws, Avogadro's hypothesis, ideal gas equation from kinetic theory.","res":{"video":"https://drive.google.com/file/d/1J_QQBzbj85KpjpqBo9VanqCsZXDpDEeX/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1K-aeH1ubBcSjgE7JWHzua8ootnrtPQKO/view?usp=sharing","notes":"https://drive.google.com/file/d/1PNRA-o7m61qAG5ZNQN4bVfa3yvQp_MQD/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1ncIQWkl6iNd6fHhTGTGxm96irKkKvAK_UEVW3SROWRk/edit?usp=sharing","test":null,"extra":[]}},{"num":"13.4","title":"Degrees of Freedom and Law of Equipartition of Energy","desc":"Degrees of freedom, equipartition of energy, specific heat of monoatomic/diatomic/polyatomic gases.","res":{"video":"https://drive.google.com/file/d/1x0vOJTw88V7mCYJ-ABPz_keh9jLC0ebz/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1eXFJJ9uS0zVYSGFPMenAS9AuV6LAzS8n/view?usp=sharing","notes":"https://drive.google.com/file/d/1nb-WFGzbyqJyAq7OR_FMXQ0-n2RsKsLK/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1UGZQ27UfCQjIf9XvKXoBG0m0ahOEvQGntKnPsROqB1w/edit?usp=sharing","test":null,"extra":[]}},{"num":"13.5","title":"Mean Free Path and Real Gases","desc":"Mean free path, behaviour of real gases, van der Waals equation, liquefaction of gases.","res":{"video":"https://drive.google.com/file/d/114VwH6XL6_3CozjBaf5GHfimu5Qq9Ula/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1fSRg7mrXF8YlORa91QDiP7UhI7THkT0g/view?usp=sharing","notes":"https://drive.google.com/file/d/1nPZ0krVll-_Tp4rCqAV7doHkHzuNZOzF/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/15aSoi1WC9yN59oPUDliRNReJGe_TSERuCMDThRKTN5I/edit?usp=sharing","test":null,"extra":[]}}]},{"num":14,"title":"Oscillations","topics":[{"num":"14.1","title":"Periodic and Oscillatory Motion","desc":"Periodic motion, oscillatory motion, SHM, displacement as a function of time, amplitude, frequency, angular frequency, phase.","res":{"video":"https://drive.google.com/file/d/1TvwF4XRQ6mG7ritApjOf6oxaeM8r5CQ4/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/125tVC90bYXyMs-F0GL9b5kkfMzqWjBd8/view?usp=sharing","notes":"https://drive.google.com/file/d/1ueFaPf0rSz0sRddoifaANxipJ_RwOdqB/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1xZMz3I8V5F81HXNipuN_R0ELX0-CpYDgS4Cc43Wx_8k/edit?usp=sharing","test":null,"extra":[]}},{"num":"14.2","title":"Simple Harmonic Motion (SHM)","desc":"SHM as projection of uniform circular motion, velocity and acceleration in SHM, force law for SHM, energy in SHM.","res":{"video":"https://drive.google.com/file/d/1IC2xZ68tJPIEh-AHlrJXG6qhKBBxvBMV/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1UNN3FT9BRhf43xI1dEPIHen4xHIgVVoe/view?usp=sharing","notes":"https://drive.google.com/file/d/1wWLojKqj8YxbF7aVVJ9_zqjeW6sonwv6/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1bgaicF_VuyvJH9qIsslOtaDK2dFq_6ILBPnTrDwDYXQ/edit?usp=sharing","test":null,"extra":[]}},{"num":"14.3","title":"Simple Pendulum and Spring-Mass System","desc":"Oscillations of simple pendulum, spring-mass system, effective length of pendulum, derivation of time period.","res":{"video":"https://drive.google.com/file/d/1CYAV8lJZ1t5Zt4YdX8GfY76ozZHtuHPP/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1otuImbBuxGq87Ur7CDBxRixvLzA1trUF/view?usp=sharing","notes":"https://drive.google.com/file/d/19qOo9Y9vmi8ytyngeyfZVX_4RxZQl-BB/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1hX1byXvn1aU8Lh7lEYkGrsmVp3oX7hCGqsToOCo60bw/edit?usp=sharing","test":null,"extra":[]}},{"num":"14.4","title":"Damped and Forced Oscillations","desc":"Damped SHM, forced oscillations, resonance, sharpness of resonance.","res":{"video":"https://drive.google.com/file/d/1NvtB7xSZFHD4rLMZ99GulM5BQLHkVqR3/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1P8RdEsAXubEoVIl6uU49qk_BeUXGEPNs/view?usp=sharing","notes":"https://drive.google.com/file/d/1wCT_SVYOq9UiPUExHFHkrpO2e4pq2YEk/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1JH-pn_GUwRvMV1O6k9kljS96bZILB6BSDrl4H9cXPSI/edit?usp=sharing","test":null,"extra":[]}},{"num":"14.5","title":"Other Systems in SHM","desc":"Oscillations of liquid column in U-tube, floating cylinder, electrical oscillations (LC circuit), comparison with mechanical systems.","res":{"video":"https://drive.google.com/file/d/14U7JxY0ywEZ4TRewHQaEi88_KGfNa5dv/view?usp=sharing","slides":null,"mindmap":"https://drive.google.com/file/d/1MgUG0EsPl1IF9yNiRd2kQy105cy8v1F2/view?usp=sharing","notes":"https://drive.google.com/file/d/1k4i454UsJ0iktJBEf6QsVn0Ase0AMe4f/view?usp=sharing","images":null,"mcq":"https://docs.google.com/document/d/1AvfUaf_gqpcrfXwmBrYWhop-Zr_bHhqNCD0YQ_JhN0Y/edit?usp=sharing","test":null,"extra":[]}}]}]}]};
+    </script>
+    <script>
+/* ============================================================
+   Study Portal — shared logic
+   Reads window.PORTAL_DATA (assets/data.js)
+   ============================================================ */
+
+(function () {
+    'use strict';
+
+    var DATA = window.PORTAL_DATA;
+    var KINDS = ['video', 'slides', 'mindmap', 'notes', 'images', 'mcq', 'test'];
+
+    var LABEL = {
+        video: 'Video',
+        slides: 'Slides',
+        mindmap: 'Mind map',
+        notes: 'Notes',
+        images: 'Images',
+        mcq: 'MCQs',
+        test: 'Test'
+    };
+
+    /* Chemistry shows Images before Video before Slides, per request —
+       every other subject keeps the default KINDS order. */
+    var PILL_ORDER = {
+        chemistry: ['images', 'video', 'slides', 'mindmap', 'mcq', 'test']
+    };
+    function orderFor(subject) { return PILL_ORDER[subject.id] || KINDS; }
+
+    var ICON = {
+        images: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>',
+        video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M17 9.5l4-2.3v9.6l-4-2.3"/></svg>',
+        slides: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>',
+        mindmap: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2.3"/><circle cx="17" cy="5" r="2.3"/><circle cx="17" cy="19" r="2.3"/><path d="M7 11l7.5-4.5M7 13l7.5 4.5"/></svg>',
+        notes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+        mcq: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2a2.5 2.5 0 114 2c-.9.7-1.5 1.2-1.5 2.3M12 17h.01"/></svg>',
+        test: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+        check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6"/></svg>',
+        arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+        back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>',
+        search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>',
+        chevron: '<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+        book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2.5 2.5 0 016.5 2H20v18H6.5A2.5 2.5 0 004 22z"/><path d="M4 17.5A2.5 2.5 0 016.5 15H20"/></svg>'
+    };
+
+    /* ---------- tiny persistent store (falls back to memory) ---------- */
+
+    var mem = {};
+    var store = {
+        get: function (k) {
+            try { return JSON.parse(localStorage.getItem(k)) || null; }
+            catch (e) { return mem[k] || null; }
+        },
+        set: function (k, v) {
+            try { localStorage.setItem(k, JSON.stringify(v)); }
+            catch (e) { mem[k] = v; }
+        }
+    };
+
+    /* ---------- helpers ---------- */
+
+    function esc(s) {
+        return String(s == null ? '' : s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    function highlight(text, q) {
+        var out = esc(text);
+        if (!q) return out;
+        var re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+        return out.replace(re, '<mark>$1</mark>');
+    }
+
+    function subjectById(id) {
+        for (var i = 0; i < DATA.subjects.length; i++) {
+            if (DATA.subjects[i].id === id) return DATA.subjects[i];
+        }
+        return null;
+    }
+
+    function eachTopic(subject, fn) {
+        subject.chapters.forEach(function (ch) {
+            ch.topics.forEach(function (t) { fn(t, ch); });
+        });
+    }
+
+    function topicCount(subject) {
+        var n = 0;
+        subject.chapters.forEach(function (c) { n += c.topics.length; });
+        return n;
+    }
+
+    function kindCounts(subject) {
+        var c = {};
+        KINDS.forEach(function (k) { c[k] = 0; });
+        eachTopic(subject, function (t) {
+            KINDS.forEach(function (k) { if (t.res[k]) c[k]++; });
+        });
+        return c;
+    }
+
+    /* Kinds a subject is *expected* to have — used for coverage and for
+       showing "not added yet" placeholders. A kind counts as expected when
+       it exists for at least a quarter of the subject's topics. */
+    function expectedKinds(subject) {
+        var counts = kindCounts(subject), total = topicCount(subject);
+        return KINDS.filter(function (k) { return counts[k] >= total * 0.25; });
+    }
+
+    function resourceTotal(subject) {
+        var n = 0;
+        eachTopic(subject, function (t) {
+            KINDS.forEach(function (k) { if (t.res[k]) n++; });
+            n += (t.res.extra || []).length;
+        });
+        return n;
+    }
+
+    function chapterCoverage(ch, kinds) {
+        if (!kinds.length || !ch.topics.length) return 0;
+        var have = 0;
+        ch.topics.forEach(function (t) {
+            kinds.forEach(function (k) { if (t.res[k]) have++; });
+        });
+        return have / (ch.topics.length * kinds.length);
+    }
+
+    /* ============================================================
+       HOME PAGE
+       ============================================================ */
+
+    function renderHome() {
+        var grid = document.getElementById('subjects');
+        if (!grid) return;
+
+        var totals = { chapters: 0, topics: 0, resources: 0 };
+
+        var html = DATA.subjects.map(function (s) {
+            var st = s.stats || (function () {
+                var kinds = expectedKinds(s);
+                return {
+                    chapters: s.chapters.length,
+                    topics: topicCount(s),
+                    resources: resourceTotal(s),
+                    cov: s.chapters.map(function (ch) {
+                        return { num: ch.num, cov: chapterCoverage(ch, kinds) };
+                    })
+                };
+            })();
+
+            totals.chapters += st.chapters;
+            totals.topics += st.topics;
+            totals.resources += st.resources;
+
+            var spark = st.cov.map(function (c) {
+                return '<i class="spark-cell" style="opacity:' + (0.14 + 0.86 * c.cov).toFixed(2) +
+                    '" title="Chapter ' + c.num + ' · ' + Math.round(c.cov * 100) + '% of resources added"></i>';
+            }).join('');
+
+            return '' +
+                '<a class="subject-card" data-subject="' + s.id + '" href="' + s.page + '">' +
+                '<div class="subject-card-top">' +
+                '<h2 class="subject-name">' + esc(s.name) + '</h2>' +
+                '<span class="subject-code">' + esc(s.short) + '</span>' +
+                '</div>' +
+                '<p class="subject-tagline">' + esc(s.tagline) + '</p>' +
+                '<div class="spark">' + spark + '</div>' +
+                '<div class="spark-legend">' + st.chapters + ' chapters · brighter = more resources ready</div>' +
+                '<div class="subject-meta">' +
+                '<span>' + st.topics + ' topics · ' + st.resources + ' links</span>' +
+                '<span class="subject-go">Open ' + ICON.arrow + '</span>' +
+                '</div>' +
+                '</a>';
+        }).join('');
+
+        grid.innerHTML = html;
+
+        var tally = document.getElementById('tally');
+        if (tally) {
+            tally.innerHTML = [
+                [DATA.subjects.length, 'Subjects'],
+                [totals.chapters, 'Chapters'],
+                [totals.topics, 'Topics'],
+                [totals.resources, 'Resource links']
+            ].map(function (c) {
+                return '<div class="tally-cell"><div class="tally-num">' + c[0] +
+                    '</div><div class="tally-label">' + c[1] + '</div></div>';
+            }).join('');
+        }
+    }
+
+    /* ============================================================
+       SUBJECT PAGE
+       ============================================================ */
+
+    function renderSubject(id) {
+        var s = subjectById(id);
+        if (!s) return;
+
+        document.documentElement.setAttribute('data-subject', s.id);
+        document.title = s.name + ' — Study Portal';
+
+        var kinds = expectedKinds(s);
+        var counts = kindCounts(s);
+        var doneKey = 'studyportal:' + s.id + ':done';
+        var done = store.get(doneKey) || {};
+        var activeFilters = {};
+        var query = '';
+
+        /* ---- header ---- */
+        var head = document.getElementById('subject-head');
+        head.innerHTML =
+            '<p class="eyebrow">' + esc(s.short) + ' · ' + s.chapters.length + ' chapters</p>' +
+            '<h1>' + esc(s.name.split(' ')[0]) + (s.name.split(' ').length > 1 ? ' <em>' + esc(s.name.split(' ').slice(1).join(' ')) + '</em>' : '') + '</h1>' +
+            '<p class="lede">' + esc(s.tagline) + '</p>' +
+            '<div class="legend" id="filters"></div>';
+
+        /* ---- filter chips ---- */
+        var filterBox = document.getElementById('filters');
+        filterBox.innerHTML = orderFor(s).filter(function (k) { return counts[k] > 0; }).map(function (k) {
+            return '<button class="chip" data-kind="' + k + '" aria-pressed="false">' +
+                ICON[k] + LABEL[k] + ' <span class="chip-count">' + counts[k] + '</span></button>';
+        }).join('');
+
+        filterBox.addEventListener('click', function (e) {
+            var chip = e.target.closest('.chip');
+            if (!chip) return;
+            var k = chip.dataset.kind;
+            activeFilters[k] = !activeFilters[k];
+            chip.setAttribute('aria-pressed', activeFilters[k] ? 'true' : 'false');
+            render();
+        });
+
+        /* ---- toolbar ---- */
+        document.getElementById('expand-all').addEventListener('click', function () {
+            document.querySelectorAll('.chapter').forEach(function (d) { d.open = true; });
+        });
+        document.getElementById('collapse-all').addEventListener('click', function () {
+            document.querySelectorAll('.chapter').forEach(function (d) { d.open = false; });
+        });
+
+        /* ---- search ---- */
+        var search = document.getElementById('search');
+        search.placeholder = 'Search ' + s.name + ' chapters and topics';
+        search.addEventListener('input', function () {
+            query = this.value.trim();
+            render();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === '/' && document.activeElement !== search) {
+                e.preventDefault(); search.focus();
+            } else if (e.key === 'Escape' && document.activeElement === search) {
+                search.value = ''; query = ''; render(); search.blur();
+            }
+        });
+
+        var startQ = new URLSearchParams(location.search).get('q');
+        if (startQ) { search.value = startQ; query = startQ.trim(); }
+
+        /* ---- rail ---- */
+        document.getElementById('rail-links').innerHTML = s.chapters.map(function (ch) {
+            return '<a class="rail-link" href="#ch-' + ch.num + '" data-ch="' + ch.num + '">' +
+                '<span>' + String(ch.num).padStart(2, '0') + '</span><span>' + esc(ch.title) + '</span></a>';
+        }).join('');
+
+        /* ---- progress ---- */
+        function updateProgress() {
+            var total = topicCount(s), n = 0;
+            Object.keys(done).forEach(function (k) { if (done[k]) n++; });
+            var pct = total ? Math.round(n / total * 100) : 0;
+            document.getElementById('progress-fill').style.width = pct + '%';
+            document.getElementById('progress-text').textContent = n + '/' + total + ' done';
+        }
+
+        /* ---- resource pills ---- */
+        function pills(t) {
+            var shown = orderFor(s).filter(function (k) { return t.res[k] || kinds.indexOf(k) > -1; });
+            var html = shown.map(function (k) {
+                var url = t.res[k];
+                if (!url) {
+                    return '<span class="pill off ' + k + '">' + ICON[k] + LABEL[k] + ' · soon</span>';
+                }
+                return '<a class="pill ' + k + '" href="' + esc(url) + '" target="_blank" rel="noopener">' +
+                    ICON[k] + LABEL[k] + '</a>';
+            }).join('');
+
+            (t.res.extra || []).forEach(function (x) {
+                html += '<a class="pill notes" href="' + esc(x.url) + '" target="_blank" rel="noopener">' +
+                    ICON.notes + esc(x.name) + '</a>';
+            });
+
+            return html || '<span class="pill off">Nothing added yet</span>';
+        }
+
+        /* ---- main render ---- */
+        function render() {
+            var list = document.getElementById('chapters');
+            var q = query.toLowerCase();
+            var filterKeys = Object.keys(activeFilters).filter(function (k) { return activeFilters[k]; });
+            var out = [];
+            var shownTopics = 0;
+
+            s.chapters.forEach(function (ch) {
+                var chMatch = !q || ch.title.toLowerCase().indexOf(q) > -1 ||
+                    ('chapter ' + ch.num).indexOf(q) > -1;
+
+                var topics = ch.topics.filter(function (t) {
+                    var okQ = !q || chMatch ||
+                        t.title.toLowerCase().indexOf(q) > -1 ||
+                        (t.desc || '').toLowerCase().indexOf(q) > -1 ||
+                        String(t.num).indexOf(q) > -1;
+                    var okF = !filterKeys.length || filterKeys.every(function (k) { return !!t.res[k]; });
+                    return okQ && okF;
+                });
+
+                if (!topics.length) return;
+                shownTopics += topics.length;
+
+                var cov = chapterCoverage(ch, kinds);
+                var bars = 5, on = Math.round(cov * bars);
+                var bar = '';
+                for (var i = 0; i < bars; i++) bar += '<i class="' + (i < on ? 'on' : '') + '"></i>';
+
+                var doneInCh = ch.topics.filter(function (t) { return done[ch.num + '.' + t.num]; }).length;
+
+                var rows = topics.map(function (t) {
+                    var key = ch.num + '.' + t.num;
+                    return '<div class="topic' + (done[key] ? ' done' : '') + '" data-key="' + key + '">' +
+                        '<button class="tick" aria-label="Mark topic as done" aria-pressed="' + (done[key] ? 'true' : 'false') + '">' + ICON.check + '</button>' +
+                        '<div>' +
+                        '<p class="topic-name"><span class="topic-tag">' + esc(t.num) + '</span>' + highlight(t.title, query) + '</p>' +
+                        (t.desc ? '<p class="topic-desc">' + highlight(t.desc, query) + '</p>' : '') +
+                        '<div class="res">' + pills(t) + '</div>' +
+                        '</div></div>';
+                }).join('');
+
+                out.push(
+                    '<details class="chapter" id="ch-' + ch.num + '"' + (q ? ' open' : '') + '>' +
+                    '<summary>' +
+                    '<span class="ch-num">' + String(ch.num).padStart(2, '0') + '</span>' +
+                    '<span class="ch-head">' +
+                    '<span class="ch-title">' + highlight(ch.title, query) + '</span>' +
+                    '<span class="ch-meta">' + ch.topics.length + ' topics · ' + doneInCh + ' done · ' + Math.round(cov * 100) + '% resourced</span>' +
+                    '</span>' +
+                    '<span class="ch-bar">' + bar + '</span>' +
+                    ICON.chevron +
+                    '</summary>' +
+                    '<div class="topics">' + rows + '</div>' +
+                    '</details>'
+                );
+            });
+
+            list.innerHTML = out.length ? out.join('') :
+                '<p class="empty">No topic matches that. Try a chapter name, a topic number like 4.2, or clear the filters.</p>';
+
+            document.getElementById('result-count').textContent =
+                (query || filterKeys.length) ? shownTopics + ' matching topics' : topicCount(s) + ' topics';
+
+            updateProgress();
+            observeChapters();
+        }
+
+        /* ---- tick handling (delegated) ---- */
+        document.getElementById('chapters').addEventListener('click', function (e) {
+            var btn = e.target.closest('.tick');
+            if (!btn) return;
+            var row = btn.closest('.topic');
+            var key = row.dataset.key;
+            done[key] = !done[key];
+            store.set(doneKey, done);
+            row.classList.toggle('done', !!done[key]);
+            btn.setAttribute('aria-pressed', done[key] ? 'true' : 'false');
+            var summary = row.closest('.chapter').querySelector('.ch-meta');
+            var chNum = row.closest('.chapter').id.replace('ch-', '');
+            var ch = s.chapters.filter(function (c) { return String(c.num) === chNum; })[0];
+            if (ch && summary) {
+                var d = ch.topics.filter(function (t) { return done[ch.num + '.' + t.num]; }).length;
+                summary.textContent = summary.textContent.replace(/· \d+ done/, '· ' + d + ' done');
+            }
+            updateProgress();
+        });
+
+        /* ---- rail highlighting ---- */
+        var io = null;
+        function observeChapters() {
+            if (io) io.disconnect();
+            if (!('IntersectionObserver' in window)) return;
+            io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (en) {
+                    if (!en.isIntersecting) return;
+                    var num = en.target.id.replace('ch-', '');
+                    document.querySelectorAll('.rail-link').forEach(function (a) {
+                        a.classList.toggle('active', a.dataset.ch === num);
+                    });
+                });
+            }, { rootMargin: '-70px 0px -72% 0px' });
+            document.querySelectorAll('.chapter').forEach(function (c) { io.observe(c); });
+        }
+
+        /* open a chapter when linked from the rail */
+        document.getElementById('rail-links').addEventListener('click', function (e) {
+            var a = e.target.closest('.rail-link');
+            if (!a) return;
+            var target = document.querySelector(a.getAttribute('href'));
+            if (target) target.open = true;
+        });
+
+        render();
+
+        if (location.hash) {
+            var t = document.querySelector(location.hash);
+            if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); }
+        }
+    }
+
+    /* ---------- boot ---------- */
+
+    window.Portal = { renderHome: renderHome, renderSubject: renderSubject, ICON: ICON };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var back = document.querySelector('.back');
+        if (back) back.insertAdjacentHTML('afterbegin', ICON.back);
+        var si = document.querySelector('.search-wrap');
+        if (si) si.insertAdjacentHTML('afterbegin', ICON.search);
+
+        var page = document.body.dataset.page;
+        if (page === 'home') renderHome();
+        else if (page) renderSubject(page);
+    });
+})();
+
+    </script>
+</body>
+
+</html>
